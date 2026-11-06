@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  
+  <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="content-area">
+  <!-- 1. Header & Draft Status -->
+    <af:panelGroupLayout id="co_pgl2" layout="vertical" styleClass="page-header" inlineStyle="margin-bottom: 20px;">
+      <af:outputText value="#{pageFlowScope.mode eq 'E' ? 'Edit Order' :  'Create New Order' }" id="co_ot1" styleClass="welcome-title"/>
+      <af:outputText value="#{pageFlowScope.vendorId}" id="ot7" visible="false"/>
+      <!--<af:outputText value="#{CreateOrderBean.draftStatusMessage}" id="co_ot2" styleClass="welcome-subtitle"/>-->
+    </af:panelGroupLayout>
+  
+  <!-- 2. Top Form Input Fields Grid -->
+    <af:panelGridLayout id="co_pgl_form" styleClass="form-grid-container">
+      <af:gridRow id="co_gr1">
+        <af:gridCell id="co_gc1" width="20%">
+          <af:inputText value="#{bindings.CustCd.inputValue}" label="#{bindings.CustCd.hints.label}"
+                        required="#{bindings.CustCd.hints.mandatory}" columns="#{bindings.CustCd.hints.displayWidth}"
+                        maximumLength="#{bindings.CustCd.hints.precision}" shortDesc="#{bindings.CustCd.hints.tooltip}"
+                        id="it1" disabled="true" contentStyle="width:160px;">
+            <f:validator binding="#{bindings.CustCd.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.CustCd.format}"/>
+          </af:inputText>
+        </af:gridCell>
+        <af:gridCell id="co_gc2" width="30%">
+          <af:inputText value="#{bindings.Address.inputValue}" label="#{bindings.Address.hints.label}" columns="#{bindings.Address.hints.displayWidth}"
+                        maximumLength="#{bindings.Address.hints.precision}"
+                        shortDesc="#{bindings.Address.hints.tooltip}" id="it2" contentStyle="width:300px;" rows="1"
+                        requiredMessageDetail="Please select Ship-To-Address" required="true">
+            <f:validator binding="#{bindings.Address.validator}"/>
+          </af:inputText>
+        </af:gridCell>
+        <af:gridCell id="co_gc3" width="25%">
+          <af:inputDate value="#{bindings.ReqDeliveryDate.inputValue}" label="#{bindings.ReqDeliveryDate.hints.label}"
+                        columns="#{bindings.ReqDeliveryDate.hints.displayWidth}"
+                        shortDesc="#{bindings.ReqDeliveryDate.hints.tooltip}" id="id1" contentStyle="width:160px;"
+                        minValue="#{pageFlowScope.OrderBean.today}"
+                        requiredMessageDetail="Please select Req Delivery Date" required="true">
+        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            <!--<af:convertDateTime pattern="#{bindings.ReqDeliveryDate.format}"/>-->
+          </af:inputDate>          
+          
+        </af:gridCell>
+        <af:gridCell id="co_gc4" width="25%">
+          <af:inputText value="#{bindings.PoNo.inputValue}" label="#{bindings.PoNo.hints.label}" columns="#{bindings.PoNo.hints.displayWidth}"
+                        maximumLength="#{bindings.PoNo.hints.precision}" shortDesc="#{bindings.PoNo.hints.tooltip}"
+                        id="it3" contentStyle="width:160px;" required="true"
+                        requiredMessageDetail="Please select PO No.">
+            <f:validator binding="#{bindings.PoNo.validator}"/>
+          </af:inputText>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    
+    <!-- 3. Product Search & Action Bar -->
+    <af:panelGroupLayout id="co_pgl_actions" layout="horizontal" styleClass="search-action-bar" inlineStyle="margin: 20px 0;">
+      <!--<af:inputText placeholder="Search product by code / name / scan..." id="co_it_search" styleClass="product-search-input"/>-->
+      <af:panelGroupLayout id="co_pgl_btns" layout="horizontal">
+        <af:button text="+ Add Item" id="co_b1" styleClass="btn btn-primary"
+                   actionListener="#{pageFlowScope.OrderBean.createDtl}"/>
+        <af:button text="Upload Excel" id="co_b2" styleClass="btn btn-outline" rendered="false"/>
+      </af:panelGroupLayout>
+      <f:facet name="separator">
+        <af:spacer width="15" id="co_sp1"/>
+      </f:facet>
+    </af:panelGroupLayout>
+  
+  
+  <!-- 4. Order Items Data Table -->
+    <af:panelGroupLayout id="co_pgl_table" styleClass="panel" inlineStyle="margin-bottom: 20px;">
+      <af:table value="#{bindings.OrderDetailVO2.collectionModel}" var="row" rows="#{bindings.OrderDetailVO2.rangeSize}"
+                emptyText="#{bindings.OrderDetailVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.OrderDetailVO2.collectionModel.selectedRow}"
+                selectionListener="#{bindings.OrderDetailVO2.collectionModel.makeCurrent}" rowSelection="single"
+                fetchSize="#{bindings.OrderDetailVO2.rangeSize}" id="t1" styleClass="data-table"
+                partialTriggers="::co_b1" filterVisible="false">
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.OrderLineId.label}" id="c1" visible="false">
+          <af:inputText value="#{row.bindings.OrderLineId.inputValue}"
+                        label="#{bindings.OrderDetailVO2.hints.OrderLineId.label}"
+                        required="#{bindings.OrderDetailVO2.hints.OrderLineId.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.OrderLineId.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.OrderLineId.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.OrderLineId.tooltip}" id="it4">
+            <f:validator binding="#{row.bindings.OrderLineId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.OrderLineId.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.OrderId.label}" id="c2" align="center">
+          <af:inputText value="#{row.bindings.OrderId.inputValue}"
+                        label="#{bindings.OrderDetailVO2.hints.OrderId.label}"
+                        required="#{bindings.OrderDetailVO2.hints.OrderId.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.OrderId.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.OrderId.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.OrderId.tooltip}" id="it5" disabled="true">
+            <f:validator binding="#{row.bindings.OrderId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.OrderId.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.ProductCode.label}" id="c3" align="center">
+          <af:inputText value="#{row.bindings.ProductCode.inputValue}"
+                        label="#{bindings.OrderDetailVO2.hints.ProductCode.label}"
+                        columns="#{bindings.OrderDetailVO2.hints.ProductCode.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.ProductCode.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.ProductCode.tooltip}" id="it6" autoSubmit="true"
+                        binding="#{pageFlowScope.OrderBean.bindProdCd}" required="true"
+                        requiredMessageDetail="Please select Product">
+            <f:validator binding="#{row.bindings.ProductCode.validator}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.Uom.label}" id="c4" align="center">
+          <af:inputText value="#{row.bindings.Uom.inputValue}" label="#{bindings.OrderDetailVO2.hints.Uom.label}"
+                        required="#{bindings.OrderDetailVO2.hints.Uom.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.Uom.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.Uom.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.Uom.tooltip}" id="it7"
+                        binding="#{pageFlowScope.OrderBean.bindUom}" autoSubmit="true" disabled="true">
+            <f:validator binding="#{row.bindings.Uom.validator}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.Quantity.label}" id="c5" align="center">
+          <af:inputText value="#{row.bindings.Quantity.inputValue}"
+                        label="#{bindings.OrderDetailVO2.hints.Quantity.label}"
+                        columns="#{bindings.OrderDetailVO2.hints.Quantity.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.Quantity.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.Quantity.tooltip}" id="it8" autoSubmit="true"
+                        binding="#{pageFlowScope.OrderBean.bindQty}"
+                        valueChangeListener="#{pageFlowScope.OrderBean.GstVce}"
+                        requiredMessageDetail="Please enter Quantity" required="true">
+            <f:validator binding="#{row.bindings.Quantity.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.Quantity.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.Rate.label}" id="c6" align="center">
+          <af:inputText value="#{row.bindings.Rate.inputValue}" label="#{bindings.OrderDetailVO2.hints.Rate.label}"
+                        required="#{bindings.OrderDetailVO2.hints.Rate.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.Rate.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.Rate.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.Rate.tooltip}" id="it9" autoSubmit="true"
+                        binding="#{pageFlowScope.OrderBean.bindRate}"
+                        valueChangeListener="#{pageFlowScope.OrderBean.GstVce}">
+            <f:validator binding="#{row.bindings.Rate.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.Rate.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.Gst.label}" id="c7" align="center">
+          <af:inputText value="#{row.bindings.Gst.inputValue}" label="#{bindings.OrderDetailVO2.hints.Gst.label}"
+                        required="#{bindings.OrderDetailVO2.hints.Gst.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.Gst.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.Gst.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.Gst.tooltip}" id="it10" autoSubmit="true"
+                        valueChangeListener="#{pageFlowScope.OrderBean.GstVce}"
+                        binding="#{pageFlowScope.OrderBean.bindGst}">
+            <f:validator binding="#{row.bindings.Gst.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.Gst.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.TaxableAmount.label}" id="c8" align="center" width="120">
+          <af:inputText value="#{row.bindings.TaxableAmount.inputValue}"
+                        label="#{bindings.OrderDetailVO2.hints.TaxableAmount.label}"
+                        required="#{bindings.OrderDetailVO2.hints.TaxableAmount.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.TaxableAmount.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.TaxableAmount.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.TaxableAmount.tooltip}" id="it11" disabled="true"
+                        autoSubmit="true">
+            <f:validator binding="#{row.bindings.TaxableAmount.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.TaxableAmount.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.GstAmount.label}" id="c12" align="center">
+          <af:inputText value="#{row.bindings.GstAmount.inputValue}"
+                        label="#{bindings.OrderDetailVO2.hints.GstAmount.label}"
+                        required="#{bindings.OrderDetailVO2.hints.GstAmount.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.GstAmount.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.GstAmount.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.GstAmount.tooltip}" id="it15" disabled="true"
+                        autoSubmit="true">
+            <f:validator binding="#{row.bindings.GstAmount.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.GstAmount.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.BasicAmount.label}" id="c9" align="center"
+                   visible="false">
+          <af:inputText value="#{row.bindings.BasicAmount.inputValue}"
+                        label="#{bindings.OrderDetailVO2.hints.BasicAmount.label}"
+                        required="#{bindings.OrderDetailVO2.hints.BasicAmount.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.BasicAmount.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.BasicAmount.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.BasicAmount.tooltip}" id="it12">
+            <f:validator binding="#{row.bindings.BasicAmount.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.BasicAmount.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.OrderDetailVO2.hints.TotalAmount.label}" id="c10" align="center">
+          <af:inputText value="#{row.bindings.TotalAmount.inputValue}"
+                        label="#{bindings.OrderDetailVO2.hints.TotalAmount.label}"
+                        required="#{bindings.OrderDetailVO2.hints.TotalAmount.mandatory}"
+                        columns="#{bindings.OrderDetailVO2.hints.TotalAmount.displayWidth}"
+                        maximumLength="#{bindings.OrderDetailVO2.hints.TotalAmount.precision}"
+                        shortDesc="#{bindings.OrderDetailVO2.hints.TotalAmount.tooltip}" id="it13" disabled="true"
+                        autoSubmit="true">
+            <f:validator binding="#{row.bindings.TotalAmount.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderDetailVO2.hints.TotalAmount.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="Delete" id="c11" width="50" align="center">
+          <af:commandLink text="✕" id="co_cl_del" actionListener="#{pageFlowScope.OrderBean.onDeleteItem}"/>
+        </af:column>
+      </af:table>
+    </af:panelGroupLayout>
+    
+    <!-- 5. Bottom Split Section: Notes & Order Summary -->
+    <af:panelGridLayout id="co_pgl_bottom" styleClass="dashboard-grid" inlineStyle="margin-bottom: 25px;">
+      <af:gridRow id="co_gr2">
+        
+        <!-- Left Panel: Notes / Attachments -->
+        <af:gridCell id="co_gc_notes" width="50%" styleClass="panel">
+          <af:outputText value="Remarks" id="co_npot1" styleClass="panel-title"/>
+          <af:inputText value="#{bindings.Remarks.inputValue}"
+                        required="#{bindings.Remarks.hints.mandatory}" columns="#{bindings.Remarks.hints.displayWidth}"
+                        maximumLength="#{bindings.Remarks.hints.precision}"
+                        shortDesc="#{bindings.Remarks.hints.tooltip}" id="it14" styleClass="notes-textarea" rows="4"
+                        contentStyle="width:500px;">
+            <f:validator binding="#{bindings.Remarks.validator}"/>
+          </af:inputText>
+          <af:panelGroupLayout id="co_pgl_attachment" layout="horizontal" inlineStyle="margin-top: 15px;">
+            <af:commandLink text="Attached: PO_45521.pdf" id="co_cl_file" styleClass="attachment-link" visible="false"/>
+          </af:panelGroupLayout>
+        </af:gridCell>
+
+        <!-- Right Panel: Order Summary Card -->
+        <af:gridCell id="co_gc_summary" width="50%" styleClass="panel">
+          <af:outputText value="Order Summary" id="co_spot1" styleClass="panel-title"/>
+          
+          <af:panelGroupLayout id="co_summary_lines" layout="vertical" styleClass="summary-lines">
+            <af:panelGroupLayout layout="horizontal" styleClass="summary-row" id="co_sr1" halign="center">
+              <af:outputText value="Sub-total" id="co_sot1"/>
+              <af:spacer width="107" height="0" id="s1"/>
+              <af:outputText
+                             id="ot1" value="#{pageFlowScope.OrderBean.subTotal}" partialTriggers="t1"
+                             binding="#{pageFlowScope.OrderBean.bindSubTotal}">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.SubTotal.format}"/>
+              </af:outputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout layout="horizontal" styleClass="summary-row" id="co_sr6">
+              <af:outputText value="GST Amount" id="co_sot3"/>
+              <af:spacer width="100" height="0" id="s2"/>
+              <af:outputText id="ot2" binding="#{pageFlowScope.OrderBean.gstTotal}"
+                             partialTriggers="t1" value="#{pageFlowScope.OrderBean.gstAmountTotal}">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.Cgst.format}"/>
+              </af:outputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout layout="horizontal" styleClass="summary-row" id="co_sr2" visible="false">
+              <af:outputText value="CGST 9%" id="ot5"/>
+              <af:spacer width="100" height="0" id="s5"/>
+              <af:outputText id="ot6"
+                             value="#{pageFlowScope.OrderBean.cgst}" binding="#{pageFlowScope.OrderBean.bindCgst}"
+                             partialTriggers="t1">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.Cgst.format}"/>
+              </af:outputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout layout="horizontal" styleClass="summary-row" id="co_sr3" visible="false">
+              <af:outputText value="SGST 9%" id="co_sot5"/>
+              <af:spacer width="100" height="0" id="s3"/>
+              <af:outputText id="ot3"
+                             value="#{pageFlowScope.OrderBean.sgst}" binding="#{pageFlowScope.OrderBean.bindSgst}"
+                             partialTriggers="t1">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.Sgst.format}"/>
+              </af:outputText>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout layout="horizontal" styleClass="summary-row" id="co_sr4" visible="false">
+              <af:outputText value="Freight" id="co_sot7"/>
+              <af:outputText value="#{CreateOrderBean.freight}" id="co_sot8"/>
+            </af:panelGroupLayout>
+            
+            <hr class="summary-divider"/>
+            
+            <af:panelGroupLayout layout="horizontal" styleClass="summary-row grand-total-row" id="co_sr5">
+              <af:outputText value="Grand Total" id="co_sot9" styleClass="grand-total-label"/>
+              <af:spacer width="65" height="0" id="s4"/>
+              <af:outputText id="ot4" styleClass="grand-total-value" value="#{pageFlowScope.OrderBean.grandTotal}"
+                             binding="#{pageFlowScope.OrderBean.bindGrandTotal}" partialTriggers="t1">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.TotalAmount.format}"/>
+              </af:outputText>
+            </af:panelGroupLayout>
+            
+            <af:outputText value="#{CreateOrderBean.creditStatusMsg}" id="co_credit_msg" styleClass="credit-status-text"/>
+          </af:panelGroupLayout>
+          
+        </af:gridCell>
+        
+      </af:gridRow>
+    </af:panelGridLayout>
+  
+  
+  <!-- 6. Footer Action Bar -->
+    <af:panelGroupLayout id="co_pgl_footer_btns" layout="horizontal" styleClass="footer-action-bar">
+      <af:button text="Cancel" id="co_b_cancel" styleClass="btn btn-outline-danger" action="back" immediate="true"/>
+      <af:panelGroupLayout id="co_pgl_right_btns" layout="horizontal">
+        <af:button text="Save Draft" id="co_b_draft" styleClass="btn btn-outline" visible="false"/>
+        <af:button text="Submit Order" id="co_b_submit" styleClass="btn btn-primary"
+                   actionListener="#{pageFlowScope.OrderBean.saveOrder}"/>
+        <f:facet name="separator">
+          <af:spacer width="10" id="co_sp2"/>
+        </f:facet>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+    
+    
+  </af:panelGroupLayout>
+</jsp:root>

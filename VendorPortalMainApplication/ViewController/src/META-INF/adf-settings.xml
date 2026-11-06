@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adf-settings xmlns="http://xmlns.oracle.com/adf/settings">
+  <adf-controller-setting xmlns="http://xmlns.oracle.com/adf/controller/config">
+    <lifecycle>
+      <phase-listener>
+        <listener-id>MyListener</listener-id>
+        <class>terms.erp.mainapp.view.listener.SessionTimeOutListener</class>
+      </phase-listener>
+    </lifecycle>
+  </adf-controller-setting>
+</adf-settings>

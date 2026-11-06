@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="bspl.sec.passresetapp" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/WEB-INF/PassReset.jsff" usageId="bspl_sec_passresetapp_PassResetPageDef"/>
+    <page path="/test.jspx" usageId="bspl_sec_passresetapp_testPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="bspl_sec_passresetapp_PassResetPageDef" path="bspl.sec.passresetapp.pageDefs.PassResetPageDef"/>
+    <page id="bspl_sec_passresetapp_testPageDef" path="bspl.sec.passresetapp.pageDefs.testPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="PassResetAppDataControl" Package="bspl.sec.passresetapp.model.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="PassResetAppLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

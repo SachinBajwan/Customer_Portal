@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ReportsAM"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true"
+  ComponentClass="model.bspl.reports.services.ReportsAMImpl"
+  ComponentInterface="model.bspl.reports.services.common.ReportsAM">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewUsage
+    Name="SaleOrdersVO1"
+    ViewObjectName="model.bspl.reports.views.SaleOrdersVO"/>
+  <ViewUsage
+    Name="DispatchOrdersVO1"
+    ViewObjectName="model.bspl.reports.views.DispatchOrdersVO"/>
+  <ViewUsage
+    Name="InvoicesVO1"
+    ViewObjectName="model.bspl.reports.views.InvoicesVO"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="getCustomerCode"
+      MethodName="getCustomerCode">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="vendorId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</AppModule>

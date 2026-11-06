@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core">
+<af:panelGroupLayout styleClass="onboarding-wrapper"> 
+    <af:panelGroupLayout styleClass="onboarding-title">
+        <af:outputText value="Customer Onboarding" styleClass="onboarding-heading"/>
+        <af:outputText value="Fields marked * are mandatory." id="ot4" styleClass="mandatory-note"/>
+    </af:panelGroupLayout>
+    <af:panelHeader text="" id="ph3" binding="#{LoginBean.bindConsentMainHeader}" styleClass="hide-panel-header-title">
+        <f:facet name="toolbar"/>
+        <af:panelGroupLayout id="trainContainer" layout="vertical" styleClass="customer-train-container">
+          <af:train id="t4" value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                    styleClass="customer-train"/>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="root" styleClass="contact-step">
+            <af:panelHeader text="Step 4: Privacy Consent" id="ph1" styleClass="AFStretchWidth custom-form-header">
+              <!-- STEP TITLE -->
+              <!--<af:outputText value="Step 3: Privacy Consent" id="stepTitle" styleClass="step-title"/>-->
+    
+                <af:panelGroupLayout id="pglLang" layout="horizontal" styleClass="lang-box AFStretchWidth" valign="middle">
+                  <af:selectOneChoice value="#{bindings.NoticeLanguage.inputValue}" label="#{bindings.NoticeLanguage.label}"
+                                      required="#{bindings.NoticeLanguage.hints.mandatory}"
+                                      shortDesc="#{bindings.NoticeLanguage.hints.tooltip}" id="soc1" contentStyle="width:160px;"
+                                      autoSubmit="true" valueChangeListener="#{LoginBean.changeLanguage}"
+                                      binding="#{LoginBean.bindNoticeLanFlg}">
+                    <f:selectItems value="#{bindings.NoticeLanguage.items}" id="si1"/>
+                    <f:validator binding="#{bindings.NoticeLanguage.validator}"/>
+                  </af:selectOneChoice>
+                </af:panelGroupLayout>
+                <af:panelHeader text="चरण 4: गोपनीयता नोटिस और सहमति" id="ph4" styleClass="step-header"
+                                binding="#{LoginBean.bindHindiPanel}" partialTriggers="soc1">
+                  <af:panelGroupLayout id="pglMain" styleClass="AFStretchWidth step-wrapper">
+                    <af:outputText value="कृपया नोटिस पढ़ें। आप इन विकल्पों को गोपनीयता केंद्र (Privacy Center) से कभी भी बदल सकते हैं।"
+                                   id="otSub" styleClass="step-subtext"/>
+                    <!-- Grid Layout: Split Left and Right -->
+                    <af:panelGroupLayout id="pglSplit" styleClass="AFStretchWidth step-container" valign="top">
+                      <!-- LEFT COLUMN: Privacy Notice -->
+                      <af:panelGroupLayout id="pglLeft" layout="vertical" styleClass="notice-card">
+                        <af:outputText value="गोपनीयता नोटिस (DPDP अधिनियम, 2023)" id="otNoticeTitle"
+                                       styleClass="notice-card-title"/>
+                        <af:panelGroupLayout id="pglScroll" layout="vertical" styleClass="scrollable-notice">
+                          <af:outputText value="1. हम कौन सा डेटा एकत्र करते हैं" id="otS1Title" styleClass="section-title"/>
+                          <af:outputText value="नाम, मोबाइल, ईमेल, पदनाम, पता, जीएसटी (GSTIN), पैन (PAN), केवाईसी (KYC) दस्तावेज़।"
+                                         id="otS1Body" styleClass="section-body"/>
+                          <af:outputText value="2. उद्देश्य" id="otS2Title" styleClass="section-title"/>
+                          <af:outputText value="खाता निर्माण, केवाईसी सत्यापन, ऑर्डर प्रसंस्करण, प्रेषण एवं इनवॉइसिंग, सेवा सूचनाएं, वैधानिक अनुपालन (जीएसटी / आयकर)।"
+                                         id="otS2Body" styleClass="section-body"/>
+                          <af:outputText value="3. डेटा प्रतिधारण (Retention)" id="otS3Title" styleClass="section-title"/>
+                          <af:outputText value="खाता सक्रिय रहने तक + कानून द्वारा आवश्यक अवधि तक रखा जाता है; तत्पश्चात मिटा दिया जाता है।"
+                                         id="otS3Body" styleClass="section-body"/>
+                          <af:outputText value="4. आपके अधिकार" id="otS4Title" styleClass="section-title"/>
+                          <af:outputText value="पहुंच, सुधार, पूर्णता, अपडेट, विलोपन, शिकायत निवारण, व्यक्ति को नामांकित करना, सहमति वापस लेना - गोपनीयता केंद्र के माध्यम से।"
+                                         id="otS4Body" styleClass="section-body"/>
+                          <af:outputText value="5. शिकायत अधिकारी / DPO" id="otS5Title" styleClass="section-title"/>
+                          <af:outputText value="नाम: XXXXX | dpo@company.com | +91-XXXXXXXXXX" id="otS5Body"
+                                         styleClass="section-body"/>
+                          <af:outputText value="6. भारतीय डेटा सुरक्षा बोर्ड को शिकायत" id="otS6Title" styleClass="section-title"/>
+                          <af:outputText value="यदि आप हमारे समाधान से संतुष्ट नहीं हैं, तो आप बोर्ड से संपर्क कर सकते हैं।"
+                                         id="otS6Body" styleClass="section-body"/>
+                          <af:outputText value="7. सहमति वापस लेना" id="otS7Title" styleClass="section-title"/>
+                          <af:outputText value="सहमति वापस लेना उतना ही आसान है जितना इसे देना। सहमति वापस लेने से पूर्व में किए गए प्रसंस्करण पर प्रभाव नहीं पड़ता है।"
+                                         id="otS7Body" styleClass="section-body"/>
+                          <af:commandLink text="नोटिस डाउनलोड करें (PDF)" id="clDownload" styleClass="download-link"/>
+                        </af:panelGroupLayout>
+                      </af:panelGroupLayout>
+                      
+                      <!-- RIGHT COLUMN: Language Select & Consent Choices -->
+                      <af:panelGroupLayout id="pglRight" layout="vertical" styleClass="notice-card">
+                        <!-- Consent Options Box -->
+                        <af:panelGroupLayout id="pglConsent" layout="vertical" styleClass="consent-card AFStretchWidth">
+                          <af:outputText value="आपकी सहमति के विकल्प" id="otConsentTitle" styleClass="consent-card-title"/>
+                          <af:outputText value="सेवा के लिए आवश्यक" id="otReqLabel" styleClass="group-label"/>
+                          <af:selectBooleanCheckbox text="मैं खाता निर्माण, केवाईसी (KYC) और ऑर्डर पूर्ति के लिए अपने डेटा के प्रसंस्करण के लिए सहमत हूँ। *"
+                                                    id="sbcReq1" styleClass="custom-checkbox" autoSubmit="true"
+                                                    binding="#{LoginBean.bindDataProcessFlg}" required="true" value="true"
+                                                    valueChangeListener="#{LoginBean.proDataHVce}"/>
+                          <af:spacer height="6" id="s2"/>
+                          <af:selectBooleanCheckbox text="मैं एसएमएस/ईमेल पर लेन-देन संबंधी अलर्ट (ओटीपी, ऑर्डर, प्रेषण, इनवॉइस) प्राप्त करने के लिए सहमत हूँ। *"
+                                                    id="sbcReq2" styleClass="custom-checkbox" autoSubmit="true"
+                                                    binding="#{LoginBean.bindTranAlertFlg}" required="true" value="true"
+                                                    valueChangeListener="#{LoginBean.TranAlertH}"/>
+                          <af:spacer height="10" id="s3"/>
+                          <af:outputText value="वैकल्पिक" id="otOptLabel" styleClass="group-label"/>
+                          <af:selectBooleanCheckbox text="मुझे ऑफ़र और उत्पाद अपडेट भेजें (ईमेल)" id="sbcOpt1"
+                                                    styleClass="custom-checkbox" binding="#{LoginBean.bindEmailAlertFlg}"
+                                                    autoSubmit="true" value="false" valueChangeListener="#{LoginBean.EmailHVce}"/>
+                          <af:spacer height="4" id="s4"/>
+                          <af:selectBooleanCheckbox text="मुझे व्हाट्सएप (WhatsApp) पर अपडेट भेजें" id="sbcOpt2"
+                                                    styleClass="custom-checkbox" binding="#{LoginBean.bindWAAlertFlg}"
+                                                    autoSubmit="true" value="false" valueChangeListener="#{LoginBean.WPHVce}"/>
+                          <af:spacer height="4" id="s5"/>
+                          <af:selectBooleanCheckbox text="पोर्टल को बेहतर बनाने के लिए एनालिटिक्स कुकीज़ की अनुमति दें" id="sbcOpt3"
+                                                    styleClass="custom-checkbox" binding="#{LoginBean.bindCookiesFlg}"
+                                                    autoSubmit="true" value="false" valueChangeListener="#{LoginBean.CookHVce}"/>
+                          <af:spacer height="12" id="s6"/>
+                          <af:separator id="sep1"/>
+                          <af:spacer height="8" id="s7"/>
+                          <af:selectBooleanCheckbox text="मैं पुष्टि करता हूँ कि मेरी आयु 18+ वर्ष है और मैं इस जानकारी को साझा करने के लिए व्यवसाय द्वारा अधिकृत हूँ। *"
+                                                    id="sbcAuth" styleClass="custom-checkbox"
+                                                    binding="#{LoginBean.bindAgeConfirmFlg}" autoSubmit="true" required="true"
+                                                    value="true" valueChangeListener="#{LoginBean.AgeFlgHVce}"/>
+                          <!-- Yellow Information Footer Box -->
+                          <af:panelGroupLayout id="pglYellow" layout="vertical" styleClass="yellow-info-box AFStretchWidth">
+                            <af:outputText value="* से चिह्नित फ़ील्ड भरना अनिवार्य है।" id="otYellow"
+                                           styleClass="yellow-info-text"/>
+                          </af:panelGroupLayout>
+                          <!-- Navigation Buttons -->
+                          <af:panelGroupLayout id="pglButtons" layout="horizontal" styleClass="AFStretchWidth" rendered="false">
+                            <af:button text="← पीछे जाएँ" id="btnBack" styleClass="btn-back"
+                                       actionListener="#{pageFlowScope.privacyBean.onBack}"/>
+                            <af:button text="सहमत हैं और आगे बढ़ें" id="btnAgree" styleClass="btn-agree"
+                                       actionListener="#{pageFlowScope.privacyBean.onAgreeAndContinue}"/>
+                          </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </af:panelGroupLayout>
+                </af:panelHeader>
+            
+                <af:panelHeader text="Step 4: Privacy Notice &amp; Consent" id="ph2" styleClass="step-header"
+                                binding="#{LoginBean.bindEnglishPanel}" partialTriggers="soc1" visible="false">
+                  <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth step-wrapper">
+                    <af:outputText value="Please read the notice. You can change these choices anytime from Privacy Center."
+                                   id="ot1" styleClass="step-subtext"/>
+                    <!-- Grid Layout: Split Left and Right -->
+                    <af:panelGroupLayout id="pgl2" styleClass="AFStretchWidth step-container" valign="top">
+                      <!-- LEFT COLUMN: Privacy Notice -->
+                      <af:panelGroupLayout id="pgl3" layout="vertical" styleClass="notice-card">
+                        <af:outputText value="Privacy Notice (DPDP Act, 2023)" id="ot2" styleClass="notice-card-title"/>
+                        <af:panelGroupLayout id="pgl4" layout="vertical" styleClass="scrollable-notice">
+                          <af:outputText value="1. Data we collect" id="ot3" styleClass="section-title"/>
+                          <af:outputText value="Name, mobile, email, designation, address, GSTIN, PAN, KYC documents." id="ot17"
+                                         styleClass="section-body"/>
+                          <af:outputText value="2. Purpose" id="ot5" styleClass="section-title"/>
+                          <af:outputText value="Account creation, KYC verification, order processing, dispatch &amp; invoicing, service notifications, statutory compliance (GST / Income Tax)."
+                                         id="ot6" styleClass="section-body"/>
+                          <af:outputText value="3. Retention" id="ot7" styleClass="section-title"/>
+                          <af:outputText value="Kept while account is active + as required by law; then erased." id="ot8"
+                                         styleClass="section-body"/>
+                          <af:outputText value="4. Your rights" id="ot9" styleClass="section-title"/>
+                          <af:outputText value="Access, correction, completion, update, erasure, grievance redressal, nominate a person, withdraw consent - via Privacy Center."
+                                         id="ot10" styleClass="section-body"/>
+                          <af:outputText value="5. Grievance Officer / DPO" id="ot11" styleClass="section-title"/>
+                          <af:outputText value="Name: XXXXX | dpo@company.com | +91-XXXXXXXXXX" id="ot12"
+                                         styleClass="section-body"/>
+                          <af:outputText value="6. Complaint to Data Protection Board of India" id="ot13"
+                                         styleClass="section-title"/>
+                          <af:outputText value="You may approach the Board if not satisfied with our resolution." id="ot14"
+                                         styleClass="section-body"/>
+                          <af:outputText value="7. Withdrawal of consent" id="ot15" styleClass="section-title"/>
+                          <af:outputText value="As easy as giving it. Withdrawal does not affect past processing." id="ot16"
+                                         styleClass="section-body"/>
+                          <af:commandLink text="Download Notice (PDF)" id="cl1" styleClass="download-link"/>
+                        </af:panelGroupLayout>
+                      </af:panelGroupLayout>
+                      <!-- RIGHT COLUMN: Language Select & Consent Choices -->
+                      <af:panelGroupLayout id="pgl5" layout="vertical" styleClass="notice-card">
+                        <!-- Language Selector Container -->
+                        <!-- Consent Options Box -->
+                        <af:panelGroupLayout id="pgl7" layout="vertical" styleClass="consent-card AFStretchWidth">
+                          <af:outputText value="Your Consent Choices" id="ot18" styleClass="consent-card-title"/>
+                          <af:outputText value="Required for service" id="ot19" styleClass="group-label"/>
+                          <af:selectBooleanCheckbox text="I agree to processing of my data for account creation, KYC and order fulfilment. *"
+                                                    id="sbc1" styleClass="custom-checkbox" binding="#{LoginBean.bindDProcessEngFlg}"
+                                                    autoSubmit="true" value="true" required="true"
+                                                    valueChangeListener="#{LoginBean.proDataHVce}"/>
+                          <af:spacer height="6" id="s9"/>
+                          <af:selectBooleanCheckbox text="I agree to receive transactional alerts (OTP, order, dispatch, invoice) on SMS/Email. *"
+                                                    id="sbc2" styleClass="custom-checkbox"
+                                                    binding="#{LoginBean.bindTranAlertEngFlg}" autoSubmit="true" value="true"
+                                                    required="true" valueChangeListener="#{LoginBean.TranAlertH}"/>
+                          <af:spacer height="10" id="s10"/>
+                          <af:outputText value="Optional" id="ot20" styleClass="group-label"/>
+                          <af:selectBooleanCheckbox text="Send me offers &amp; product updates (Email)" id="sbc3"
+                                                    styleClass="custom-checkbox" binding="#{LoginBean.bindEmailAlertEngFlg}"
+                                                    autoSubmit="true" value="false" valueChangeListener="#{LoginBean.EmailHVce}"/>
+                          <af:spacer height="4" id="s11"/>
+                          <af:selectBooleanCheckbox text="Send me updates on WhatsApp" id="sbc4" styleClass="custom-checkbox"
+                                                    binding="#{LoginBean.bindWAEngFlg}" autoSubmit="true" value="false"
+                                                    valueChangeListener="#{LoginBean.WPHVce}"/>
+                          <af:spacer height="4" id="s12"/>
+                          <af:selectBooleanCheckbox text="Allow analytics cookies to improve portal" id="sbc5"
+                                                    styleClass="custom-checkbox" binding="#{LoginBean.bindCookiesEngFlg}"
+                                                    autoSubmit="true" value="false" valueChangeListener="#{LoginBean.CookHVce}"/>
+                          <af:spacer height="12" id="s13"/>
+                          <af:separator id="s14"/>
+                          <af:spacer height="8" id="s15"/>
+                          <af:selectBooleanCheckbox text="I confirm I am 18+ years and authorised by the business to share this information. *"
+                                                    id="sbc6" styleClass="custom-checkbox" binding="#{LoginBean.bindAgeAlertEngFlg}"
+                                                    autoSubmit="true" value="true" required="true"
+                                                    valueChangeListener="#{LoginBean.AgeFlgHVce}"/>
+                          <!-- Yellow Information Footer Box -->
+                          <af:panelGroupLayout id="pgl8" layout="vertical" styleClass="yellow-info-box AFStretchWidth">
+                            <af:outputText value="Fields marked * are mandatory." id="ot21" styleClass="yellow-info-text"/>
+                          </af:panelGroupLayout>
+                          <!-- Navigation Buttons -->
+                          <af:panelGroupLayout id="pgl9" layout="horizontal" styleClass="AFStretchWidth" rendered="false">
+                            <af:button text="← Back" id="btn1" styleClass="btn-back"
+                                       actionListener="#{pageFlowScope.privacyBean.onBack}"/>
+                            <af:button text="I Agree &amp; Continue" id="btn2" styleClass="btn-agree"
+                                       actionListener="#{pageFlowScope.privacyBean.onAgreeAndContinue}"/>
+                          </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </af:panelGroupLayout>
+                </af:panelHeader>
+            </af:panelHeader>
+            <af:panelGroupLayout id="buttons" styleClass="button-row">
+                <af:panelGroupLayout styleClass="button-section">
+                    <af:commandButton text="← Back" id="backButton" action="back" styleClass="common-button back-button"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="rightButtons" styleClass="button-section">
+                    <af:commandButton text="Save" id="draftButton" styleClass="draft-button"
+                                      actionListener="#{LoginBean.saveNewRegistration}" rendered="false"/>
+                    <af:commandButton text="Accept and Continue →" id="nextButton" styleClass="common-button next-button"
+                                      action="#{LoginBean.ConsentAgree}"/>
+                    <af:commandButton text="Cancel" id="cancelButton" styleClass="common-button" immediate="true"
+                                      actionListener="#{LoginBean.backToLoginMain}"/>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+    </af:panelHeader>
+</af:panelGroupLayout>
+  <!--- FORM -->
+  <!-- English -->
+        
+        
+        <!-- BUTTONS -->
+
+</jsp:root>

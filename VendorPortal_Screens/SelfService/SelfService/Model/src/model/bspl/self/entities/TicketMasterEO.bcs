@@ -1,0 +1,17 @@
+//Groovy Scripts for model.bspl.self.entities.TicketMasterEO
+
+package model.bspl.self.entities
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+import groovy.transform.TypeChecked;
+import groovy.transform.TypeCheckingMode;
+ 
+@TypeChecked(TypeCheckingMode.SKIP)
+
+
+@TransientValueExpression(attributeName="TicketId")
+def TicketId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("GLOBAL_OCI_SEQ",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

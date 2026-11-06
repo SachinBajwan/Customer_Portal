@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="CreateOrderTF_CreateOrderTF_setOrderHdrPageDef" Package="bspl.orders.ui.flow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="setOrderHdr" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setOrderHdr"
+                  IsViewObjectMethod="false" DataControl="OrderAMDataControl"
+                  InstanceName="data.OrderAMDataControl.dataProvider"
+                  ReturnName="data.OrderAMDataControl.methodResults.setOrderHdr_OrderAMDataControl_dataProvider_setOrderHdr_result"/>
+  </bindings>
+</pageDefinition>

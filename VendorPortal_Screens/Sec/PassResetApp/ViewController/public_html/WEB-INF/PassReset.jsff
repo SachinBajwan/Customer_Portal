@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl3">
+  <div align="center" style="padding: 120px;102px;102px;102px">
+  <div   style="background:transparent;border-radius:15px;  box-shadow:0px 0px 2px #000;height:250px; width:450px;">
+        <af:spacer width="10" height="20" id="s2"/><af:panelFormLayout id="pgl1"> 
+    <af:inputText value="#{bindings.OldPassword.inputValue}" label="Old Password"
+                  required="#{bindings.OldPassword.hints.mandatory}"
+                  columns="#{bindings.OldPassword.hints.displayWidth}"
+                  maximumLength="#{bindings.OldPassword.hints.precision}"
+                  shortDesc="#{bindings.OldPassword.hints.tooltip}" id="it2" autoSubmit="true" secret="true">
+      <f:validator binding="#{bindings.OldPassword.validator}"/>
+    </af:inputText>
+          <af:spacer width="5" height="10" id="s5"/>
+          <af:inputText value="#{bindings.NewPassword.inputValue}" label="New Password"
+                  required="#{bindings.NewPassword.hints.mandatory}"
+                  columns="#{bindings.NewPassword.hints.displayWidth}"
+                  maximumLength="#{bindings.NewPassword.hints.precision}"
+                  shortDesc="#{bindings.NewPassword.hints.tooltip}" id="it3" autoSubmit="true" secret="true">
+      <f:validator binding="#{bindings.NewPassword.validator}"/>
+    </af:inputText>
+          <af:spacer width="10" height="5" id="s4"/>
+          <af:inputText value="#{bindings.ConfirmPassword.inputValue}" label="Comfirm Password"
+                  required="#{bindings.ConfirmPassword.hints.mandatory}"
+                  columns="#{bindings.ConfirmPassword.hints.displayWidth}"
+                  maximumLength="#{bindings.ConfirmPassword.hints.precision}"
+                  shortDesc="#{bindings.ConfirmPassword.hints.tooltip}" id="it4" autoSubmit="true" secret="true">
+      <f:validator binding="#{bindings.ConfirmPassword.validator}"/>
+    </af:inputText>
+          <af:spacer width="10" height="5" id="s3"/>
+          <af:panelGroupLayout id="pgl2">
+      <af:button text="Submit" id="b1" actionListener="#{PassResetAppBean.onClickSubmit}" inlineStyle="width:60px"/>
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:button text="Exit" id="b2" action="goBack" inlineStyle="width:60px"/>
+   </af:panelGroupLayout>
+   </af:panelFormLayout>
+</div>
+</div>
+ </af:panelGroupLayout>
+  
+</jsp:root>

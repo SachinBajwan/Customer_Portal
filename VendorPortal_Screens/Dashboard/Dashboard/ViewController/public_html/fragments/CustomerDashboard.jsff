@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+ 
+ <af:panelGroupLayout id="dg_pgl1" layout="vertical" styleClass="content-area">
+    
+    <!-- 1. Welcome Greeting Banner -->
+    <af:panelGroupLayout id="dg_pgl2" layout="vertical" inlineStyle="margin-bottom: 20px;">
+      <af:outputText value="Good morning, #{pageFlowScope.DashboardBean.userName}" id="dg_ot1" styleClass="welcome-title"/>
+      <af:outputText value="Last login: #{bindings.LoginTm.inputValue}, #{bindings.LoginDate.inputValue}, I.P :#{bindings.MachineIp.inputValue}" id="dg_ot2" styleClass="welcome-subtitle"
+                     visible="#{bindings.MachineIp.inputValue != null}"/>
+    </af:panelGroupLayout>
+    <af:table value="#{bindings.CustPendingSummaryVO1.collectionModel}" var="row"
+              rows="#{bindings.CustPendingSummaryVO1.rangeSize}"
+              emptyText="#{bindings.CustPendingSummaryVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.CustPendingSummaryVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.CustPendingSummaryVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.CustPendingSummaryVO1.rangeSize}" id="t1" visible="false">
+      <af:column headerText="#{bindings.CustPendingSummaryVO1.hints.RecCnt.label}" id="c1">
+        <af:outputText value="#{row.RecCnt}" shortDesc="#{bindings.CustPendingSummaryVO1.hints.RecCnt.tooltip}"
+                       id="ot1">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.CustPendingSummaryVO1.hints.RecCnt.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column headerText="#{bindings.CustPendingSummaryVO1.hints.CustCode.label}" id="c2">
+        <af:outputText value="#{row.CustCode}" shortDesc="#{bindings.CustPendingSummaryVO1.hints.CustCode.tooltip}"
+                       id="ot2"/>
+      </af:column>
+      <af:column headerText="#{bindings.CustPendingSummaryVO1.hints.Remarks.label}" id="c3">
+        <af:outputText value="#{row.Remarks}" shortDesc="#{bindings.CustPendingSummaryVO1.hints.Remarks.tooltip}"
+                       id="ot3"/>
+      </af:column>
+    </af:table>
+    <!-- 2. KPI Metric Cards (4-Column Layout using Panel GridLayout) -->
+    <af:panelGridLayout id="dg_pgl_metrics" styleClass="metrics-container">
+      <af:gridRow id="dg_gr1">
+        
+        <af:gridCell id="dg_gc1" width="25%">
+          <af:panelGroupLayout id="dg_m1" layout="vertical" styleClass="metric-card blue">
+            <af:outputText value="Open Orders" id="dg_mt1" styleClass="metric-title"/>
+            <af:outputText value="#{pageFlowScope.DashboardBean.openOrdersCount}" id="dg_mv1" styleClass="metric-value"/>
+          </af:panelGroupLayout>
+        </af:gridCell>
+        
+        <af:gridCell id="dg_gc2" width="25%">
+          <af:panelGroupLayout id="dg_m2" layout="vertical" styleClass="metric-card orange">
+            <af:outputText value="In Transit" id="dg_mt2" styleClass="metric-title"/>
+            <af:outputText value="#{pageFlowScope.DashboardBean.inTransitCount}" id="dg_mv2" styleClass="metric-value"/>
+          </af:panelGroupLayout>
+        </af:gridCell>
+        
+        <af:gridCell id="dg_gc3" width="25%">
+          <af:panelGroupLayout id="dg_m3" layout="vertical" styleClass="metric-card green">
+            <af:outputText value="Delivered (30d)" id="dg_mt3" styleClass="metric-title"/>
+            <af:outputText value="#{pageFlowScope.DashboardBean.deliveredCount}" id="dg_mv3" styleClass="metric-value"/>
+          </af:panelGroupLayout>
+        </af:gridCell>
+        
+        <af:gridCell id="dg_gc4" width="25%">
+          <af:panelGroupLayout id="dg_m4" layout="vertical" styleClass="metric-card red">
+            <af:outputText value="Invoices Due" id="dg_mt4" styleClass="metric-title"/>
+            <af:outputText value="#{pageFlowScope.DashboardBean.invoicesDueAmount}" id="dg_mv4" styleClass="metric-value"/>
+          </af:panelGroupLayout>
+        </af:gridCell>
+        
+      </af:gridRow>
+    </af:panelGridLayout>
+    
+ 
+        <!-- Recent Orders Table -->
+        
+    <af:spacer width="0" height="30" id="s1"/>
+    
+    <!-- Header -->
+        <af:outputText value="Recent Orders"
+                       id="recentOrdersTitle"
+                       styleClass="recent-orders-title"/>
+
+    <af:table value="#{bindings.RecentOrdersVO1.collectionModel}" var="row" rows="#{bindings.RecentOrdersVO1.rangeSize}"
+              rowBandingInterval="1" selectedRowKeys="#{bindings.RecentOrdersVO1.collectionModel.selectedRow}"
+              selectionListener="#{bindings.RecentOrdersVO1.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.RecentOrdersVO1.rangeSize}" id="t2"
+              verticalGridVisible="false" styleClass="recent-orders-table"
+              emptyText="#{bindings.RecentOrdersVO1.viewable ? 'No data to display.' : 'Access Denied.'}">
+      <af:column sortProperty="#{bindings.RecentOrdersVO1.hints.DocNo.name}" sortable="true"
+                 headerText="#{bindings.RecentOrdersVO1.hints.DocNo.label}" id="c4" width="180"
+                 headerClass="recent-orders-header">
+        <af:outputText value="#{row.DocNo}" shortDesc="#{bindings.RecentOrdersVO1.hints.DocNo.tooltip}" id="ot4"
+                       styleClass="order-no"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RecentOrdersVO1.hints.CreationDate.name}" sortable="true"
+                 headerText="#{bindings.RecentOrdersVO1.hints.CreationDate.label}" id="c5"
+                 headerClass="recent-orders-header" width="180">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.RecentOrdersVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreationDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.RecentOrdersVO1.hints.CreationDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.CreationDate}" shortDesc="#{bindings.RecentOrdersVO1.hints.CreationDate.tooltip}"
+                       id="ot5" styleClass="order-date">
+          <af:convertDateTime pattern="#{bindings.RecentOrdersVO1.hints.CreationDate.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RecentOrdersVO1.hints.Amount.name}" sortable="true"
+                 headerText="#{bindings.RecentOrdersVO1.hints.Amount.label}" id="c6" width="180"
+                 headerClass="recent-orders-header">
+        <af:outputText value="#{row.Amount}" shortDesc="#{bindings.RecentOrdersVO1.hints.Amount.tooltip}" id="ot6"
+                       styleClass="order-amount">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.RecentOrdersVO1.hints.Amount.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RecentOrdersVO1.hints.Remarks.name}" sortable="true"
+                 headerText="#{bindings.RecentOrdersVO1.hints.Remarks.label}" id="c7" headerClass="recent-orders-header"
+                 width="180">
+        <af:outputText value="#{row.Remarks}" shortDesc="#{bindings.RecentOrdersVO1.hints.Remarks.tooltip}" id="ot7"
+                       styleClass="#{row.bindings.Remarks.inputValue eq 'In Transit'                                                  ? 'Remarks-badge Remarks-transit'                                                  : row.bindings.Remarks.inputValue eq 'Delivered'                                                  ? 'Remarks-badge Remarks-delivered'                                                  : row.bindings.Remarks.inputValue eq 'Approved'                                                  ? 'Remarks-badge Remarks-approved'                                                  : 'Remarks-badge Remarks-pending'}"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.RecentOrdersVO1.hints.SessionId.name}" sortable="true"
+                 headerText="#{bindings.RecentOrdersVO1.hints.SessionId.label}" id="c8" visible="false">
+        <af:inputText value="#{row.bindings.SessionId.inputValue}"
+                      label="#{bindings.RecentOrdersVO1.hints.SessionId.label}"
+                      required="#{bindings.RecentOrdersVO1.hints.SessionId.mandatory}"
+                      columns="#{bindings.RecentOrdersVO1.hints.SessionId.displayWidth}"
+                      maximumLength="#{bindings.RecentOrdersVO1.hints.SessionId.precision}"
+                      shortDesc="#{bindings.RecentOrdersVO1.hints.SessionId.tooltip}" id="it4">
+          <f:validator binding="#{row.bindings.SessionId.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.RecentOrdersVO1.hints.SessionId.format}"/>
+        </af:inputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RecentOrdersVO1.hints.CustCode.name}" sortable="true"
+                 headerText="#{bindings.RecentOrdersVO1.hints.CustCode.label}" id="c9" visible="false">
+        <af:inputText value="#{row.bindings.CustCode.inputValue}"
+                      label="#{bindings.RecentOrdersVO1.hints.CustCode.label}"
+                      required="#{bindings.RecentOrdersVO1.hints.CustCode.mandatory}"
+                      columns="#{bindings.RecentOrdersVO1.hints.CustCode.displayWidth}"
+                      maximumLength="#{bindings.RecentOrdersVO1.hints.CustCode.precision}"
+                      shortDesc="#{bindings.RecentOrdersVO1.hints.CustCode.tooltip}" id="it5">
+          <f:validator binding="#{row.bindings.CustCode.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.RecentOrdersVO1.hints.CustCode.format}"/>
+        </af:inputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.RecentOrdersVO1.hints.UnitCd.name}" sortable="true"
+                 headerText="#{bindings.RecentOrdersVO1.hints.UnitCd.label}" id="c10" visible="false">
+        <af:inputText value="#{row.bindings.UnitCd.inputValue}" label="#{bindings.RecentOrdersVO1.hints.UnitCd.label}"
+                      required="#{bindings.RecentOrdersVO1.hints.UnitCd.mandatory}"
+                      columns="#{bindings.RecentOrdersVO1.hints.UnitCd.displayWidth}"
+                      maximumLength="#{bindings.RecentOrdersVO1.hints.UnitCd.precision}"
+                      shortDesc="#{bindings.RecentOrdersVO1.hints.UnitCd.tooltip}" id="it6">
+          <f:validator binding="#{row.bindings.UnitCd.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.RecentOrdersVO1.hints.UnitCd.format}"/>
+        </af:inputText>
+      </af:column>
+    </af:table>
+
+    </af:panelGroupLayout>
+    
+    
+
+</jsp:root>

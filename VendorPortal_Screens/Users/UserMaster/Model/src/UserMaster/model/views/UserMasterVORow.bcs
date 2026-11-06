@@ -1,0 +1,19 @@
+//Groovy Scripts for UserMaster.model.views.UserMasterVO
+
+package UserMaster.model.views
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="LastUpdateDate")
+def LastUpdateDate_ExpressionScript_Expression()
+{
+adf.currentDate
+}
+
+
+@TransientValueExpression(attributeName="CreationDate")
+def CreationDate_ExpressionScript_Expression()
+{
+adf.currentDate
+}
+

@@ -1,0 +1,415 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="Dashboard" id="d1" partialTriggers="soc1">
+            <af:resource type="css">
+                #pgl1 {
+                    animation-name: moveInLeft;
+                    animation-duration: 1s;
+                }
+                /* #l7{
+            background-color: #20283E;
+        }
+        #l8{
+            background-color: #20283E;
+        }
+        #l9{
+            background-color: #484848;
+        }
+        #l10{
+            background-color: #AC3E31;
+        }
+        #l11{
+            background-color: #AC3E31;
+        }
+        #l12{
+            background-color: #AC3E31;
+        }
+        #l13{
+            background-color: #AC3E31;
+        }
+        #l14{
+            background-color: #20283E;
+        }
+        #l15{
+            background-color: #20283E;
+        }
+        #l16{
+            background-color: #20283E;
+        }*/
+            </af:resource>
+            <af:resource type="javascript" source="/resource/js/LoginBackDisabled.js"/>
+            <af:messages id="m2"/>
+            <af:form id="f1">
+                <af:panelGridLayout id="pgl2" dimensionsFrom="parent" styleClass="AFStretchWidth">
+                    <af:gridRow id="gr1">
+                        <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                            <af:panelGroupLayout id="pgl3" layout="vertical" styleClass="AFStretchWidth">
+                                <af:panelGroupLayout id="pgl4" styleClass="AFStretchWidth" layout="vertical">
+                                    <af:panelGroupLayout id="pgl5" layout="horizontal" styleClass="AFStretchWidth"
+                                                         inlineStyle="border:gray solid thin;">
+                                        <!--inlineStyle="background-color:#EFEDE0;"-->
+                                        <af:panelGroupLayout id="pgl6" halign="left" styleClass="AFStretchWidth"
+                                                             layout="horizontal" inlineStyle="padding:5px;">
+                                            <img src="resource/image/Company_Logo.png" height="38" alt="company Logo"
+                                                 width="107"/>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl7" layout="horizontal" halign="end"
+                                                             styleClass="AFStretchWidth" inlineStyle="padding:5px;">
+                                            <af:panelGroupLayout id="pgl18" layout="horizontal" rendered="false">
+                                                <af:inputText value="#{bindings.DocFileNameTrans.inputValue}"
+                                                              label="#{bindings.DocFileNameTrans.hints.label}"
+                                                              required="#{bindings.DocFileNameTrans.hints.mandatory}"
+                                                              columns="#{bindings.DocFileNameTrans.hints.displayWidth}"
+                                                              maximumLength="#{bindings.DocFileNameTrans.hints.precision}"
+                                                              shortDesc="#{bindings.DocFileNameTrans.hints.tooltip}"
+                                                              partialTriggers="docTCodeTransId" id="it1">
+                                                    <f:validator binding="#{bindings.DocFileNameTrans.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.DocFileIdTrans.inputValue}"
+                                                              label="#{bindings.DocFileIdTrans.hints.label}"
+                                                              required="#{bindings.DocFileIdTrans.hints.mandatory}"
+                                                              columns="#{bindings.DocFileIdTrans.hints.displayWidth}"
+                                                              maximumLength="#{bindings.DocFileIdTrans.hints.precision}"
+                                                              shortDesc="#{bindings.DocFileIdTrans.hints.tooltip}"
+                                                              partialTriggers="docTCodeTransId" id="it2">
+                                                    <f:validator binding="#{bindings.DocFileIdTrans.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.DocFlowPathTrans.inputValue}"
+                                                              label="#{bindings.DocFlowPathTrans.hints.label}"
+                                                              required="#{bindings.DocFlowPathTrans.hints.mandatory}"
+                                                              columns="#{bindings.DocFlowPathTrans.hints.displayWidth}"
+                                                              maximumLength="#{bindings.DocFlowPathTrans.hints.precision}"
+                                                              shortDesc="#{bindings.DocFlowPathTrans.hints.tooltip}"
+                                                              partialTriggers="docTCodeTransId" id="it3">
+                                                    <f:validator binding="#{bindings.DocFlowPathTrans.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.DocSerachTrans.inputValue}"
+                                                              label="#{bindings.DocSerachTrans.hints.label}"
+                                                              required="#{bindings.DocSerachTrans.hints.mandatory}"
+                                                              columns="#{bindings.DocSerachTrans.hints.displayWidth}"
+                                                              maximumLength="#{bindings.DocSerachTrans.hints.precision}"
+                                                              shortDesc="#{bindings.DocSerachTrans.hints.tooltip}"
+                                                              partialTriggers="docTCodeTransId" id="it4">
+                                                    <f:validator binding="#{bindings.DocSerachTrans.validator}"/>
+                                                </af:inputText>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                                                 styleClass="AFStretchWidth">
+                                                <af:toolbar id="t2">
+                                                    <af:link id="l1" selected="true" shortDesc="Report Factory"
+                                                             icon="/resource/image/report_factory.png" immediate="true"
+                                                             destination="#{pageFlowScope.ReportFactoryPath}"
+                                                             targetFrame="_blank"/>
+                                                    <af:menuBar id="mb1" inlineStyle="height:40px;">
+                                                        <af:menu id="m1" inlineStyle="height:35px;"
+                                                                 icon="/resource/image/drop_down_menu.png"
+                                                                 text="#{pageFlowScope.UserName}">
+                                                            <af:commandMenuItem id="cmi1"
+                                                                                inlineStyle="font-weight:bold;"
+                                                                                text="Profile"
+                                                                                icon="/resource/image/User_Online.png"
+                                                                                rendered="false">
+                                                                <f:attribute name="Symbol" value="I"/>
+                                                            </af:commandMenuItem>
+                                                            <af:commandMenuItem id="cmi2"
+                                                                                inlineStyle="font-weight:bold;"
+                                                                                text="Change Password"
+                                                                                icon="/resource/image/User_Lock.png"
+                                                                                rendered="true"
+                                                                                actionListener="#{pageFlowScope.MainWorkareaBean.passwordReset}"/>
+                                                            <af:commandMenuItem text="LogOut" id="cmi4"
+                                                                                inlineStyle="font-weight:bold;"
+                                                                                action="#{LoginBean.onLogout}"
+                                                                                icon="/resource/image/menu_shutdown_24.png"
+                                                                                immediate="true"/>
+                                                        </af:menu>
+                                                    </af:menuBar>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl9" layout="horizontal"
+                                                                 styleClass="AFStretchWidth" visible="false">
+                                                <img src="resource/image/Company_Logo.png" height="38"
+                                                     alt="company Logo" width="107"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl10" valign="middle" layout="horizontal"
+                                                         styleClass="AFStretchWidth"
+                                                         inlineStyle="border:gray solid thin;">
+                                        <!--inlineStyle="background-color:#91BDAA;"-->
+                                        <af:panelGroupLayout id="pgl12" layout="horizontal" valign="middle"
+                                                             halign="center" styleClass="AFStretchWidth"/>
+                                        <af:panelGroupLayout id="pgl13" layout="horizontal" valign="middle" halign="end"
+                                                             styleClass="AFStretchWidth" inlineStyle="float:right;">
+                                            <af:toolbar id="t1">
+                                                <af:button text="Approval Pendency" id="b3"
+                                                           actionListener="#{pageFlowScope.MainWorkareaBean.goApprovalPendanyAL}"/>
+                                                <af:button text="Dashboard" id="b4"
+                                                           actionListener="#{pageFlowScope.MainWorkareaBean.goDashboardAL}"/>
+                                                <af:button text="Document Pending" id="b6"
+                                                           actionListener="#{pageFlowScope.MainWorkareaBean.goDocumentPendingListAL}"/>
+                                                <af:link id="l2" targetFrame="_blank" shortDesc="Facebook"
+                                                         icon="/resource/image/facebook_icon.png"
+                                                         actionListener="#{TermsMainAppScopeBean.facebookAL}"
+                                                         rendered="false"/>
+                                                <af:link id="l3" targetFrame="_blank"
+                                                         icon="/resource/image/twitter_icon.png"
+                                                         actionListener="#{TermsMainAppScopeBean.goToTwitterAL}"
+                                                         rendered="false"/>
+                                                <af:link id="l4" targetFrame="_blank"
+                                                         icon="/resource/image/linkedin_icon.png"
+                                                         actionListener="#{TermsMainAppScopeBean.goToLinkedInAL}"
+                                                         rendered="false"/>
+                                                <af:link id="l5" targetFrame="_blank"
+                                                         icon="/resource/image/gmail_icon.png"
+                                                         actionListener="#{TermsMainAppScopeBean.goGooglePlusAL}"
+                                                         rendered="false"/>
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:gridCell>
+                    </af:gridRow>
+                    <af:gridRow height="100%" id="gr3">
+                        <af:gridCell width="auto" halign="stretch" valign="stretch" id="gc2">
+                            <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth" layout="scroll"
+                                                 inlineStyle="background-color: #FFFFFF;">
+                                <af:panelGroupLayout id="pgl14" layout="vertical" styleClass="AFStretchWidth">
+                                    <af:spacer width="10" height="70" id="s1"/>
+                                    <af:panelGroupLayout id="pgl15" layout="horizontal" styleClass="AFStretchWidth">
+                                        <af:spacer width="80" height="10" id="s2"/>
+                                        <af:panelGridLayout id="pgl16" inlineStyle="background-attachment:scroll;">
+                                            <af:gridRow marginTop="5px" height="auto" id="gr4">
+                                                <af:gridCell marginStart="5px" width="auto" id="gc4" columnSpan="1"
+                                                             marginEnd="15px">
+                                                    <af:link id="l6" styleClass="cards"
+                                                             inlineStyle="padding-right:95px;"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.ENG_P_VIEW == 'N'}"
+                                                             icon="/resource/image/ENG.png"
+                                                             disabledIcon="/resource/image/denied.png" text="MASTERS">
+                                                        <af:clientAttribute name="moduleName" value="ENG"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell marginStart="5px" width="auto" id="gc5" marginEnd="15px">
+                                                    <af:link text="FINANCE" id="l7" styleClass="cards"
+                                                             icon="/resource/image/FINS.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.FIN_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png"
+                                                             inlineStyle="padding-right:88px;height:50px;">
+                                                        <af:clientAttribute name="moduleName" value="FIN"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell marginStart="5px" width="auto" id="gc6" marginEnd="15px">
+                                                    <af:link text="MARKETING" id="l8" styleClass="cards"
+                                                             icon="/resource/image/MKT.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.MKT_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="MKT"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell marginStart="5px" width="auto" marginEnd="15px" id="gc7">
+                                                    <af:link text="MATERIAL" id="l9" styleClass="cards"
+                                                             inlineStyle="padding-right:70px;"
+                                                             icon="/resource/image/MTL.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.MTL_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="MTL"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                            <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                                <af:gridCell marginStart="5px" width="auto" id="gc8">
+                                                    <af:link text="MAINTENANCE" id="l10" styleClass="cards"
+                                                             inlineStyle="padding-right:66px;"
+                                                             icon="/resource/image/MTM.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.MTM_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute value="MTM" name="moduleName"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell marginStart="5px" width="auto" id="gc9">
+                                                    <af:link text="PPC" id="l11" styleClass="cards"
+                                                             inlineStyle="padding-right:135px;"
+                                                             icon="/resource/image/PPC.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.PPC_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="PPC"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell marginStart="5px" width="auto" id="gc10">
+                                                    <af:link text="PRODUCTION" id="l12" styleClass="cards"
+                                                             inlineStyle="padding-right:44px;"
+                                                             icon="/resource/image/PRD.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.PRD_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="PRD"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc11">
+                                                    <af:link text="QUALITY" id="l13" styleClass="cards"
+                                                             inlineStyle="padding-right:81px;"
+                                                             icon="/resource/image/QCL.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.QCL_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="QCL"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr5">
+                                                <af:gridCell marginStart="5px" width="auto" id="gc12">
+                                                    <af:link text="SALES" id="l14" styleClass="cards"
+                                                             inlineStyle="padding-right:110px;"
+                                                             icon="/resource/image/Sales.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.FIN_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="SLS"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell marginStart="5px" width="auto" id="gc13">
+                                                    <af:link text="SECURITY" id="l15" styleClass="cards"
+                                                             inlineStyle="padding-right:100px;"
+                                                             icon="/resource/image/SEC.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.SEC_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="SEC"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell id="gc14" width="auto">
+                                                    <af:link text="PAYROLL" id="l16" styleClass="cards"
+                                                             inlineStyle="padding-right:70px;"
+                                                             icon="/resource/image/Payroll.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.HRM_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="HRM"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell marginStart="5px" width="auto" marginEnd="5px" id="gc15">
+                                                    <af:link text="WARRANTY" id="l117" styleClass="cards"
+                                                             inlineStyle="padding-right:76px; height:50px;"
+                                                             icon="/resource/image/warranty.jpeg"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             disabled="#{pageFlowScope.QCL_P_VIEW == 'N'}"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="MNT"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                            <af:gridRow id="gr7">
+                                                <af:gridCell marginStart="5px" width="auto" id="gc16">
+                                                    <af:link text="PROCUREMENT " id="l18" styleClass="cards"
+                                                             inlineStyle="padding-right:58px;"
+                                                             icon="/resource/image/procurement.png"
+                                                             actionListener="#{pageFlowScope.MainWorkareaBean.globalModuleNavigationAL}"
+                                                             visible="#{pageFlowScope.CompanyType == 'DAIRY' }"
+                                                             disabledIcon="/resource/image/denied.png">
+                                                        <af:clientAttribute name="moduleName" value="DAR"/>
+                                                    </af:link>
+                                                </af:gridCell>
+                                                <af:gridCell id="gc17"/>
+                                                <af:gridCell id="gc18"/>
+                                                <af:gridCell id="gc19"/>
+                                            </af:gridRow>
+                                        </af:panelGridLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:gridCell>
+                    </af:gridRow>
+                    <af:gridRow height="30px" id="gr6">
+                        <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc3">
+                            <af:panelGroupLayout id="pgl17" layout="vertical" inlineStyle="background-color:#91BDAA;"
+                                                 styleClass="AFStretchWidth" rendered="false">
+                                <af:panelGroupLayout id="pgl19" styleClass="AFStretchWidth" inlineStyle="padding:3px;"
+                                                     layout="horizontal">
+                                    <af:panelGroupLayout id="pgl20" halign="center" inlineStyle="padding:3px;"
+                                                         layout="horizontal">
+                                        <af:outputFormatted value="Copyright &#169; 2021 TERMS. Designed by Mawai Infotech Ltd. All rights reserved."
+                                                            id="of1" inlineStyle="font-weight:bold;"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:gridCell>
+                    </af:gridRow>
+                </af:panelGridLayout>
+            </af:form>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                      binding="#{pageFlowScope.TermsSetupUiWorkareaBean.changeFirstPassPopup}"
+                      rendered="#{pageFlowScope.UserId   != null &amp;&amp; pageFlowScope.UserName != null &amp;&amp; pageFlowScope.UnitCode != null &amp;&amp; pageFlowScope.UnitName != null &amp;&amp; pageFlowScope.FinYear  != null &amp;&amp; pageFlowScope.EmpCode  != null}">
+                <af:dialog id="d4" closeIconVisible="false" type="none" title="Change Password">
+                    <af:panelFormLayout id="pfl4" rows="2" maxColumns="1">
+                        <af:inputText label="New Password" id="it11" required="true" secret="true"
+                                      binding="#{pageFlowScope.TermsSetupUiWorkareaBean.newPasswordBinding}"
+                                      valueChangeListener="#{pageFlowScope.TermsSetupUiWorkareaBean.newPasswordCheckVCE}"
+                                      autoSubmit="true"/>
+                        <af:inputText label="Confirm Password" id="it6" secret="true"
+                                      binding="#{pageFlowScope.TermsSetupUiWorkareaBean.confirmPasswordBinding}"
+                                      autoSubmit="true"/>
+                    </af:panelFormLayout>
+                    <af:spacer width="10" height="30" id="s7"/>
+                    <af:panelGroupLayout id="pfl5">
+                        <af:spacer width="35" height="10" id="s6"/>
+                        <af:button text="Confirm &amp; Update" id="b1"
+                                   actionListener="#{pageFlowScope.TermsSetupUiWorkareaBean.confirmButtonAL}"/>
+                        <af:spacer width="10" height="10" id="s5"/>
+                        <af:button text="Do it Later !!" id="b2"
+                                   actionListener="#{pageFlowScope.TermsSetupUiWorkareaBean.cancelButtonAL}"
+                                   immediate="true"/>
+                    </af:panelGroupLayout>
+                </af:dialog>
+            </af:popup>
+            <af:showPopupBehavior popupId="p1" triggerType="load"
+                                  disabled='#{pageFlowScope.FirstLogin eq "N" ? false : true}'/>
+            <af:form id="f2">
+                <af:popup childCreation="deferred" id="p2" binding="#{pageFlowScope.MainWorkareaBean.popMostVisit}">
+                    <af:panelGroupLayout id="pgl23" layout="horizontal" partialTriggers="p2">
+                        <af:image source="/resource/image/favorite-icon-14.png" id="i2"
+                                  inlineStyle="width:18px; height:18px;"/>
+                        <af:outputFormatted value="Most Visited Screens" id="of5"
+                                            inlineStyle="color:#0955A1; font-size:8.5pt; font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                    <af:table value="#{bindings.UserMostVisitVO1.collectionModel}" var="row"
+                              rows="#{bindings.UserMostVisitVO1.rangeSize}"
+                              emptyText="#{bindings.UserMostVisitVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.UserMostVisitVO1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.UserMostVisitVO1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.UserMostVisitVO1.rangeSize}"
+                              filterModel="#{bindings.UserMostVisitVO1Query.queryDescriptor}"
+                              queryListener="#{bindings.UserMostVisitVO1Query.processQuery}" varStatus="vs" id="t3"
+                              styleClass="AFStretchWidth" partialTriggers="::l17" width="200">
+                        <af:column sortProperty="#{bindings.UserMostVisitVO1.hints.Tcode.name}" filterable="true"
+                                   sortable="true" id="c1" width="200">
+                            <af:commandLink text="#{row.Tcode} #{row.FileName}" id="cl2"
+                                            actionListener="#{pageFlowScope.MainWorkareaBean.Initialize_Screen}"
+                                            inlineStyle="font-size:small;" partialSubmit="true"/>
+                            <af:outputText value="#{row.Tcode}"
+                                           shortDesc="#{bindings.UserMostVisitVO1.hints.Tcode.tooltip}" id="ot1"
+                                           visible="false"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.UserMostVisitVO1.hints.FileName.name}" filterable="true"
+                                   sortable="true" headerText="#{bindings.UserMostVisitVO1.hints.FileName.label}"
+                                   id="c2" visible="false">
+                            <af:outputText value="#{row.FileName}"
+                                           shortDesc="#{bindings.UserMostVisitVO1.hints.FileName.tooltip}" id="ot2"/>
+                        </af:column>
+                    </af:table>
+                </af:popup>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

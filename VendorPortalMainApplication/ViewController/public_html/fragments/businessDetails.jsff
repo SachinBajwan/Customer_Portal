@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core">
+<af:panelGroupLayout styleClass="onboarding-wrapper"> 
+    <af:panelGroupLayout styleClass="onboarding-title">
+        <af:outputText value="Customer Onboarding" styleClass="onboarding-heading"/>
+        <af:outputText value="Fields marked * are mandatory." id="ot4" styleClass="mandatory-note"/>
+    </af:panelGroupLayout>
+      <af:panelHeader text="" id="ph2" binding="#{LoginBean.bindBussDtlMainHeader}" styleClass="hide-panel-header-title">
+        <f:facet name="toolbar"/>
+        <af:panelGroupLayout id="trainContainer" layout="vertical" styleClass="customer-train-container">
+          <af:train id="t4" value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                    styleClass="customer-train" visible="true"/>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="root" styleClass="contact-step">
+          <!-- STEP TITLE -->
+          <!--<af:outputText
+                value="Step 2: Business Details"
+                id="stepTitle"
+                styleClass="step-title"/>-->
+          <!--- FORM -->
+          <af:panelHeader text="Step 1: Business Details" id="ph1" styleClass="AFStretchWidth custom-form-header">
+            
+              <af:panelGroupLayout id="pgl2" styleClass="AFStretchWidth container-fluid">
+                <af:panelGroupLayout styleClass="row">
+                    <af:panelGroupLayout styleClass="col-lg-6 col-md-6 col-sm-12">
+                        <af:selectOneRadio value="#{bindings.RegFlgDesc.inputValue}" label="#{bindings.RegFlgDesc.label}"
+                                           required="#{bindings.RegFlgDesc.hints.mandatory}"
+                                           shortDesc="#{bindings.RegFlgDesc.hints.tooltip}" id="sor1"
+                                           autoSubmit="true" valueChangeListener="#{LoginBean.regFlag}"
+                                           binding="#{LoginBean.bindRegFlg}" styleClass="input-radio">
+                          <f:selectItems value="#{bindings.RegFlgDesc.items}" id="si1"/>
+                          <f:validator binding="#{bindings.RegFlgDesc.validator}"/>
+                        </af:selectOneRadio>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.CustomerCode.inputValue}" label="#{bindings.CustomerCode.hints.label}"
+                                      required="#{bindings.CustomerCode.hints.mandatory}"
+                                      columns="#{bindings.CustomerCode.hints.displayWidth}"
+                                      maximumLength="#{bindings.CustomerCode.hints.precision}"
+                                      shortDesc="#{bindings.CustomerCode.hints.tooltip}" id="it12" disabled="true" readOnly="true"
+                                      styleClass="input-field">
+                          <f:validator binding="#{bindings.CustomerCode.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+              
+              <af:panelGroupLayout id="pgl1" styleClass="custom-form-layout">
+              <af:panelGroupLayout id="pgl3" styleClass="AFStretchWidth container-fluid">
+                <af:panelGroupLayout styleClass="row">
+                    <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12" visible="false">
+                        <af:inputText value="#{bindings.RegFlag.inputValue}" label="#{bindings.RegFlag.hints.label}"
+                                      required="#{bindings.RegFlag.hints.mandatory}"
+                                      columns="#{bindings.RegFlag.hints.displayWidth}"
+                                      maximumLength="#{bindings.RegFlag.hints.precision}"
+                                      shortDesc="#{bindings.RegFlag.hints.tooltip}" id="it7" contentStyle="width:220px;"
+                                      binding="#{LoginBean.bindRegFlag}" visible="false">
+                          <f:validator binding="#{bindings.RegFlag.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12">
+                        <af:inputComboboxListOfValues id="customerTypeDescId"
+                                                      popupTitle="Search and Select: #{bindings.CustomerTypeDesc.hints.label}"
+                                                      value="#{bindings.CustomerTypeDesc.inputValue}"
+                                                      label="#{bindings.CustomerTypeDesc.hints.label}"
+                                                      model="#{bindings.CustomerTypeDesc.listOfValuesModel}"
+                                                      columns="#{bindings.CustomerTypeDesc.hints.displayWidth}"
+                                                      shortDesc="#{bindings.CustomerTypeDesc.hints.tooltip}"
+                                                      required="true"
+                                                      binding="#{LoginBean.bindVendTyp}" styleClass="input-field">
+                          <f:validator binding="#{bindings.CustomerTypeDesc.validator}"/>
+                        </af:inputComboboxListOfValues>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.GstRegNo.inputValue}" label="#{bindings.GstRegNo.hints.label}"
+                                      columns="#{bindings.GstRegNo.hints.displayWidth}"
+                                      maximumLength="#{bindings.GstRegNo.hints.precision}"
+                                      shortDesc="#{bindings.GstRegNo.hints.tooltip}" id="it3"
+                                      required="true" binding="#{LoginBean.bindGstNo}" autoSubmit="true"
+                                      validator="#{LoginBean.gstRegNoValidator}" valueChangeListener="#{LoginBean.GstnRegNoVCL}"
+                                       styleClass="input-field">
+                          <f:validator binding="#{bindings.GstRegNo.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.PanNo.inputValue}" label="#{bindings.PanNo.hints.label}"
+                                      columns="#{bindings.PanNo.hints.displayWidth}"
+                                      maximumLength="#{bindings.PanNo.hints.precision}" shortDesc="#{bindings.PanNo.hints.tooltip}"
+                                      id="it4" binding="#{LoginBean.bindPanNo}" autoSubmit="true"
+                                      disabled="true" styleClass="input-field">
+                          <f:validator binding="#{bindings.PanNo.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12">
+                        <af:inputComboboxListOfValues id="constitutionDescId"
+                                                      popupTitle="Search and Select: #{bindings.ConstitutionDesc.hints.label}"
+                                                      value="#{bindings.ConstitutionDesc.inputValue}"
+                                                      label="#{bindings.ConstitutionDesc.hints.label}"
+                                                      model="#{bindings.ConstitutionDesc.listOfValuesModel}"
+                                                      columns="#{bindings.ConstitutionDesc.hints.displayWidth}"
+                                                      shortDesc="#{bindings.ConstitutionDesc.hints.tooltip}"
+                                                      required="true" styleClass="input-field">
+                          <f:validator binding="#{bindings.ConstitutionDesc.validator}"/>
+                        </af:inputComboboxListOfValues>
+                    </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-6 col-md-6 col-sm-12" id="pgl9">
+                                    <af:inputText value="#{bindings.LegName.inputValue}"
+                                                  label="#{bindings.LegName.hints.label}"
+                                                  required="#{bindings.LegName.hints.mandatory}"
+                                                  columns="#{bindings.LegName.hints.displayWidth}"
+                                                  maximumLength="#{bindings.LegName.hints.precision}"
+                                                  shortDesc="#{bindings.LegName.hints.tooltip}" id="it13"
+                                                  styleClass="input-field">
+                                        <f:validator binding="#{bindings.LegName.validator}"/>
+                                    </af:inputText>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-6 col-md-6 col-sm-12" id="pgl10">
+                                    <af:inputText value="#{bindings.LglNameOfBs.inputValue}"
+                                                  label="#{bindings.LglNameOfBs.hints.label}"
+                                                  columns="#{bindings.LglNameOfBs.hints.displayWidth}"
+                                                  maximumLength="#{bindings.LglNameOfBs.hints.precision}"
+                                                  shortDesc="#{bindings.LglNameOfBs.hints.tooltip}" id="it1"
+                                                  required="true" styleClass="input-field">
+                                        <f:validator binding="#{bindings.LglNameOfBs.validator}"/>
+                                    </af:inputText>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12" id="pgl5">
+                                    <af:inputComboboxListOfValues id="stateNameId"
+                                                                  popupTitle="Search and Select: #{bindings.StateName.hints.label}"
+                                                                  value="#{bindings.StateName.inputValue}"
+                                                                  label="#{bindings.StateName.hints.label}"
+                                                                  model="#{bindings.StateName.listOfValuesModel}"
+                                                                  columns="#{bindings.StateName.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.StateName.hints.tooltip}"
+                                                                  required="true" binding="#{LoginBean.bindState}"
+                                                                  autoSubmit="true" styleClass="input-field">
+                                        <f:validator binding="#{bindings.StateName.validator}"/>
+                                    </af:inputComboboxListOfValues>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12">
+                        <af:inputComboboxListOfValues id="cityNameId"
+                                                      popupTitle="Search and Select: #{bindings.CityName.hints.label}"
+                                                      value="#{bindings.CityName.inputValue}"
+                                                      label="#{bindings.CityName.hints.label}"
+                                                      model="#{bindings.CityName.listOfValuesModel}"
+                                                      columns="#{bindings.CityName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.CityName.hints.tooltip}"
+                                                      required="true" disabled="#{bindings.StateName.inputValue == null}"
+                                                      binding="#{LoginBean.bindCity}" styleClass="input-field">
+                          <f:validator binding="#{bindings.CityName.validator}"/>
+                        </af:inputComboboxListOfValues>
+                    </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl6" styleClass="col-lg-3 col-md-6 col-sm-12">
+                                    <af:inputComboboxListOfValues id="districtNameId"
+                                                                  popupTitle="Search and Select: #{bindings.DistrictName.hints.label}"
+                                                                  value="#{bindings.DistrictName.inputValue}"
+                                                                  label="#{bindings.DistrictName.hints.label}"
+                                                                  model="#{bindings.DistrictName.listOfValuesModel}"
+                                                                  columns="#{bindings.DistrictName.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.DistrictName.hints.tooltip}"
+                                                                  styleClass="input-field" required="true">
+                                        <f:validator binding="#{bindings.DistrictName.validator}"/>
+                                    </af:inputComboboxListOfValues>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12" visible="false">
+                        <af:inputText value="#{bindings.State.inputValue}" label="#{bindings.State.hints.label}"
+                                      required="#{bindings.State.hints.mandatory}" columns="#{bindings.State.hints.displayWidth}"
+                                      maximumLength="#{bindings.State.hints.precision}" shortDesc="#{bindings.State.hints.tooltip}"
+                                      id="it10" autoSubmit="true" binding="#{LoginBean.bindStateDesc}"
+                                       styleClass="input-field" visible="false">
+                          <f:validator binding="#{bindings.State.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.PinCode.inputValue}" label="#{bindings.PinCode.hints.label}"
+                                      columns="#{bindings.PinCode.hints.displayWidth}" maximumLength="6"
+                                      shortDesc="#{bindings.PinCode.hints.tooltip}" id="it11" required="true"
+                                      binding="#{LoginBean.bindPinNo}" styleClass="input-field">
+                          <f:validator binding="#{bindings.PinCode.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-6 col-md-6 col-sm-12" id="pgl8">
+                                    <af:inputText value="#{bindings.BillAddressLine1.inputValue}"
+                                                  label="#{bindings.BillAddressLine1.hints.label}"
+                                                  columns="#{bindings.BillAddressLine1.hints.displayWidth}"
+                                                  maximumLength="#{bindings.BillAddressLine1.hints.precision}"
+                                                  shortDesc="#{bindings.BillAddressLine1.hints.tooltip}" id="it5"
+                                                  autoSubmit="true" binding="#{LoginBean.bindAddress}" required="true"
+                                                  rows="2" styleClass="input-field">
+                                        <f:validator binding="#{bindings.BillAddressLine1.validator}"/>
+                                    </af:inputText>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-6 col-md-6 col-sm-12" id="pgl11">
+                                    <af:inputText value="#{bindings.BillAddressLine2.inputValue}"
+                                                  label="#{bindings.BillAddressLine2.hints.label}"
+                                                  required="#{bindings.BillAddressLine2.hints.mandatory}"
+                                                  columns="#{bindings.BillAddressLine2.hints.displayWidth}"
+                                                  maximumLength="#{bindings.BillAddressLine2.hints.precision}"
+                                                  shortDesc="#{bindings.BillAddressLine2.hints.tooltip}" id="it8"
+                                                  rows="2" styleClass="input-field">
+                                        <f:validator binding="#{bindings.BillAddressLine2.validator}"/>
+                                    </af:inputText>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12" visible="false">
+                        <af:inputText value="#{bindings.City.inputValue}" label="#{bindings.City.hints.label}"
+                                      required="#{bindings.City.hints.mandatory}" columns="#{bindings.City.hints.displayWidth}"
+                                      maximumLength="#{bindings.City.hints.precision}" shortDesc="#{bindings.City.hints.tooltip}"
+                                      id="it9" contentStyle="width:220px;" visible="false" binding="#{LoginBean.bindCityDesc}">
+                          <f:validator binding="#{bindings.City.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl7" styleClass="col-lg-3 col-md-6 col-sm-12" visible="false">
+                                    <af:inputText value="#{bindings.District.inputValue}"
+                                                  label="#{bindings.District.hints.label}"
+                                                  required="#{bindings.District.hints.mandatory}"
+                                                  columns="#{bindings.District.hints.displayWidth}"
+                                                  maximumLength="#{bindings.District.hints.precision}"
+                                                  shortDesc="#{bindings.District.hints.tooltip}" id="it14"
+                                                  contentStyle="width:220px;" visible="false">
+                                        <f:validator binding="#{bindings.District.validator}"/>
+                                    </af:inputText>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12" visible="false">
+                        <af:inputText value="#{bindings.Constitution.inputValue}" label="#{bindings.Constitution.hints.label}"
+                                      required="#{bindings.Constitution.hints.mandatory}"
+                                      columns="#{bindings.Constitution.hints.displayWidth}"
+                                      maximumLength="#{bindings.Constitution.hints.precision}"
+                                      shortDesc="#{bindings.Constitution.hints.tooltip}" id="it2" contentStyle="width:220px;"
+                                      visible="false">
+                          <f:validator binding="#{bindings.Constitution.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-3 col-md-6 col-sm-12" visible="false">
+                        <af:inputText value="#{bindings.CustType.inputValue}" label="#{bindings.CustType.hints.label}"
+                                      required="#{bindings.CustType.hints.mandatory}"
+                                      columns="#{bindings.CustType.hints.displayWidth}"
+                                      maximumLength="#{bindings.CustType.hints.precision}"
+                                      shortDesc="#{bindings.CustType.hints.tooltip}" id="it6" contentStyle="width:220px;"
+                                      visible="false">
+                          <f:validator binding="#{bindings.CustType.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+              </af:panelGroupLayout>
+              <!-- Info Box Section -->
+              <!--<af:panelBox text="" id="pb1" showHeader="never" background="light"
+                           inlineStyle="border-radius: 4px; padding: 5px;">-->
+                <af:panelGroupLayout id="pgl4" styleClass="info-box">
+                    <af:panelGroupLayout styleClass="info-title">
+                        <af:outputText value="(i) Why we collect this:" id="ot1"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="info-text">
+                        <af:outputText value="Contact details are used only to create your login, send OTPs, and share order/dispatch/invoice updates."
+                                 id="ot2"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="info-text">
+                        <af:outputText value="Only fields marked * are required for the service. Optional fields can be left blank."
+                                 id="ot3"/>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              <!--</af:panelBox>-->
+              <!-- Footer note -->
+              <!--<af:outputText value="Fields marked * are mandatory." id="ot4" styleClass="mandatory-note"/>-->
+              
+          </af:panelHeader>
+          <!-- BUTTONS -->
+          <af:panelGroupLayout id="buttons" styleClass="button-row">
+            <af:panelGroupLayout styleClass="button-section">
+                <af:commandButton text="← Back" id="backButton" action="back" styleClass="back-button" rendered="false"/>
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="rightButtons" styleClass="button-section">
+              <af:commandButton text="Save" id="draftButton" styleClass="draft-button"
+                                actionListener="#{LoginBean.saveNewRegistration}" rendered="false"/>
+              <af:commandButton text="Next →" id="nextButton" action="next" styleClass="common-button next-button"/>
+              <af:commandButton text="Cancel" id="cancelButton" styleClass="common-button" immediate="true"
+                                actionListener="#{LoginBean.backToLoginMain}"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+      </af:panelHeader>
+</af:panelGroupLayout>
+</jsp:root>

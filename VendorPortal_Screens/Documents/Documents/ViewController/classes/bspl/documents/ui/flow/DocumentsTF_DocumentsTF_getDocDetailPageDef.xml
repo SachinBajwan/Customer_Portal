@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="DocumentsTF_DocumentsTF_getDocDetailPageDef" Package="bspl.documents.ui.flow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="getDocDetail" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getDocDetail"
+                  IsViewObjectMethod="false" DataControl="DocumentAMDataControl"
+                  InstanceName="data.DocumentAMDataControl.dataProvider"
+                  ReturnName="data.DocumentAMDataControl.methodResults.getDocDetail_DocumentAMDataControl_dataProvider_getDocDetail_result"/>
+  </bindings>
+</pageDefinition>

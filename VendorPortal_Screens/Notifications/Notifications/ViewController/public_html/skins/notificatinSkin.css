@@ -1,0 +1,371 @@
+@charset "UTF-8";
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+@namespace af "http://xmlns.oracle.com/adf/faces/rich";
+@namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+
+/* =========================================================
+   MAIN PAGE
+   ========================================================= */
+
+.notification-page {
+    width: 100%;
+    padding: 18px 28px 25px 28px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.notification-header {
+    margin-bottom: 15px;
+}
+
+.notification-heading {
+    font-size: 21px;
+    font-weight: bold;
+    color: #1f3b64;
+    display: block;
+}
+
+.notification-subheading {
+    font-size: 11px;
+    color: #7c8796;
+    margin-top: 3px;
+    display: block;
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.notification-toolbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.notification-filters {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+/* =========================================================
+   FILTER BUTTONS
+   ========================================================= */
+
+.filter-button {
+    min-width: 72px;
+    height: 29px;
+
+    border: 1px solid #d4dce5;
+    border-radius: 16px;
+
+    background-color: #ffffff;
+
+    color: #37465a;
+
+    font-size: 10px;
+    font-weight: normal;
+
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.filter-active {
+    background-color: #287bbd;
+    color: #ffffff;
+
+    border-color: #287bbd;
+    font-weight: bold;
+}
+
+.filter-button:hover {
+    background-color: #eef5fb;
+}
+
+
+/* =========================================================
+   UNREAD BADGE
+   ========================================================= */
+
+.unread-badge {
+    width: 15px;
+    height: 15px;
+
+    line-height: 15px;
+
+    text-align: center;
+
+    border-radius: 50%;
+
+    background-color: #d92323;
+    color: white;
+
+    font-size: 9px;
+    font-weight: bold;
+
+    margin-left: 2px;
+}
+
+
+/* =========================================================
+   MARK ALL AS READ
+   ========================================================= */
+
+.mark-read-link {
+    color: #2873b3;
+    font-size: 10px;
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+.mark-read-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   NOTIFICATION LIST
+   ========================================================= */
+
+.notification-list {
+    width: 100%;
+}
+
+
+/* =========================================================
+   NOTIFICATION CARD
+   ========================================================= */
+
+.notification-card {
+    width: 100%;
+    min-height: 58px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d2d9e2;
+    border-radius: 5px;
+
+    margin-bottom: 7px;
+
+    padding: 9px 12px;
+
+    display: flex;
+    align-items: center;
+
+    background-color: #ffffff;
+}
+
+
+/* First alert - light blue background */
+
+.notification-card:first-child {
+    background-color: #e9f3fc;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.notification-payment,
+.notification-order,
+.notification-document,
+.notification-approval,
+.notification-security,
+.notification-info {
+
+    width: 22px;
+    height: 22px;
+
+    min-width: 22px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 11px;
+}
+
+
+.notification-payment {
+    background-color: #d82d2d;
+}
+
+.notification-order {
+    background-color: #297bb8;
+}
+
+.notification-document {
+    background-color: #ef8b18;
+}
+
+.notification-approval {
+    background-color: #3b9446;
+}
+
+.notification-security {
+    background-color: #263f70;
+}
+
+.notification-info {
+    background-color: #297bb8;
+}
+
+
+.notification-icon {
+    color: white;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.notification-content {
+    flex: 1;
+
+    padding-right: 10px;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.notification-title-row {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notification-title {
+    color: #26364b;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.notification-time {
+    color: #8c96a4;
+
+    font-size: 9px;
+
+    margin-left: auto;
+}
+
+
+/* =========================================================
+   REFERENCE
+   ========================================================= */
+
+.notification-reference {
+    color: #48566a;
+
+    font-size: 9px;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.notification-message {
+    color: #596575;
+
+    font-size: 9px;
+
+    margin-top: 3px;
+
+    display: block;
+}
+
+
+/* =========================================================
+   UNREAD DOT
+   ========================================================= */
+
+.notification-unread-dot {
+
+    width: 7px;
+    height: 7px;
+
+    min-width: 7px;
+
+    border-radius: 50%;
+
+    background-color: #287cbb;
+
+    margin-left: 5px;
+}
+
+.notification-read-dot {
+
+    width: 7px;
+    height: 7px;
+
+    min-width: 7px;
+
+    border-radius: 50%;
+
+    margin-left: 5px;
+}
+
+
+/* =========================================================
+   ADF OVERRIDES
+   ========================================================= */
+
+.notification-page .AFButtonBackground {
+    background-image: none !important;
+}
+
+.notification-page .AFButtonForeground {
+    background-image: none !important;
+}
+
+.notification-page .AFButtonMiddle {
+    background-image: none !important;
+}
+
+.notification-page .AFButtonStart {
+    background-image: none !important;
+}
+
+.notification-page .AFButtonEnd {
+    background-image: none !important;
+}
+
+.notification-pagination {
+    width: 100%;
+    padding: 18px 0;
+    margin-top: 10px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.pagination-info {
+    color: #475569;
+    padding: 8px 15px;
+    font-size: 13px;
+}

@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <!-- Use JSTL for a dynamic context path if needed, or facesContext.externalContext.requestContextPath -->
+    <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="portal-page-container content-area"
+                         binding="#{pageFlowScope.ReportsBean.bindMainPanel}">
+        <!-- Title Area -->
+        <af:panelGroupLayout id="pgl2" layout="horizontal" styleClass="page-header-container"
+                             inlineStyle="margin-bottom: 20px;">
+            <af:outputText value="Reports" id="ot1" styleClass="page-title"/>
+        </af:panelGroupLayout>
+        <!-- Report Type Tab Selection (Region 1 in image) -->
+        <af:panelGroupLayout id="pgl_tabs" layout="horizontal" styleClass="reports-tab-container"
+                             inlineStyle="margin-bottom: 25px;">
+            <af:selectOneRadio id="sorConsent" label="Report Type :" value="S" layout="horizontal" autoSubmit="true"
+                               binding="#{pageFlowScope.ReportsBean.bindReportRadio}"
+                               valueChangeListener="#{pageFlowScope.ReportsBean.reportRadioVce}">
+                <af:selectItem label="Sale Orders" value="S" id="siYes"/>
+                <af:selectItem label="Dispatch Advice" value="D" id="siNo"/>
+                <af:selectItem label="Invoice" value="I" id="siInv"/>
+                <af:selectItem label="DR-CR Notes" value="N" id="siDc"/>
+            </af:selectOneRadio>
+        </af:panelGroupLayout>
+        <!-- Filters Panel (Region 2 & 3 in image) -->
+        <af:panelGroupLayout id="pgl_filters" styleClass="panel filter-panel" inlineStyle="margin-bottom: 20px;">
+            <!-- Upper filter row: Dates and Choices -->
+            <af:panelGridLayout id="pgl_fgrid">
+                <af:gridRow id="gr1">
+                    <af:gridCell id="gc1" width="25%">
+                        <af:inputDate label="From Date *" id="id1" columns="12"
+                                      placeholder="01-Sep-2026" value="#{pageFlowScope.ReportsBean.fromDate}"
+                                      partialTriggers="b_reset it1"/>
+                    </af:gridCell>
+                    <af:gridCell id="gc2" width="25%">
+                        <af:inputDate label="To Date *" id="id2" columns="12" placeholder="23-Sep-2026"
+                                      value="#{pageFlowScope.ReportsBean.toDate}" partialTriggers="b_reset it1"/>
+                    </af:gridCell>
+                    <af:gridCell id="gc3" width="25%">
+                        <af:inputText label="Doc No." id="it1" value="#{pageFlowScope.ReportsBean.docNo}"
+                                      partialTriggers="b_reset" autoSubmit="true"/>
+                    </af:gridCell>
+                    <af:gridCell id="gc5" halign="end">
+                        <af:panelGroupLayout id="pgl_factions" layout="horizontal" inlineStyle="margin-top: 25px;">
+                            <af:button text="Apply" id="b_apply" styleClass="btn btn-primary"
+                                       inlineStyle="margin-right: 10px;"
+                                       actionListener="#{pageFlowScope.ReportsBean.applyFiltersListener}"/>
+                            <af:button text="Reset" id="b_reset" styleClass="btn btn-secondary"
+                                       actionListener="#{pageFlowScope.ReportsBean.resetFiltersListener}"/>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+            <!-- Quick filters row -->
+            <af:panelGroupLayout id="pgl_quick" layout="horizontal" inlineStyle="margin-top: 15px;" visible="false">
+                <af:outputText value="Quick:" id="ot_quick_label" styleClass="panel-text"
+                               inlineStyle="margin-right: 15px;"/>
+                <af:panelGroupLayout id="pgl_qbtns" layout="horizontal" styleClass="quick-filters-container">
+                    <af:button text="Today" id="b_q1" styleClass="btn quick-btn"
+                               actionListener="#{pageFlowScope.ReportsBean.quickFilterListener}"></af:button>
+                    <af:button text="Last 7d" id="b_q2" styleClass="btn quick-btn"
+                               actionListener="#{pageFlowScope.ReportsBean.quickFilterListener}"></af:button>
+                    <af:button text="This Month" id="b_q3" styleClass="btn quick-btn active"
+                               actionListener="#{pageFlowScope.ReportsBean.quickFilterListener}"></af:button>
+                    <af:button text="Last Month" id="b_q4" styleClass="btn quick-btn"
+                               actionListener="#{pageFlowScope.ReportsBean.quickFilterListener}"></af:button>
+                    <af:button text="This FY" id="b_q5" styleClass="btn quick-btn"
+                               actionListener="#{pageFlowScope.ReportsBean.quickFilterListener}"></af:button>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+        <!-- Table Section with Summation (Region 4, 5 in image) -->
+        <!-- Table Sale Order -->
+        <af:panelGroupLayout id="pgl_so" layout="vertical" binding="#{pageFlowScope.ReportsBean.bindSOPanel}">
+            <!-- Table Header (Showing counts, Export buttons) -->
+            <af:panelGroupLayout id="pgl_tbl_hdr" layout="horizontal" styleClass="search-action-bar"
+                                 inlineStyle="margin-bottom: 12px; ">
+                <af:outputText value="Showing 1-#{bindings.SaleOrdersVO1.rangeSize} of #{bindings.SaleOrdersVO1Iterator.estimatedRowCount} records | #{pageFlowScope.ReportsBean.fromDate} to #{pageFlowScope.ReportsBean.toDate} (max range 12 months)"
+                               id="ot_count" styleClass="text-muted" inlineStyle="font-size: 13px;"
+                               partialTriggers="b_apply"/>
+                <af:panelGroupLayout id="pgl_exports" layout="horizontal">
+                    <af:button text="Export Excel" id="b_excel" styleClass="btn" inlineStyle="margin-right: 10px;">
+                        <af:exportCollectionActionListener type="excelHTML" exportedId="pc1:t2"
+                                                           filename="SaleOrdersReport.xls" title="Sale Orders Report"/>
+                    </af:button>
+                    <af:button text="Export PDF" id="b_pdf" styleClass="btn" partialSubmit="false" useWindow="true">
+                        <af:fileDownloadActionListener filename="SaleOrder.pdf" contentType="application/pdf"
+                                                       method="#{pageFlowScope.ReportsBean.downloadSO_PDF}"/>
+                    </af:button>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            <!-- Main Data Table for Sale Orders -->
+            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                <af:table value="#{bindings.SaleOrdersVO1.collectionModel}" var="row"
+                          rows="#{bindings.SaleOrdersVO1.rangeSize}"
+                          emptyText="#{bindings.SaleOrdersVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" selectedRowKeys="#{bindings.SaleOrdersVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.SaleOrdersVO1.collectionModel.makeCurrent}"
+                          rowSelection="single" filterModel="#{bindings.SaleOrdersVO1Query.queryDescriptor}"
+                          queryListener="#{bindings.SaleOrdersVO1Query.processQuery}" varStatus="vs" id="t2"
+                          styleClass="data-table" scrollPolicy="page" fetchSize="#{bindings.SaleOrdersVO1.rangeSize}">
+                    <af:column sortProperty="#{bindings.SaleOrdersVO1.hints.UnitCode.name}" filterable="true"
+                               sortable="true" headerText="Unit" id="c9">
+                        <af:outputText value="#{row.UnitCode}"
+                                       shortDesc="#{bindings.SaleOrdersVO1.hints.UnitCode.tooltip}" id="ot8"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SaleOrdersVO1.hints.AckNumber.name}" filterable="true"
+                               sortable="true" headerText="Sale Order No." id="c10" width="150">
+                        <af:outputText value="#{row.AckNumber}"
+                                       shortDesc="#{bindings.SaleOrdersVO1.hints.AckNumber.tooltip}" id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SaleOrdersVO1.hints.AckDate.name}" filterable="true"
+                               sortable="true" headerText="SO Date" id="c11">
+                        <f:facet name="filter">
+                            <af:inputDate value="#{bindings.SaleOrdersVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.AckDate.value}"
+                                          id="id3">
+                                <af:convertDateTime pattern="#{bindings.SaleOrdersVO1.hints.AckDate.format}"/>
+                            </af:inputDate>
+                        </f:facet>
+                        <af:outputText value="#{row.AckDate}"
+                                       shortDesc="#{bindings.SaleOrdersVO1.hints.AckDate.tooltip}" id="ot5">
+                            <af:convertDateTime pattern="#{bindings.SaleOrdersVO1.hints.AckDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="PO Ref No." id="c1"
+                               sortProperty="#{bindings.SaleOrdersVO1.hints.CustPoNumber.name}" filterable="true"
+                               width="150">
+                        <af:outputText value="#{row.CustPoNumber}"
+                                       shortDesc="#{bindings.SaleOrdersVO1.hints.CustPoNumber.tooltip}" id="ot9"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SaleOrdersVO1.hints.ShipToName.name}" filterable="true"
+                               sortable="true" headerText="Ship To" id="c12" width="250">
+                        <af:outputText value="#{row.ShipToName}"
+                                       shortDesc="#{bindings.SaleOrdersVO1.hints.ShipToName.tooltip}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SaleOrdersVO1.hints.Quantity.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.SaleOrdersVO1.hints.Quantity.label}" id="c13">
+                        <af:outputText value="#{row.Quantity}"
+                                       shortDesc="#{bindings.SaleOrdersVO1.hints.Quantity.tooltip}" id="ot6">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.SaleOrdersVO1.hints.Quantity.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SaleOrdersVO1.hints.Price.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.SaleOrdersVO1.hints.Price.label}" id="c14">
+                        <af:outputText value="#{row.Price}" shortDesc="#{bindings.SaleOrdersVO1.hints.Price.tooltip}"
+                                       id="ot2">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.SaleOrdersVO1.hints.Price.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SaleOrdersVO1.hints.Status.name}" filterable="true"
+                               sortable="true" headerText="#{bindings.SaleOrdersVO1.hints.Status.label}" id="c15">
+                        <af:outputText value="#{row.Status}" shortDesc="#{bindings.SaleOrdersVO1.hints.Status.tooltip}"
+                                       id="ot4"/>
+                    </af:column>
+                    <af:column id="c2" align="center" width="50" headerText="Doc">
+                        <af:button text="PDF" id="b5" targetFrame="_blank"
+                                   destination="/reports/saleorderservlet?defpath=#{pageFlowScope.ReportsBean.jasperReportName}&amp;DocId=#{row.AckNumber}&amp;UnitCd=#{row.UnitCode}&amp;RepType=PO"/>
+                    </af:column>
+                </af:table>
+            </af:panelCollection>
+        </af:panelGroupLayout>
+        <!-- Table Dispatch Advice -->
+        <af:panelGroupLayout id="pgl_da" layout="vertical" binding="#{pageFlowScope.ReportsBean.bindDAPanel}"
+                             visible="false">
+            <af:panelGroupLayout id="pgl14" layout="horizontal" styleClass="search-action-bar"
+                                 inlineStyle="margin-bottom: 12px; ">
+                <af:outputText value="Showing 1-#{bindings.DispatchOrdersVO1.rangeSize} of #{bindings.DispatchOrdersVO1Iterator.estimatedRowCount} records | #{pageFlowScope.ReportsBean.fromDate} to #{pageFlowScope.ReportsBean.toDate} (max range 12 months)"
+                               id="ot_count1" styleClass="text-muted" inlineStyle="font-size: 13px;"
+                               partialTriggers="b_apply"/>
+                <af:panelGroupLayout id="pgl_exports_da" layout="horizontal">
+                    <af:button text="Export Excel" id="b_excel_da" styleClass="btn" inlineStyle="margin-right: 10px;">
+                        <af:exportCollectionActionListener type="excelHTML" exportedId="pc2:t1"
+                                                           filename="DispatchOrderReport.xls" title="Dispatch Order Report"/>
+                    </af:button>
+                    <af:button text="Export PDF" id="b_pdf_da" styleClass="btn" partialSubmit="false" useWindow="true">
+                        <af:fileDownloadActionListener filename="DispatchOrder.pdf" contentType="application/pdf"
+                                                       method="#{pageFlowScope.ReportsBean.downloadDA_PDF}"/>
+                    </af:button>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            
+            <!-- Main Data Table for Dispatch Order -->
+            <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+                <af:table value="#{bindings.DispatchOrdersVO1.collectionModel}" var="row"
+                          rows="#{bindings.DispatchOrdersVO1.rangeSize}"
+                          emptyText="#{bindings.DispatchOrdersVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.DispatchOrdersVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.DispatchOrdersVO1.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.DispatchOrdersVO1.rangeSize}"
+                          filterModel="#{bindings.DispatchOrdersVO1Query.queryDescriptor}"
+                          queryListener="#{bindings.DispatchOrdersVO1Query.processQuery}" varStatus="vs" id="t1"
+                          scrollPolicy="page">
+                    <af:column headerText="Unit" id="c18">
+                        <af:outputText value="#{row.Unitcode}"
+                                       shortDesc="#{bindings.DispatchOrdersVO1.hints.Unitcode.tooltip}" id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.DispatchOrdersVO1.hints.DaNo.name}" filterable="true"
+                               headerText="DA No." id="c3" width="150">
+                        <af:outputText value="#{row.DaNo}" shortDesc="#{bindings.DispatchOrdersVO1.hints.DaNo.tooltip}"
+                                       id="ot10"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.DispatchOrdersVO1.hints.DaDate.name}" filterable="true"
+                               headerText="DA Date" id="c4">
+                        <f:facet name="filter">
+                            <af:inputDate value="#{bindings.DispatchOrdersVO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.DaDate.value}"
+                                          id="id4">
+                                <af:convertDateTime pattern="#{bindings.DispatchOrdersVO1.hints.DaDate.format}"/>
+                            </af:inputDate>
+                        </f:facet>
+                        <af:outputText value="#{row.DaDate}"
+                                       shortDesc="#{bindings.DispatchOrdersVO1.hints.DaDate.tooltip}" id="ot11"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.DispatchOrdersVO1.hints.SoRef.name}" filterable="true"
+                               headerText="SO Ref No." id="c5" width="150">
+                        <af:outputText value="#{row.SoRef}"
+                                       shortDesc="#{bindings.DispatchOrdersVO1.hints.SoRef.tooltip}" id="ot12"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.DispatchOrdersVO1.hints.Transporter.name}" filterable="true"
+                               headerText="#{bindings.DispatchOrdersVO1.hints.Transporter.label}" id="c6" width="130">
+                        <af:outputText value="#{row.Transporter}"
+                                       shortDesc="#{bindings.DispatchOrdersVO1.hints.Transporter.tooltip}" id="ot13"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.DispatchOrdersVO1.hints.Vehicle.name}" filterable="true"
+                               headerText="#{bindings.DispatchOrdersVO1.hints.Vehicle.label}" id="c7" width="130">
+                        <af:outputText value="#{row.Vehicle}"
+                                       shortDesc="#{bindings.DispatchOrdersVO1.hints.Vehicle.tooltip}" id="ot14"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.DispatchOrdersVO1.hints.Qty.name}" filterable="true"
+                               headerText="Quantity" id="c8">
+                        <af:outputText value="#{row.Qty}" shortDesc="#{bindings.DispatchOrdersVO1.hints.Qty.tooltip}"
+                                       id="ot15"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.DispatchOrdersVO1.hints.Status.name}" filterable="true"
+                               headerText="#{bindings.DispatchOrdersVO1.hints.Status.label}" id="c16">
+                        <af:outputText value="#{row.Status}"
+                                       shortDesc="#{bindings.DispatchOrdersVO1.hints.Status.tooltip}" id="ot16">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.DispatchOrdersVO1.hints.Status.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column id="c17" align="center" width="50" headerText="Doc">
+                        <af:button text="PDF" id="b1"
+                           destination="/reports/dispatchadviceservlet?defpath=#{pageFlowScope.ReportsBean.jasperReportName}&amp;DocId=#{row.DaNo}&amp;UnitCd=#{row.Unitcode}&amp;RepType=SN&amp;DispParam=#{bindings.ReportParam.inputValue}"
+                           targetFrame="_blank"/>
+                    </af:column>
+                </af:table>
+            </af:panelCollection>
+        </af:panelGroupLayout>
+        
+         <af:panelGroupLayout id="pgl_inv" layout="vertical"
+                             visible="false" binding="#{pageFlowScope.ReportsBean.bindINVPanel}">
+            <af:panelGroupLayout id="pgl15" layout="horizontal" styleClass="search-action-bar"
+                                 inlineStyle="margin-bottom: 12px; ">
+                <af:outputText value="Showing 1-#{bindings.InvoicesVO1.rangeSize} of #{bindings.InvoicesVO1Iterator.estimatedRowCount} records | #{pageFlowScope.ReportsBean.fromDate} to #{pageFlowScope.ReportsBean.toDate} (max range 12 months)"
+                               id="ot_count2" styleClass="text-muted" inlineStyle="font-size: 13px;"
+                               partialTriggers="b_apply"/>
+                <af:panelGroupLayout id="pgl_exports_inv" layout="horizontal">
+                    <af:button text="Export Excel" id="b_excel_inv" styleClass="btn" inlineStyle="margin-right: 10px;">
+                        <af:exportCollectionActionListener type="excelHTML" exportedId="pc3:t3"
+                                                           filename="InvoicesReport.xls" title="Invoices Report"/>
+                    </af:button>
+                    <af:button text="Export PDF" id="b_pdf_inv" styleClass="btn" partialSubmit="false" useWindow="true">
+                        <af:fileDownloadActionListener filename="Invoices.pdf" contentType="application/pdf"
+                                                       method="#{pageFlowScope.ReportsBean.downloadINV_PDF}"/>
+                    </af:button>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            
+            <!-- Main Data Table for Dispatch Order -->
+            <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+                <af:table value="#{bindings.InvoicesVO1.collectionModel}" var="row"
+                          rows="#{bindings.InvoicesVO1.rangeSize}"
+                          emptyText="#{bindings.InvoicesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" selectedRowKeys="#{bindings.InvoicesVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.InvoicesVO1.collectionModel.makeCurrent}" rowSelection="single"
+                          fetchSize="#{bindings.InvoicesVO1.rangeSize}" id="t3">
+                    <af:column headerText="#{bindings.InvoicesVO1.hints.IrnNo.label}" id="c28">
+                        <af:outputText value="#{row.IrnNo}" shortDesc="#{bindings.InvoicesVO1.hints.IrnNo.tooltip}"
+                                       id="ot26"/>
+                    </af:column>
+                    <af:column headerText="Unit" id="c27" width="100">
+                        <af:outputText value="#{row.UnitCode}"
+                                       shortDesc="#{bindings.InvoicesVO1.hints.UnitCode.tooltip}" id="ot25"/>
+                    </af:column>
+                    <af:column headerText="Invoice No." id="c19" width="150">
+                        <af:outputText value="#{row.InvNo}" shortDesc="#{bindings.InvoicesVO1.hints.InvNo.tooltip}"
+                                       id="ot18"/>
+                    </af:column>
+                    <af:column headerText="Invoice Date" id="c20" width="150">
+                        <af:outputText value="#{row.InvDate}" shortDesc="#{bindings.InvoicesVO1.hints.InvDate.tooltip}"
+                                       id="ot19">
+                            <af:convertDateTime pattern="#{bindings.InvoicesVO1.hints.InvDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="SO Ref No." id="c21" width="150">
+                        <af:outputText value="#{row.SaleOrderNumber}"
+                                       shortDesc="#{bindings.InvoicesVO1.hints.SaleOrderNumber.tooltip}" id="ot20"/>
+                    </af:column>
+                    <af:column headerText="Taxable Amount" id="c22" width="150">
+                        <af:outputText value="#{row.TaxableAmount}"
+                                       shortDesc="#{bindings.InvoicesVO1.hints.TaxableAmount.tooltip}" id="ot21">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.InvoicesVO1.hints.TaxableAmount.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="Total Amount" id="c23" width="150">
+                        <af:outputText value="#{row.TotalAmt}"
+                                       shortDesc="#{bindings.InvoicesVO1.hints.TotalAmt.tooltip}" id="ot22">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.InvoicesVO1.hints.TotalAmt.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="Due Date" id="c24" width="150">
+                        <af:outputText value="#{row.DueDate}" shortDesc="#{bindings.InvoicesVO1.hints.DueDate.tooltip}"
+                                       id="ot23">
+                            <af:convertDateTime pattern="#{bindings.InvoicesVO1.hints.DueDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.InvoicesVO1.hints.Status.label}" id="c25" width="150">
+                        <af:outputText value="#{row.Status}" shortDesc="#{bindings.InvoicesVO1.hints.Status.tooltip}"
+                                       id="ot24"/>
+                    </af:column>
+                    <af:column id="c26" headerText="Doc" align="center" width="50">
+                    <af:button text="PDF" id="b9" targetFrame="_blank"
+                           destination='/reports/invoiceentryservlet?defpath=#{pageFlowScope.ReportsBean.jasperReportName}&amp;DocId=#{row.InvNo}&amp;UnitCd=#{row.UnitCode}&amp;RepType=TAI&amp;InvParam=#{bindings.InvParamTrans.inputValue}&amp;EmpCode=#{pageFlowScope.EmpCode}'/>
+                    </af:column>
+                </af:table>
+            </af:panelCollection>
+        </af:panelGroupLayout>
+        
+        
+        <!-- Footer information text block (from image) -->
+        <af:panelGroupLayout id="pgl_footer_info" layout="vertical" inlineStyle="margin-top: 25px;">
+            <af:outputText value="Dispatch Advice tab: DA No, DA Date, SO Ref, Transporter, Vehicle, LR No, Qty, Status."
+                           id="ot_da_info" styleClass="text-muted" inlineStyle="font-size: 13px; margin-bottom: 5px;"/>
+            <af:outputText value="Invoice tab: Invoice No, Date, SO/DA Ref, Taxable Value, GST, Total, Due Date, Payment Status, e-Invoice IRN."
+                           id="ot_inv_info" styleClass="text-muted" inlineStyle="font-size: 13px;"/>
+        </af:panelGroupLayout>
+    </af:panelGroupLayout>
+</jsp:root>

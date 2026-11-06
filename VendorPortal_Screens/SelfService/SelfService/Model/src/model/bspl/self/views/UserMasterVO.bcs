@@ -1,0 +1,12 @@
+//Groovy Scripts for model.bspl.self.views.UserMasterVO
+
+package model.bspl.self.views
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="bindUserId")
+def bindUserId_VariableScript_Variable()
+{
+adf.context.expressionEvaluator.evaluate('#{pageFlowScope.userId}')
+}
+

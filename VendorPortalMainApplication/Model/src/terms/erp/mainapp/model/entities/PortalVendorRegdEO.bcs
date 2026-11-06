@@ -1,0 +1,33 @@
+//Groovy Scripts for terms.erp.mainapp.model.entities.PortalVendorRegdEO
+
+package terms.erp.mainapp.model.entities
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="CreationDate")
+def CreationDate_ExpressionScript_Expression()
+{
+adf.currentDateTime
+}
+
+
+@TransientValueExpression(attributeName="LastUpdateDate")
+def LastUpdateDate_ExpressionScript_Expression()
+{
+adf.currentDateTime
+}
+
+
+@TransientValueExpression(attributeName="VendorId")
+def VendorId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("GLOBAL_OCI_SEQ",adf.object.getDBTransaction())).getSequenceNumber()
+}
+
+
+@TransientValueExpression(attributeName="LineId")
+def LineId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("VEN_LINE_ID",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

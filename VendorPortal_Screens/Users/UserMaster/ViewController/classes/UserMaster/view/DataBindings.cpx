@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="UserMaster.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/fragments/CreateUser.jsff" usageId="UserMaster_view_CreateUserPageDef"/>
+    <page path="/WEB-INF/bspl/UserMaster/ui/flow/CreateUserTF.xml#CreateUserTF@Rollback"
+          usageId="UserMaster_view_CreateUserTF_CreateUserTF_RollbackPageDef"/>
+    <page path="/UserMas.jspx" usageId="UserMaster_view_UserMasPageDef"/>
+    <page path="/fragments/SearchUser.jsff" usageId="UserMaster_view_SearchUserPageDef"/>
+    <page path="/WEB-INF/bspl/UserMaster/ui/flow/CreateUserTF.xml#CreateUserTF@getUserDetails"
+          usageId="UserMaster_view_CreateUserTF_CreateUserTF_getUserDetailsPageDef"/>
+    <page path="/WEB-INF/bspl/UserMaster/ui/flow/SearchUserTF.xml#SearchUserTF@getUsers"
+          usageId="UserMaster_view_SearchUserTF_SearchUserTF_getUsersPageDef"/>
+    <page path="/WEB-INF/bspl/UserMaster/ui/flow/CreateUserTF.xml#CreateUserTF@insertCustomerDtl"
+          usageId="UserMaster_view_CreateUserTF_CreateUserTF_insertCustomerDtlPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="UserMaster_view_CreateUserPageDef" path="UserMaster.view.pageDefs.CreateUserPageDef"/>
+    <page id="UserMaster_view_CreateUserTF_CreateUserTF_RollbackPageDef"
+          path="bspl.UserMaster.ui.flow.CreateUserTF_CreateUserTF_RollbackPageDef"/>
+    <page id="UserMaster_view_UserMasPageDef" path="UserMaster.view.pageDefs.UserMasPageDef"/>
+    <page id="UserMaster_view_SearchUserPageDef" path="UserMaster.view.pageDefs.SearchUserPageDef"/>
+    <page id="UserMaster_view_CreateUserTF_CreateUserTF_getUserDetailsPageDef"
+          path="bspl.UserMaster.ui.flow.CreateUserTF_CreateUserTF_getUserDetailsPageDef"/>
+    <page id="UserMaster_view_SearchUserTF_SearchUserTF_getUsersPageDef"
+          path="bspl.UserMaster.ui.flow.SearchUserTF_SearchUserTF_getUsersPageDef"/>
+    <page id="UserMaster_view_CreateUserTF_CreateUserTF_insertCustomerDtlPageDef"
+          path="bspl.UserMaster.ui.flow.CreateUserTF_CreateUserTF_insertCustomerDtlPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="UserMasAMDataControl" Package="UserMaster.model.module"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="UserMasAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

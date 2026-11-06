@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="CreateOrderTF">
+    <default-activity>router1</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>orderId</name>
+      <value>#{pageFlowScope.orderId}</value>
+      <class>java.lang.Long</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name>mode</name>
+      <value>#{pageFlowScope.mode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__16">
+      <name>userId</name>
+      <value>#{pageFlowScope.userId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__20">
+      <name>vendorId</name>
+      <value>#{pageFlowScope.vendorId}</value>
+      <class>java.lang.Long</class>
+    </input-parameter-definition>
+    <managed-bean id="__19">
+      <managed-bean-name>OrderBean</managed-bean-name>
+      <managed-bean-class>view.bspl.orders.beans.OrderBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="createOrders">
+      <page>/fragments/createOrders.jsff</page>
+    </view>
+    <router id="router1">
+      <case id="__9">
+        <expression>#{pageFlowScope.mode=='E'}</expression>
+        <outcome>edit</outcome>
+      </case>
+      <case id="__10">
+        <expression>#{pageFlowScope.mode=='C'}</expression>
+        <outcome>create</outcome>
+      </case>
+      <default-outcome>edit</default-outcome>
+    </router>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="getOrderDetail">
+      <method>#{bindings.getOrderDetail.execute}</method>
+      <outcome>
+        <fixed-outcome>getOrderDetail</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="Rollback">
+      <method>#{bindings.Rollback.execute}</method>
+      <outcome>
+        <fixed-outcome>Rollback</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="setOrderHdr">
+      <method>#{bindings.setOrderHdr.execute}</method>
+      <outcome>
+        <fixed-outcome>setOrderHdr</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>router1</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>getOrderDetail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>setOrderHdr</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>getOrderDetail</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>getOrderDetail</from-outcome>
+        <to-activity-id>createOrders</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>createOrders</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>Rollback</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>Rollback</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>Rollback</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>setOrderHdr</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome>setOrderHdr</from-outcome>
+        <to-activity-id>createOrders</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

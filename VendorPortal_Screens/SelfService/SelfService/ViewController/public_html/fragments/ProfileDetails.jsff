@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+
+<af:panelHeader text="My Profile" id="ph2">
+
+        <af:panelGroupLayout id="root" layout="vertical" styleClass="contact-step">
+            <!-- STEP TITLE -->
+            <!--<af:outputText
+            value="Step 3: Review Submit"
+            id="stepTitle"
+            styleClass="step-title"/>-->
+            <!--- FORM -->
+            <af:panelHeader text=" " id="ph1" styleClass="doc-page-header">
+                <af:panelGroupLayout id="pglMain" layout="vertical" styleClass="review-main">
+                    <!-- PAGE HEADER -->
+                    <af:panelHeader id="phMain" text=" " styleClass="review-header">
+                        <af:outputText id="otInstruction"
+                                       value="Please review your details before confirming and saving."
+                                       styleClass="review-instruction"/>
+                    </af:panelHeader>
+                    <!-- BUSINESS DETAILS -->
+                    <af:panelHeader id="phBusiness" text="Business Details" styleClass="review-section">
+                        <af:panelFormLayout id="pflBusiness" rows="3" maxColumns="3" styleClass="custom-form-layout"
+                                            fieldWidth="180" labelWidth="180">
+                            <af:panelLabelAndMessage label="Business Name" id="plam1">
+                                <af:inputText value="#{bindings.LglNameOfBs.inputValue}" simple="true"
+                                              required="#{bindings.LglNameOfBs.hints.mandatory}"
+                                              columns="#{bindings.LglNameOfBs.hints.displayWidth}"
+                                              maximumLength="#{bindings.LglNameOfBs.hints.precision}"
+                                              shortDesc="#{bindings.LglNameOfBs.hints.tooltip}" id="it1"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.LglNameOfBs.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="Business Type" id="plam2">
+                                <af:inputText value="#{bindings.CustomerTypeDesc.inputValue}" simple="true"
+                                              required="#{bindings.CustomerTypeDesc.hints.mandatory}"
+                                              columns="#{bindings.CustomerTypeDesc.hints.displayWidth}"
+                                              maximumLength="#{bindings.CustomerTypeDesc.hints.precision}"
+                                              shortDesc="#{bindings.CustomerTypeDesc.hints.tooltip}" id="it14"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.CustomerTypeDesc.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="GST Registration No." id="plam3">
+                                <af:inputText value="#{bindings.GstRegNo.inputValue}" simple="true"
+                                              required="#{bindings.GstRegNo.hints.mandatory}"
+                                              columns="#{bindings.GstRegNo.hints.displayWidth}"
+                                              maximumLength="#{bindings.GstRegNo.hints.precision}"
+                                              shortDesc="#{bindings.GstRegNo.hints.tooltip}" id="it2"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.GstRegNo.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="PAN Number" id="plam4">
+                                <af:inputText value="#{bindings.PanNo.inputValue}" simple="true"
+                                              required="#{bindings.PanNo.hints.mandatory}"
+                                              columns="#{bindings.PanNo.hints.displayWidth}"
+                                              maximumLength="#{bindings.PanNo.hints.precision}"
+                                              shortDesc="#{bindings.PanNo.hints.tooltip}" id="it3"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.PanNo.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="Business Address" id="plam5">
+                                <af:inputText value="#{bindings.BillAddressLine1.inputValue}" simple="true"
+                                              required="#{bindings.BillAddressLine1.hints.mandatory}"
+                                              columns="#{bindings.BillAddressLine1.hints.displayWidth}"
+                                              maximumLength="#{bindings.BillAddressLine1.hints.precision}"
+                                              shortDesc="#{bindings.BillAddressLine1.hints.tooltip}" id="it4"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.BillAddressLine1.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="State" id="plam6">
+                                <af:inputText value="#{bindings.StateName.inputValue}" simple="true"
+                                              required="#{bindings.StateName.hints.mandatory}"
+                                              columns="#{bindings.StateName.hints.displayWidth}"
+                                              maximumLength="#{bindings.StateName.hints.precision}"
+                                              shortDesc="#{bindings.StateName.hints.tooltip}" id="it7"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.StateName.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="City" id="plam7">
+                                <af:inputText value="#{bindings.CityName.inputValue}" simple="true"
+                                              required="#{bindings.CityName.hints.mandatory}"
+                                              columns="#{bindings.CityName.hints.displayWidth}"
+                                              maximumLength="#{bindings.CityName.hints.precision}"
+                                              shortDesc="#{bindings.CityName.hints.tooltip}" id="it6"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.CityName.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="PIN Code" id="plam8">
+                                <af:inputText value="#{bindings.PinCode.inputValue}" simple="true"
+                                              required="#{bindings.PinCode.hints.mandatory}"
+                                              columns="#{bindings.PinCode.hints.displayWidth}"
+                                              maximumLength="6"
+                                              shortDesc="#{bindings.PinCode.hints.tooltip}" id="it5"
+                                              contentStyle="width:180px;">
+                                    <f:validator binding="#{bindings.PinCode.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                    <!-- PERSON DETAILS -->
+                    <af:panelHeader id="phPerson" text="Person Details" styleClass="review-section">
+                        <af:panelFormLayout id="pflPerson" rows="3" maxColumns="3" styleClass="custom-form-layout"
+                                            fieldWidth="180" labelWidth="180">
+                            <af:panelLabelAndMessage label="Trade Name" id="plam9">
+                                <af:inputText value="#{bindings.Name.inputValue}" simple="true"
+                                              required="#{bindings.Name.hints.mandatory}"
+                                              columns="#{bindings.Name.hints.displayWidth}"
+                                              maximumLength="#{bindings.Name.hints.precision}"
+                                              shortDesc="#{bindings.Name.hints.tooltip}" id="it8"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.Name.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="Legal Name" id="plam10">
+                                <af:inputText value="#{bindings.LegName.inputValue}" simple="true"
+                                              required="#{bindings.LegName.hints.mandatory}"
+                                              columns="#{bindings.LegName.hints.displayWidth}"
+                                              maximumLength="#{bindings.LegName.hints.precision}"
+                                              shortDesc="#{bindings.LegName.hints.tooltip}" id="it9"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.LegName.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="Designation" id="plam11">
+                                <af:inputText value="#{bindings.Designation.inputValue}" simple="true"
+                                              required="#{bindings.Designation.hints.mandatory}"
+                                              columns="#{bindings.Designation.hints.displayWidth}"
+                                              maximumLength="#{bindings.Designation.hints.precision}"
+                                              shortDesc="#{bindings.Designation.hints.tooltip}" id="it10"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.Designation.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="Mobile Number" id="plam12">
+                                <af:inputText value="#{bindings.Mobile.inputValue}" simple="true"
+                                              required="#{bindings.Mobile.hints.mandatory}"
+                                              columns="#{bindings.Mobile.hints.displayWidth}"
+                                              maximumLength="#{bindings.Mobile.hints.precision}"
+                                              shortDesc="#{bindings.Mobile.hints.tooltip}" id="it11"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.Mobile.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="Email ID" id="plam13">
+                                <af:inputText value="#{bindings.Email.inputValue}" simple="true"
+                                              required="#{bindings.Email.hints.mandatory}"
+                                              columns="#{bindings.Email.hints.displayWidth}"
+                                              maximumLength="#{bindings.Email.hints.precision}"
+                                              shortDesc="#{bindings.Email.hints.tooltip}" id="it12"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.Email.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="Role" id="plam14">
+                                <af:inputText value="#{bindings.CustRole.inputValue}" simple="true"
+                                              required="#{bindings.CustRole.hints.mandatory}"
+                                              columns="#{bindings.CustRole.hints.displayWidth}"
+                                              maximumLength="#{bindings.CustRole.hints.precision}"
+                                              shortDesc="#{bindings.CustRole.hints.tooltip}" id="it13"
+                                              contentStyle="width:180px;" readOnly="true">
+                                    <f:validator binding="#{bindings.CustRole.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                    <!-- DOCUMENT DETAILS -->
+                    <!-- CONFIRMATION MESSAGE -->
+                    <!-- ACTION BUTTONS -->
+                </af:panelGroupLayout>
+            </af:panelHeader>
+            <!-- BUTTONS -->
+            <af:panelGroupLayout id="buttons" layout="horizontal" styleClass="button-row">
+                <af:panelGroupLayout layout="horizontal" id="rightButtons" halign="right">
+                    <af:commandButton text="Save" id="draftButton" styleClass="draft-button"
+                                      actionListener="#{pageFlowScope.ProfileBean.saveProfile}"/>
+                    <af:commandButton text="Next →" id="nextButton" action="next" styleClass="next-button"
+                                      rendered="false"/>
+                    <af:commandButton text="Cancel" id="cancelButton" styleClass="cancel-button" immediate="true"
+                                      action="back"/>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+        
+        <f:facet name="context"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+    </af:panelHeader>
+
+
+</jsp:root>

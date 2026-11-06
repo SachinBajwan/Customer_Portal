@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="view.bspl.self" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/SelfService.jspx" usageId="view_bspl_self_SelfServicePageDef"/>
+    <page path="/fragments/ProfileDetails.jsff" usageId="view_bspl_self_ProfileDetailsPageDef"/>
+    <page path="/WEB-INF/bspl/self/ui/flow/ProfileTF.xml#ProfileTF@getProfileDetail"
+          usageId="view_bspl_self_ProfileTF_ProfileTF_getProfileDetailPageDef"/>
+    <page path="/WEB-INF/bspl/self/ui/flow/ProfileTF.xml#ProfileTF@Rollback"
+          usageId="view_bspl_self_ProfileTF_ProfileTF_RollbackPageDef"/>
+    <page path="/fragments/Tickets.jsff" usageId="view_bspl_self_TicketsPageDef"/>
+    <page path="/WEB-INF/bspl/self/ui/flow/TicketsTF.xml#TicketsTF@getTicketDetail"
+          usageId="view_bspl_self_TicketsTF_TicketsTF_getTicketDetailPageDef"/>
+    <page path="/fragments/changePassword.jsff" usageId="view_bspl_self_changePasswordPageDef"/>
+    <page path="/WEB-INF/bspl/self/ui/flow/ChangePasswordTF.xml#ChangePasswordTF@Rollback"
+          usageId="view_bspl_self_ChangePasswordTF_ChangePasswordTF_RollbackPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="view_bspl_self_SelfServicePageDef" path="view.bspl.self.pageDefs.SelfServicePageDef"/>
+    <page id="view_bspl_self_ProfileDetailsPageDef" path="fragments.ProfileDetailsPageDef"/>
+    <page id="view_bspl_self_ProfileTF_ProfileTF_getProfileDetailPageDef"
+          path="bspl.self.ui.flow.ProfileTF_ProfileTF_getProfileDetailPageDef"/>
+    <page id="view_bspl_self_ProfileTF_ProfileTF_RollbackPageDef"
+          path="bspl.self.ui.flow.ProfileTF_ProfileTF_RollbackPageDef"/>
+    <page id="view_bspl_self_TicketsPageDef" path="fragments.TicketsPageDef"/>
+    <page id="view_bspl_self_TicketsTF_TicketsTF_getTicketDetailPageDef"
+          path="bspl.self.ui.flow.TicketsTF_TicketsTF_getTicketDetailPageDef"/>
+    <page id="view_bspl_self_changePasswordPageDef" path="fragments.changePasswordPageDef"/>
+    <page id="view_bspl_self_ChangePasswordTF_ChangePasswordTF_RollbackPageDef"
+          path="bspl.self.ui.flow.ChangePasswordTF_ChangePasswordTF_RollbackPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="SelfServiceAMDataControl" Package="model.bspl.self.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="SelfServiceAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

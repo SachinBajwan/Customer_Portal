@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="privacyConsentPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_NoticeLanguage" id="NoticeLanguage"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <action id="Rollback" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

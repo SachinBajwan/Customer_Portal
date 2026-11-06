@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CustPendingSummaryVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  SelectAllAttributes="false">
+  <Variable
+    Name="bindCustCd"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <EntityUsage
+    Name="CustPendingSummaryEO"
+    Entity="model.bspl.dashboard.entities.CustPendingSummaryEO"/>
+  <ViewAttribute
+    Name="RecCnt"
+    PrecisionRule="true"
+    EntityAttrName="RecCnt"
+    EntityUsage="CustPendingSummaryEO"
+    AliasName="REC_CNT"/>
+  <ViewAttribute
+    Name="CustCode"
+    PrecisionRule="true"
+    EntityAttrName="CustCode"
+    EntityUsage="CustPendingSummaryEO"
+    AliasName="CUST_CODE"/>
+  <ViewAttribute
+    Name="Remarks"
+    PrecisionRule="true"
+    EntityAttrName="Remarks"
+    EntityUsage="CustPendingSummaryEO"
+    AliasName="REMARKS"/>
+  <ViewCriteria
+    Name="CustPendingSummaryVOCriteria"
+    ViewObjectName="model.bspl.dashboard.views.CustPendingSummaryVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="CustPendingSummaryVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CustPendingSummaryVOCriteria_CustPendingSummaryVOCriteria_row_0_CustCode"
+        ViewAttribute="CustCode"
+        Operator="="
+        Conjunction="AND"
+        Value=":bindCustCd"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+</ViewObject>

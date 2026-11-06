@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="mainPanel"
+                                 layout="vertical"
+                                 styleClass="notification-page">
+                                 
+                                 <!-- HEADER -->
+                <af:panelGroupLayout id="headerPanel"
+                                     layout="vertical"
+                                     styleClass="notification-header">
+
+                    <af:outputText id="headerTitle"
+                                   value="Notifications &amp; Alerts 🔔"
+                                   styleClass="notification-heading"/>
+
+                    <af:outputText id="headerSubTitle"
+                                   value="Stay updated on orders, dispatches, invoices and account activity"
+                                   styleClass="notification-subheading"/>
+
+                </af:panelGroupLayout> 
+                
+                
+                 <!-- FILTER + MARK ALL -->
+                <af:panelGroupLayout id="filterPanel"
+                                     layout="horizontal"
+                                     styleClass="notification-toolbar">
+
+                    <af:panelGroupLayout id="filters"
+                                         layout="horizontal"
+                                         styleClass="notification-filters">
+
+                        <af:commandButton id="allBtn"
+                                          text="All (#{pageFlowScope.notificationBean.notificationCount})"
+                                          styleClass="filter-button filter-active"
+                                          actionListener="#{pageFlowScope.notificationBean.getRecords}"/>
+
+                        <af:commandButton id="orderBtn"
+                                          text="Orders"
+                                          styleClass="filter-button"
+                                          actionListener="#{pageFlowScope.notificationBean.getRecords}"/>
+
+                        <af:commandButton id="dispatchBtn"
+                                          text="Dispatch"
+                                          styleClass="filter-button"
+                                          actionListener="#{pageFlowScope.notificationBean.getRecords}"/>
+
+                        <af:commandButton id="invoiceBtn"
+                                          text="Invoice/Payment"
+                                          styleClass="filter-button"
+                                          actionListener="#{pageFlowScope.notificationBean.getRecords}"/>
+
+                        <af:commandButton id="securityBtn"
+                                          text="Account &amp; Security"
+                                          styleClass="filter-button"/>
+
+                        <af:outputText id="unreadBadge"
+                                       value="#{pageFlowScope.notificationBean.unreadCount}"
+                                       styleClass="unread-badge"/>
+
+                    </af:panelGroupLayout>
+
+
+                    <af:commandLink id="markAll"
+                                    text="Mark all as read"
+                                    action="#{pageFlowScope.notificationBean.markAllAsRead}"
+                                    styleClass="mark-read-link" rendered="false"/>
+
+                </af:panelGroupLayout>
+                
+                <!-- NOTIFICATION LIST -->
+                <af:panelGroupLayout id="notificationList"
+                                     layout="vertical"
+                                     styleClass="notification-list"
+                                     binding="#{pageFlowScope.notificationBean.notificationList}" halign="right">
+            <af:table value="#{bindings.MsgNotificationSynVO1.collectionModel}" var="row"
+                      rows="#{bindings.MsgNotificationSynVO1.rangeSize}"
+                      emptyText="#{bindings.MsgNotificationSynVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.MsgNotificationSynVO1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.MsgNotificationSynVO1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.MsgNotificationSynVO1.rangeSize}" id="t1" binding="#{pageFlowScope.notificationBean.bindNotificationTable}"
+                      visible="false">
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.Body.label}" id="c1">
+                    <af:inputText value="#{row.bindings.Body.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.Body.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.Body.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.Body.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.Body.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.Body.tooltip}" id="it1">
+                        <f:validator binding="#{row.bindings.Body.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.CreatedBy.label}" id="c2">
+                    <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.CreatedBy.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.CreatedBy.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.CreatedBy.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.CreatedBy.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.CreatedBy.tooltip}" id="it2">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.CreationDate.label}" id="c3">
+                    <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.CreationDate.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.CreationDate.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.CreationDate.displayWidth}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.CreationDate.tooltip}" id="id1">
+                        <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.MsgNotificationSynVO1.hints.CreationDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.CustCode.label}" id="c4">
+                    <af:inputText value="#{row.bindings.CustCode.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.CustCode.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.CustCode.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.CustCode.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.CustCode.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.CustCode.tooltip}" id="it3">
+                        <f:validator binding="#{row.bindings.CustCode.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.DocNo.label}" id="c5">
+                    <af:inputText value="#{row.bindings.DocNo.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.DocNo.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.DocNo.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.DocNo.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.DocNo.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.DocNo.tooltip}" id="it4">
+                        <f:validator binding="#{row.bindings.DocNo.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedBy.label}" id="c6">
+                    <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedBy.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedBy.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedBy.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedBy.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedBy.tooltip}" id="it5">
+                        <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedDate.label}" id="c7">
+                    <af:inputDate value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedDate.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedDate.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedDate.displayWidth}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedDate.tooltip}" id="id2">
+                        <f:validator binding="#{row.bindings.LastUpdatedDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.MsgNotificationSynVO1.hints.LastUpdatedDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.ObjectVersionNumber.label}" id="c8">
+                    <af:inputText value="#{row.bindings.ObjectVersionNumber.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.ObjectVersionNumber.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.ObjectVersionNumber.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.ObjectVersionNumber.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.ObjectVersionNumber.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.ObjectVersionNumber.tooltip}"
+                                  id="it6">
+                        <f:validator binding="#{row.bindings.ObjectVersionNumber.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.MsgNotificationSynVO1.hints.ObjectVersionNumber.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.Status.label}" id="c9">
+                    <af:inputText value="#{row.bindings.Status.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.Status.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.Status.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.Status.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.Status.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.Status.tooltip}" id="it7">
+                        <f:validator binding="#{row.bindings.Status.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.Subject.label}" id="c10">
+                    <af:inputText value="#{row.bindings.Subject.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.Subject.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.Subject.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.Subject.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.Subject.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.Subject.tooltip}" id="it8">
+                        <f:validator binding="#{row.bindings.Subject.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.MsgNotificationSynVO1.hints.UnitCd.label}" id="c11">
+                    <af:inputText value="#{row.bindings.UnitCd.inputValue}"
+                                  label="#{bindings.MsgNotificationSynVO1.hints.UnitCd.label}"
+                                  required="#{bindings.MsgNotificationSynVO1.hints.UnitCd.mandatory}"
+                                  columns="#{bindings.MsgNotificationSynVO1.hints.UnitCd.displayWidth}"
+                                  maximumLength="#{bindings.MsgNotificationSynVO1.hints.UnitCd.precision}"
+                                  shortDesc="#{bindings.MsgNotificationSynVO1.hints.UnitCd.tooltip}" id="it9">
+                        <f:validator binding="#{row.bindings.UnitCd.validator}"/>
+                    </af:inputText>
+                </af:column>
+            </af:table>
+            <af:iterator id="notificationIterator"
+             value="#{pageFlowScope.notificationBean.pageNotifications}"
+             var="notification">
+
+                        <af:panelGroupLayout id="notificationRow"
+                                             layout="horizontal"
+                                             styleClass="notification-card">
+
+                            <!-- ICON -->
+                            <af:panelGroupLayout id="iconContainer"
+                                                 layout="horizontal" styleClass="#{notification.typeClass}">
+
+                                <af:outputText id="icon"
+                                               value="!"
+                                               styleClass="notification-icon"/>
+
+                            </af:panelGroupLayout>
+
+
+                            <!-- CONTENT -->
+                            <af:panelGroupLayout id="notificationContent"
+                                                 layout="vertical"
+                                                 styleClass="notification-content">
+
+                                <af:panelGroupLayout id="titleRow"
+                                                     layout="horizontal"
+                                                     styleClass="notification-title-row">
+                            <af:link text="#{notification.title}" id="l1" styleClass="notification-title"
+                                     actionListener="#{pageFlowScope.notificationBean.readAlertMessage}">
+                                <af:outputText id="title" value="#{notification.title}"
+                                               styleClass="notification-title" visible="false"
+                                               binding="#{pageFlowScope.notificationBean.bindNotificationId}"/>
+                                
+                            </af:link>
+                            <af:outputText value="#{notification.status}" id="ot1" visible="false"/>
+                            <af:outputText id="time"
+                                                   value="#{notification.createdDate}"
+                                                   styleClass="notification-time"/>
+
+                                </af:panelGroupLayout>
+
+
+                                <af:outputText id="reference"
+                                               value="#{notification.referenceNo}"
+                                               rendered="#{not empty notification.referenceNo}"
+                                               styleClass="notification-reference"/>
+
+
+
+
+                            </af:panelGroupLayout>
+
+
+                            <!-- UNREAD DOT -->
+                    <af:panelGroupLayout id="unreadDot"
+                                                 layout="horizontal"
+                                                 rendered="#{not notification.read}"
+                                                 binding="#{pageFlowScope.notificationBean.bindMsgStatusPanel}"
+                                                 styleClass="notification-unread-dot" halign="right"/>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                              binding="#{pageFlowScope.notificationBean.bindAlertPop}">
+                        <af:dialog id="d1" type="ok" closeIconVisible="false"
+                                   title="#{pageFlowScope.notificationBean.popTitle}">
+                            <f:facet name="buttonBar"/>
+                            
+                           <af:outputText id="message"
+                                               styleClass="notification-header"
+                                          value="#{pageFlowScope.notificationBean.popMsg}"/>
+                                               
+                        </af:dialog>
+                    </af:popup>
+                </af:panelGroupLayout>
+
+                    </af:iterator>
+                    </af:panelGroupLayout>
+                    
+                    <!-- PAGINATION -->
+                <!-- PAGINATION -->
+<af:panelGroupLayout id="paginationPanel"
+                     layout="horizontal"
+                     halign="center"
+                     styleClass="notification-pagination">
+
+    <af:commandButton id="previousButton"
+                  text="← Previous"
+                  action="#{pageFlowScope.notificationBean.previousPage}"
+                  partialSubmit="false"
+                  immediate="true"/>
+
+    <af:outputText id="pageInfo"
+                   value="Page #{pageFlowScope.notificationBean.currentPageNumber} of #{pageFlowScope.notificationBean.totalPages}"
+                   styleClass="pagination-info"/>
+
+    <af:commandButton id="nextButton"
+                  text="Next →"
+                  action="#{pageFlowScope.notificationBean.nextPage}"
+                  partialSubmit="false"
+                  immediate="true"/>
+
+</af:panelGroupLayout>
+                
+        </af:panelGroupLayout>
+</jsp:root>

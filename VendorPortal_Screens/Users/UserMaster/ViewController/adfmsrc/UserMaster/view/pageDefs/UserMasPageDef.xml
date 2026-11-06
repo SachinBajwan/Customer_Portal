@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="UserMasPageDef"
+                Package="UserMaster.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="SearchUserTF1" taskFlowId="/WEB-INF/bspl/UserMaster/ui/flow/SearchUserTF.xml#SearchUserTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="userId" value="243"/>
+        <parameter id="vendorId" value="200007768675"/>
+        <parameter id="userRole" value="CA"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SelfServiceAM"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true"
+  ComponentClass="model.bspl.self.services.SelfServiceAMImpl"
+  ComponentInterface="model.bspl.self.services.common.SelfServiceAM">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewUsage
+    Name="PortalVendorRegdVO1"
+    ViewObjectName="model.bspl.self.views.PortalVendorRegdVO"/>
+  <ViewUsage
+    Name="TicketMasterVO1"
+    ViewObjectName="model.bspl.self.views.TicketMasterVO"/>
+  <ViewUsage
+    Name="UserMasterVO1"
+    ViewObjectName="model.bspl.self.views.UserMasterVO"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="getProfileDetail"
+      MethodName="getProfileDetail">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getTicketDetail"
+      MethodName="getTicketDetail">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="changePassword"
+      MethodName="changePassword">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="oldPass"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="newPass"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="encryptedPassword"
+      MethodName="encryptedPassword">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="password"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</AppModule>

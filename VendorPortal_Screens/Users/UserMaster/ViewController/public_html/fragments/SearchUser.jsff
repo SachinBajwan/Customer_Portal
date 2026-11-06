@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  
+  <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="content-area">
+  <!-- 1. Header & Draft Status -->
+    <af:panelGroupLayout id="co_pgl2" layout="vertical" styleClass="page-header" inlineStyle="margin-bottom: 20px;">
+      <af:outputText value="Manage Users" id="co_ot1" styleClass="welcome-title"/>
+      <af:outputText value="#{pageFlowScope.vendorId} as #{pageFlowScope.userRole}" id="ot8" visible="false"/>
+      <!--<af:outputText value="#{CreateOrderBean.draftStatusMessage}" id="co_ot2" styleClass="welcome-subtitle"/>-->
+    </af:panelGroupLayout>
+  
+  <af:panelGroupLayout id="co_pgl_actions" layout="horizontal" styleClass="search-action-bar" inlineStyle="margin: 20px 0;">
+      <!--<af:inputText placeholder="Search product by code / name / scan..." id="co_it_search" styleClass="product-search-input"/>-->
+      <af:panelGroupLayout id="co_pgl_btns" layout="horizontal">
+        <af:button text="+ Create User" id="co_b1" styleClass="btn btn-primary"
+                   action="#{pageFlowScope.SearchUser.checkCount}">
+          <af:setActionListener from="C" to="#{pageFlowScope.mode}"/>
+        </af:button>
+        <af:button text="Back" id="co_b2" styleClass="btn btn-cancel" action="back"/>
+      </af:panelGroupLayout>
+      <f:facet name="separator">
+        <af:spacer width="15" id="co_sp1"/>
+      </f:facet>
+    </af:panelGroupLayout>
+    
+    
+    <af:panelGroupLayout layout="vertical" id="pgl2" inlineStyle="margin-bottom: 20px;" styleClass="panel">
+      <af:panelHeader text=" " id="ph1">
+        <af:query id="qryId1" headerText="Search" disclosed="true"
+                  value="#{bindings.SearchUsersVOCriteriaQuery.queryDescriptor}"
+                  model="#{bindings.SearchUsersVOCriteriaQuery.queryModel}"
+                  queryListener="#{bindings.SearchUsersVOCriteriaQuery.processQuery}"
+                  queryOperationListener="#{bindings.SearchUsersVOCriteriaQuery.processQueryOperation}"
+                  resultComponentId="::pc1:resId1" saveQueryMode="hidden" modeChangeVisible="false" rows="1"
+                  maxColumns="2"/>
+        <af:panelGroupLayout layout="vertical" id="pgl4"/>
+      </af:panelHeader>
+      <af:panelGroupLayout id="pgl3" inlineStyle="margin-bottom: 20px;" styleClass="panel">
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.SearchUsersVO1.collectionModel}" var="row"
+                    rows="#{bindings.SearchUsersVO1.rangeSize}"
+                    emptyText="#{bindings.SearchUsersVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.SearchUsersVO1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.SearchUsersVO1.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.SearchUsersVO1.rangeSize}"
+                    filterModel="#{bindings.SearchUsersVOCriteriaQuery.queryDescriptor}"
+                    queryListener="#{bindings.SearchUsersVOCriteriaQuery.processQuery}" varStatus="vs" id="resId1"
+                    styleClass="recent-orders-table">
+            <af:column sortProperty="#{bindings.SearchUsersVO1.hints.VendorId.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.SearchUsersVO1.hints.VendorId.label}" id="resId1c1" width="120"
+                       headerClass="recent-orders-header">
+              <af:outputText value="#{row.VendorId}" shortDesc="#{bindings.SearchUsersVO1.hints.VendorId.tooltip}"
+                             id="ot1" styleClass="order-no"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchUsersVO1.hints.LineId.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.SearchUsersVO1.hints.LineId.label}" id="resId1c2" width="120"
+                       headerClass="recent-orders-header">
+              <af:outputText value="#{row.LineId}" shortDesc="#{bindings.SearchUsersVO1.hints.LineId.tooltip}"
+                             id="ot2" styleClass="order-no"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchUsersVO1.hints.ContactPerson.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SearchUsersVO1.hints.ContactPerson.label}" id="resId1c3"
+                       width="150" headerClass="recent-orders-header">
+              <af:link id="l1" action="go">
+                <af:outputText value="#{row.ContactPerson}"
+                               shortDesc="#{bindings.SearchUsersVO1.hints.ContactPerson.tooltip}" id="ot3"
+                               styleClass="order-no"/>
+                <af:setActionListener to="#{pageFlowScope.lineId}" from="#{row.LineId}"/>
+                <af:setActionListener from="V" to="#{pageFlowScope.mode}"/>
+              </af:link>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchUsersVO1.hints.Email.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.SearchUsersVO1.hints.Email.label}" id="resId1c4" width="200"
+                       headerClass="recent-orders-header">
+              <af:outputText value="#{row.Email}" shortDesc="#{bindings.SearchUsersVO1.hints.Email.tooltip}" id="ot4"
+                             styleClass="order-no"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchUsersVO1.hints.Loginname.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.SearchUsersVO1.hints.Loginname.label}" id="resId1c5" width="200"
+                       headerClass="recent-orders-header">
+              <af:outputText value="#{row.Loginname}" shortDesc="#{bindings.SearchUsersVO1.hints.Loginname.tooltip}"
+                             id="ot5" styleClass="order-no"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchUsersVO1.hints.CustRole.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.SearchUsersVO1.hints.CustRole.label}" id="resId1c6" width="180"
+                       headerClass="recent-orders-header">
+              <af:outputText value="#{row.CustRole}" shortDesc="#{bindings.SearchUsersVO1.hints.CustRole.tooltip}"
+                             id="ot6" visible="false"/>
+              <af:outputText value="#{row.CustRoleDesc}"
+                             shortDesc="#{bindings.SearchUsersVO1.hints.CustRoleDesc.tooltip}" id="ot7"
+                             styleClass="order-no"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+    
+    </af:panelGroupLayout>
+  
+</jsp:root>

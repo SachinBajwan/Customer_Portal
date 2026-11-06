@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="MainWorkarea" id="d1">
+            <af:resource type="javascript" source="/resource/js/LoginBackDisabled.js"/>
+            <af:resource type="javascript" source="/resource/js/refresh.js"/>
+            <af:messages id="m2"/>
+            <af:form id="f1" usesUpload="true" visible="#{pageFlowScope.userName ne null}">
+                <af:pageTemplate viewId="/templates/MainWorkTemplate.jspx" id="pt1">
+                    <f:facet name="header">
+                        <af:panelGroupLayout id="p18" layout="horizontal" styleClass="top-navbar">
+                            <!-- Logo & Title -->
+                            <af:panelGroupLayout id="p10" layout="horizontal" styleClass="nav-left">
+                                <af:outputText value="CP" id="pt_ot1" styleClass="logo-badge"/>
+                                <af:outputText value="CUSTOMER PORTAL" id="pt_ot2" styleClass="portal-title"/>
+                            </af:panelGroupLayout>
+                            <!-- Search Bar -->
+                            <af:panelGroupLayout id="p13" layout="horizontal" styleClass="nav-center">
+                                <af:inputText id="pt_it1" placeholder="Search orders, invoices..."
+                                              styleClass="search-input"/>
+                            </af:panelGroupLayout>
+                            <!-- User Profile & Notifications -->
+                            <af:panelGroupLayout id="pt_pgl4" layout="horizontal" styleClass="nav-right">
+                                <af:icon name="warning" id="pt_i1" styleClass="notif-icon"/>
+                                <af:panelGroupLayout id="pt_pgl5" layout="horizontal" styleClass="user-profile">
+                                    <af:outputText value="Welcome : #{pageFlowScope.userName}" id="of1"
+                                                   inlineStyle="font-weight:bold;" noWrap="true"/>
+                                    <af:panelGroupLayout id="pgl8" layout="horizontal" styleClass="AFStretchWidth">
+                                        <af:toolbar id="t2">
+                                            <af:link id="l2"
+                                                     actionListener="#{pageFlowScope.MainWorkareaBean.homeButtonAL}"
+                                                     shortDesc="Home" icon="/resource/image/Home_Icon.png"
+                                                     immediate="true" rendered="false"/>
+                                            <af:menuBar id="mb1" inlineStyle="height:40px;">
+                                                <af:menu id="m1" inlineStyle="height:35px;"
+                                                         icon="/resource/image/drop_down_menu.png"
+                                                         text="#{pageFlowScope.UserName}">
+                                                    <af:commandMenuItem text="LogOut" id="cmi4"
+                                                                        inlineStyle="font-weight:bold;"
+                                                                        action="#{LoginBean.onLogout}"
+                                                                        icon="/resource/image/menu_shutdown_24.png"
+                                                                        immediate="true"/>
+                                                </af:menu>
+                                            </af:menuBar>
+                                        </af:toolbar>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl9" layout="horizontal" styleClass="AFStretchWidth"
+                                                         rendered="false">
+                                        <img src="resource/image/Company_Logo.png" height="38" alt="company Logo"
+                                             width="110"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="main">
+                        <!--<af:panelStretchLayout id="psl1">
+                            <f:facet name="start"/>
+                            <f:facet name="end"/>
+                            <f:facet name="top"/>
+                            <f:facet name="bottom"/>
+                            <f:facet name="center"/>
+                        </af:panelStretchLayout>-->
+                        <af:panelGroupLayout id="pgl2">
+                            <af:region value="#{bindings.dynamicRegion1.regionModel}" id="r1"/>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="navigate">
+                        <af:panelBox text="PanelBox1" id="pb1" showHeader="never" showDisclosure="false">
+                            <f:facet name="toolbar"/>
+                           <af:panelGroupLayout id="pt_menu_list" layout="vertical" styleClass="sidebar-menu">
+                                <af:commandLink text="Dashboard" id="pt_cl1" styleClass="sidebar-link active"
+                                                actionListener="#{pageFlowScope.MainWorkareaBean.documentOpenAL}"
+                                                immediate="true" partialSubmit="true">
+                                    <af:clientAttribute name="TaskFlowId" value="CEP0000000006"/>
+                                    <af:clientAttribute name="TaskFlowName" value="Dashboard"/>
+                                    <af:clientAttribute name="TaskFlowSource"
+                                                        value="/WEB-INF/bspl/dashboard/ui/flow/DashboardTF.xml#DashboardTF"/>
+                                    <af:clientAttribute name="FileType" value="FORM"/>
+                                </af:commandLink>
+                                <af:commandLink text="Notifications" id="pt_cl3" styleClass="sidebar-link"
+                                                actionListener="#{pageFlowScope.MainWorkareaBean.documentOpenAL}"
+                                                immediate="true" partialSubmit="true">
+                                    <af:clientAttribute name="TaskFlowId" value="CEP0000000003"/>
+                                    <af:clientAttribute name="TaskFlowName" value="Notifications"/>
+                                    <af:clientAttribute name="TaskFlowSource"
+                                                        value="/WEB-INF/bspl/notifications/ui/flow/NotificationSalesTF.xml#NotificationSalesTF"/>
+                                    <af:clientAttribute name="FileType" value="FORM"/>
+                                </af:commandLink>
+                                <af:commandLink text="Self-Service" id="pt_cl4" styleClass="sidebar-link"
+                                                actionListener="#{pageFlowScope.MainWorkareaBean.documentOpenAL}"
+                                                immediate="true" partialSubmit="true">
+                                    <af:clientAttribute name="TaskFlowId" value="CEP0000000004"/>
+                                    <af:clientAttribute name="TaskFlowName" value="SelfService"/>
+                                    <af:clientAttribute name="TaskFlowSource"
+                                                        value="/WEB-INF/bspl/self/ui/flow/SelfServiceTF.xml#SelfServiceTF"/>
+                                    <af:clientAttribute name="FileType" value="FORM"/>
+                                </af:commandLink>
+                                <af:commandLink text="Documents" id="pt_cl5" styleClass="sidebar-link"
+                                                actionListener="#{pageFlowScope.MainWorkareaBean.documentOpenAL}"
+                                                immediate="true" partialSubmit="true">
+                                    <af:clientAttribute name="TaskFlowId" value="CEP0000000009"/>
+                                    <af:clientAttribute name="TaskFlowName" value="Documents"/>
+                                    <af:clientAttribute name="TaskFlowSource"
+                                                        value="/WEB-INF/bspl/documents/ui/flow/DocumentsTF.xml#DocumentsTF"/>
+                                    <af:clientAttribute name="FileType" value="FORM"/>
+                                </af:commandLink>
+                                <af:commandLink text="Order Generate" id="pt_cl6" styleClass="sidebar-link"
+                                                actionListener="#{pageFlowScope.MainWorkareaBean.documentOpenAL}"
+                                                immediate="true" partialSubmit="true">
+                                    <af:clientAttribute name="TaskFlowId" value="CEP0000000005"/>
+                                    <af:clientAttribute name="TaskFlowName" value="OrderGenerate"/>
+                                    <af:clientAttribute name="TaskFlowSource"
+                                                        value="/WEB-INF/bspl/orders/ui/flow/SearchOrderTF.xml#SearchOrderTF"/>
+                                    <af:clientAttribute name="FileType" value="FORM"/>
+                                </af:commandLink>
+                                <af:commandLink text="Order Tracking" id="pt_cl2" styleClass="sidebar-link"
+                                                actionListener="#{pageFlowScope.MainWorkareaBean.documentOpenAL}"
+                                                immediate="true" partialSubmit="true">
+                                    <af:clientAttribute name="TaskFlowId" value="CEP0000000008"/>
+                                    <af:clientAttribute name="TaskFlowName" value="OrderTrack"/>
+                                    <af:clientAttribute name="TaskFlowSource"
+                                                        value="/WEB-INF/bspl/track/ui/flow/OrderTrackingTF.xml#OrderTrackingTF"/>
+                                    <af:clientAttribute name="FileType" value="FORM"/>
+                                </af:commandLink>                                
+                                <af:commandLink text="Reorder" id="pt_cl8" styleClass="sidebar-link" rendered="false"/>
+                                <af:commandLink text="Reports" id="pt_cl9" styleClass="sidebar-link"
+                                                actionListener="#{pageFlowScope.MainWorkareaBean.documentOpenAL}"
+                                                immediate="true" partialSubmit="true">
+                                    <af:clientAttribute name="TaskFlowId" value="CEP0000000010"/>
+                                    <af:clientAttribute name="TaskFlowName" value="Reports"/>
+                                    <af:clientAttribute name="TaskFlowSource"
+                                                        value="/WEB-INF/bspl/reports/ui/flow/ReportsTF.xml#ReportsTF"/>
+                                    <af:clientAttribute name="FileType" value="FORM"/>
+                                </af:commandLink>
+                                <af:commandLink text="Privacy Center" id="pt_cl10" styleClass="sidebar-link"
+                                                rendered="false"/>
+                                <af:commandLink text="Logout" id="pt_cl11" styleClass="sidebar-link"
+                                                action="#{LoginBean.onLogout}"/>
+                            </af:panelGroupLayout>
+                            <!--<af:tree value="#{bindings.FileMasterErpVVO1.treeModel}" var="node"
+                                     selectionListener="#{bindings.FileMasterErpVVO1.treeModel.makeCurrent}"
+                                     rowSelection="single" id="t1">
+                                <f:facet name="nodeStamp">
+                                    <af:link id="l3" actionListener="#{pageFlowScope.MainWorkareaBean.documentOpenAL}"
+                                             text="#{node.FileSname}" inlineStyle="font-size: 14px;" immediate="true">
+                                               <af:clientAttribute name="TaskFlowId" value="#{node.FileId}"/>
+                                        <af:clientAttribute name="TaskFlowName" value="#{node.FileSname}"/>
+                                        <af:clientAttribute name="TaskFlowSource" value="#{node.FlowPath}"/>
+                                        <af:clientAttribute name="FileType" value="#{node.FileType}"/>
+                                    </af:link>
+                                </f:facet>
+                            </af:tree>-->
+                        </af:panelBox>
+                    </f:facet>
+                </af:pageTemplate>
+                <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="immediate"
+                          binding="#{pageFlowScope.MainWorkareaBean.bindDocCheckPopup}">
+                    <af:dialog id="d2" type="none" closeIconVisible="false" title="Warning">
+                        <f:facet name="buttonBar">
+                            <af:toolbar id="t3">
+                                <af:button text="Yes" id="b1"
+                                           actionListener="#{pageFlowScope.MainWorkareaBean.yesConfirmBtnAL}"
+                                           immediate="true"/>
+                                <af:button text="No" id="b2"
+                                           actionListener="#{pageFlowScope.MainWorkareaBean.noConfirmBtnAL}"
+                                           immediate="true"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <af:outputFormatted id="of3" inlineStyle="font-weight:bold; font-size:13px; color:Red;"
+                                            value="Do you want to close previous form?"/>
+                    </af:dialog>
+                </af:popup>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+ 
+
+ <af:panelGroupLayout id="root" layout="vertical" styleClass="contact-step">
+          
+            <!--- FORM -->
+            <af:panelHeader text="Document Upload &amp; Management" id="ph1" styleClass="doc-page-header">
+                <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth">
+                    <af:spacer width="0" height="10" id="s1"/>
+                    <af:outputText value="Upload KYC, statutory and order-related documents securely" id="otSub"
+                                   styleClass="doc-page-subtext"/>
+                    <!-- 1. Drag and Drop Box -->
+                    <!-- 2. Document Upload Inputs -->
+                    <af:spacer height="20" id="s2"/>
+                    <!-- Search & Filter Controls -->
+                    <!-- 3. Documents Table -->
+                    <af:outputFormatted value="Atleast 3 Documents are must of size less than 10 MB" id="of3"
+                                        styleClass="warning-text-orange" visible="false"/>
+                <af:inputText value="#{bindings.VendorId.inputValue}" label="#{bindings.VendorId.hints.label}"
+                              required="#{bindings.VendorId.hints.mandatory}"
+                              columns="#{bindings.VendorId.hints.displayWidth}"
+                              maximumLength="#{bindings.VendorId.hints.precision}"
+                              shortDesc="#{bindings.VendorId.hints.tooltip}" id="it6" visible="false">
+                    <f:validator binding="#{bindings.VendorId.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.VendorId.format}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.GstRegNo.inputValue}" label="#{bindings.GstRegNo.hints.label}"
+                              required="#{bindings.GstRegNo.hints.mandatory}"
+                              columns="#{bindings.GstRegNo.hints.displayWidth}"
+                              maximumLength="#{bindings.GstRegNo.hints.precision}"
+                              shortDesc="#{bindings.GstRegNo.hints.tooltip}" id="it7" visible="false">
+                    <f:validator binding="#{bindings.GstRegNo.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.PanNo.inputValue}" label="#{bindings.PanNo.hints.label}"
+                              required="#{bindings.PanNo.hints.mandatory}"
+                              columns="#{bindings.PanNo.hints.displayWidth}"
+                              maximumLength="#{bindings.PanNo.hints.precision}"
+                              shortDesc="#{bindings.PanNo.hints.tooltip}" id="it8" visible="false">
+                    <f:validator binding="#{bindings.PanNo.validator}"/>
+                </af:inputText>
+                <af:spacer height="10" id="s5"/>
+                    <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="kyc-document-container">
+                    <af:table value="#{bindings.PortalDocAttachRefDtlVO2.collectionModel}" var="row"
+                              rows="#{bindings.PortalDocAttachRefDtlVO2.rangeSize}"
+                              emptyText="#{bindings.PortalDocAttachRefDtlVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.PortalDocAttachRefDtlVO2.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.PortalDocAttachRefDtlVO2.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.PortalDocAttachRefDtlVO2.rangeSize}" id="t2"
+                              styleClass="recent-orders-table">
+                        <af:column headerText="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocType.label}" id="c11"
+                                   width="150" headerClass="recent-orders-header">
+                            <af:inputText value="#{row.bindings.RefDocType.inputValue}"
+                                          label="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocType.label}"
+                                          required="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocType.mandatory}"
+                                          columns="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocType.displayWidth}"
+                                          maximumLength="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocType.precision}"
+                                          shortDesc="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocType.tooltip}"
+                                          id="it9" readOnly="true">
+                                <f:validator binding="#{row.bindings.RefDocType.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column id="c32" align="center" width="80" headerClass="recent-orders-header">
+                            <af:button text="Upload" id="b10" styleClass="kyc-upload-button">
+                                <af:showPopupBehavior popupId="::p1"/>
+                            </af:button>
+                        </af:column>
+                        <af:column headerText="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocNo.label}" id="c12"
+                                   width="150" headerClass="recent-orders-header">
+                            <af:inputText value="#{row.bindings.RefDocNo.inputValue}"
+                                          label="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocNo.label}"
+                                          required="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocNo.mandatory}"
+                                          columns="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocNo.displayWidth}"
+                                          maximumLength="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocNo.precision}"
+                                          shortDesc="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocNo.tooltip}"
+                                          id="it10" readOnly="#{row.bindings.RefDocType.inputValue != 'AADHAR CARD'}"
+                                          autoSubmit="true">
+                                <f:validator binding="#{row.bindings.RefDocNo.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.PortalDocAttachRefDtlVO2.hints.Path.label}" id="c13"
+                                   headerClass="recent-orders-header">
+                            <af:inputText value="#{row.bindings.Path.inputValue}"
+                                          label="#{bindings.PortalDocAttachRefDtlVO2.hints.Path.label}"
+                                          required="#{bindings.PortalDocAttachRefDtlVO2.hints.Path.mandatory}"
+                                          columns="#{bindings.PortalDocAttachRefDtlVO2.hints.Path.displayWidth}"
+                                          maximumLength="#{bindings.PortalDocAttachRefDtlVO2.hints.Path.precision}"
+                                          shortDesc="#{bindings.PortalDocAttachRefDtlVO2.hints.Path.tooltip}" id="it11"
+                                          readOnly="true">
+                                <f:validator binding="#{row.bindings.Path.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.PortalDocAttachRefDtlVO2.hints.DocFileName.label}" id="c14"
+                                   width="180" headerClass="recent-orders-header">
+                            <af:inputText value="#{row.bindings.DocFileName.inputValue}"
+                                          label="#{bindings.PortalDocAttachRefDtlVO2.hints.DocFileName.label}"
+                                          required="#{bindings.PortalDocAttachRefDtlVO2.hints.DocFileName.mandatory}"
+                                          columns="#{bindings.PortalDocAttachRefDtlVO2.hints.DocFileName.displayWidth}"
+                                          maximumLength="#{bindings.PortalDocAttachRefDtlVO2.hints.DocFileName.precision}"
+                                          shortDesc="#{bindings.PortalDocAttachRefDtlVO2.hints.DocFileName.tooltip}"
+                                          id="it12" readOnly="true">
+                                <f:validator binding="#{row.bindings.DocFileName.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.PortalDocAttachRefDtlVO2.hints.Remarks.label}" id="c15"
+                                   width="300" headerClass="recent-orders-header">
+                            <af:inputText value="#{row.bindings.Remarks.inputValue}"
+                                          label="#{bindings.PortalDocAttachRefDtlVO2.hints.Remarks.label}"
+                                          required="#{bindings.PortalDocAttachRefDtlVO2.hints.Remarks.mandatory}"
+                                          columns="#{bindings.PortalDocAttachRefDtlVO2.hints.Remarks.displayWidth}"
+                                          maximumLength="#{bindings.PortalDocAttachRefDtlVO2.hints.Remarks.precision}"
+                                          shortDesc="#{bindings.PortalDocAttachRefDtlVO2.hints.Remarks.tooltip}"
+                                          id="it13" autoSubmit="true">
+                                <f:validator binding="#{row.bindings.Remarks.validator}"/>
+                            </af:inputText>
+                        </af:column>
+                        <af:column id="c9" headerText="Status" width="95" align="start"
+                                   headerClass="recent-orders-header">
+                            <af:panelGroupLayout id="pglStatus" layout="horizontal">
+                                <af:outputText value="Verified" id="otStatus" styleClass="status-badge"
+                                               inlineStyle="background-color:yellow;color:#327747;"/>
+                            </af:panelGroupLayout>
+                        </af:column>
+                        <af:column id="c6" align="center" width="60" rendered="false">
+                            <af:button text="View" id="b1"/>
+                        </af:column>
+                        <af:column id="c7" align="center" width="80" headerClass="recent-orders-header">
+                            <af:button text="Download" id="b2" disabled="#{row.bindings.Path.inputValue==null}">
+                                <af:fileDownloadActionListener filename="#{row.bindings.DocFileName.inputValue}"
+                                                               method="#{pageFlowScope.DocsUplaodBean.downloadAction}"/>
+                            </af:button>
+                        </af:column>
+                    </af:table>
+                    </af:panelGroupLayout>
+                    <!-- 4. Footer Notes -->
+                <af:panelGroupLayout id="buttons" layout="horizontal" styleClass="button-row" valign="top">
+                    <af:outputText value="(i) Aadhaar: Upload masked copy only (first 8 digits hidden). Full Aadhaar numbers are auto-masked."
+                                   id="otWarn" styleClass="warning-text-orange"/>
+                    <af:panelGroupLayout layout="horizontal" id="rightButtons">
+                        <af:commandButton text="Submit" id="submitButton" styleClass="draft-button" immediate="true"
+                                          actionListener="#{pageFlowScope.DocsUplaodBean.saveDocs}"/>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+                <af:spacer height="10" id="s6"/>
+                                   
+                                   
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                        <af:dialog id="d1">
+                            <f:facet name="buttonBar"/>
+                            <!-- 1. Drag and Drop Box -->
+                            <af:panelGroupLayout id="pglDrop" layout="vertical" styleClass="drop-zone">
+                                <af:outputText value="↑" id="otIcon" styleClass="drop-zone-icon"/>
+                                <af:panelGroupLayout id="pglText" layout="horizontal" halign="center">
+                                    <af:inputFile id="if1" autoSubmit="true"
+                                                  valueChangeListener="#{pageFlowScope.DocsUplaodBean.uploadDocs}"
+                                                  binding="#{pageFlowScope.DocsUplaodBean.bindInputFile}"/>
+                                </af:panelGroupLayout>
+                                <af:outputText value="Allowed: PDF, JPG, PNG, XLSX | Max 10 MB per file | Files are virus-scanned &amp; encrypted"
+                                               id="otDropInfo" styleClass="drop-zone-info"/>
+                            </af:panelGroupLayout>
+                        </af:dialog>
+                    </af:popup>
+                </af:panelGroupLayout>
+            </af:panelHeader>
+            <!-- BUTTONS -->
+             <!-- BUTTONS -->
+    </af:panelGroupLayout>
+        
+</jsp:root>

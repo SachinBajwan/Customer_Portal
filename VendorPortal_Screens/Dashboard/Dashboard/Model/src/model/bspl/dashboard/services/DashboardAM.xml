@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DashboardAM"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true"
+  ComponentClass="model.bspl.dashboard.services.DashboardAMImpl"
+  ComponentInterface="model.bspl.dashboard.services.common.DashboardAM">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewUsage
+    Name="CustPendingSummaryVO1"
+    ViewObjectName="model.bspl.dashboard.views.CustPendingSummaryVO"/>
+  <ViewUsage
+    Name="RecentOrdersVO1"
+    ViewObjectName="model.bspl.dashboard.views.RecentOrdersVO"/>
+  <ViewUsage
+    Name="UserSessionVO1"
+    ViewObjectName="model.bspl.dashboard.views.UserSessionVO"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="getCustomerCode"
+      MethodName="getCustomerCode">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="vendorId"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="callOrdersProcedure"
+      MethodName="callOrdersProcedure">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getCustomerName"
+      MethodName="getCustomerName">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="vendorId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</AppModule>

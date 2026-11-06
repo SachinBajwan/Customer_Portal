@@ -1,0 +1,12 @@
+//Groovy Scripts for model.bspl.dashboard.views.UserSessionVO
+
+package model.bspl.dashboard.views
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="userId")
+def userId_VariableScript_Variable()
+{
+adf.context.expressionEvaluator.evaluate('#{pageFlowScope.userId}')
+}
+

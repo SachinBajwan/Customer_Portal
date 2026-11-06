@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  
+   <af:panelGroupLayout id="pglMain"
+                         layout="vertical"
+                         styleClass="self-service-page">
+
+        <!-- ================= HEADER ================= -->
+
+        <af:panelGroupLayout id="pglHeader"
+                             layout="vertical"
+                             styleClass="self-service-header">
+
+            <af:outputText id="otTitle"
+                           value="Self-Service Tools"
+                           styleClass="self-service-title"/>
+
+            <af:outputText id="otSubtitle"
+                           value="Manage your account, users, addresses and support requests"
+                           styleClass="self-service-subtitle"/>
+
+        </af:panelGroupLayout>
+        
+        
+        <!-- ================= TOOL GRID ================= -->
+
+        <af:panelGroupLayout id="pglTools"
+                             layout="vertical"
+                             styleClass="tools-container">
+
+
+            <!-- ================= ROW 1 ================= -->
+
+            <af:panelGroupLayout id="pglRow1"
+                                 layout="horizontal"
+                                 styleClass="tool-row">
+
+
+                <!-- My Profile -->
+
+                <af:panelGroupLayout id="pglProfile"
+                                     layout="horizontal"
+                                     styleClass="tool-card">
+
+                    <af:panelGroupLayout id="pglProfileIcon"
+                                         layout="vertical"
+                                         styleClass="tool-icon-box">
+
+                        <af:outputText id="otProfileIcon"
+                                       value="☰"
+                                       styleClass="tool-icon"/>
+
+                    </af:panelGroupLayout>
+
+                    <af:panelGroupLayout id="pglProfileText"
+                                         layout="vertical"
+                                         styleClass="tool-content">
+
+                        <af:commandLink id="lnkProfile"
+                                        text="My Profile"
+                                        styleClass="tool-title" action="#{pageFlowScope.selfServiceBean.openProfile}"/>
+
+                        <af:outputText id="otProfileDesc"
+                                       value="View / update details"
+                                       styleClass="tool-description"/>
+
+                    </af:panelGroupLayout>
+
+                </af:panelGroupLayout>
+
+
+                <!-- Change Password -->
+
+                <af:panelGroupLayout id="pglPassword"
+                                     layout="horizontal"
+                                     styleClass="tool-card">
+
+                    <af:panelGroupLayout id="pglPasswordIcon"
+                                         layout="vertical"
+                                         styleClass="tool-icon-box">
+
+                        <af:outputText id="otPasswordIcon"
+                                       value="☰"
+                                       styleClass="tool-icon"/>
+
+                    </af:panelGroupLayout>
+
+                    <af:panelGroupLayout id="pglPasswordText"
+                                         layout="vertical"
+                                         styleClass="tool-content">
+
+                        <af:commandLink id="lnkPassword"
+                                        text="Change Password"
+                                        action="#{pageFlowScope.selfServiceBean.changePassword}"
+                                        styleClass="tool-title"/>
+
+                        <af:outputText id="otPasswordDesc"
+                                       value="Update login password"
+                                       styleClass="tool-description"/>
+
+                    </af:panelGroupLayout>
+
+                </af:panelGroupLayout>
+
+
+                <!-- Manage Users -->
+
+                <af:panelGroupLayout id="pglUsers"
+                                     layout="horizontal"
+                                     styleClass="tool-card">
+
+                    <af:panelGroupLayout id="pglUsersIcon"
+                                         layout="vertical"
+                                         styleClass="tool-icon-box">
+
+                        <af:outputText id="otUsersIcon"
+                                       value="☰"
+                                       styleClass="tool-icon"/>
+
+                    </af:panelGroupLayout>
+
+                    <af:panelGroupLayout id="pglUsersText"
+                                         layout="vertical"
+                                         styleClass="tool-content">
+
+                        <af:commandLink id="lnkUsers"
+                                        text="Manage Users"
+                                        action="#{pageFlowScope.selfServiceBean.manageUsers}"
+                                        styleClass="tool-title"/>
+
+                        <af:outputText id="otUsersDesc"
+                                       value="Add / remove sub-users"
+                                       styleClass="tool-description"/>
+
+                    </af:panelGroupLayout>
+
+                </af:panelGroupLayout>
+
+
+                <!-- Delivery Addresses -->
+
+                <af:panelGroupLayout id="pglAddress"
+                                     layout="horizontal"
+                                     styleClass="tool-card">
+
+                    <af:panelGroupLayout id="pglAddressIcon"
+                                         layout="vertical"
+                                         styleClass="tool-icon-box">
+
+                        <af:outputText id="otAddressIcon"
+                                       value="☰"
+                                       styleClass="tool-icon"/>
+
+                    </af:panelGroupLayout>
+
+                    <af:panelGroupLayout id="pglAddressText"
+                                         layout="vertical"
+                                         styleClass="tool-content">
+
+                        <af:commandLink id="lnkAddress"
+                                        text="Delivery Addresses"
+                                        action="#{pageFlowScope.selfServiceBean.deliveryAddresses}"
+                                        styleClass="tool-title"/>
+
+                        <af:outputText id="otAddressDesc"
+                                       value="Ship-to locations"
+                                       styleClass="tool-description"/>
+
+                    </af:panelGroupLayout>
+
+
+                    <!-- Notification Badge -->
+
+                </af:panelGroupLayout>
+
+            </af:panelGroupLayout>
+
+
+            <!-- ================= ROW 2 ================= -->
+
+            <af:panelGroupLayout id="pglRow2"
+                                 layout="horizontal"
+                                 styleClass="tool-row">
+
+
+                <!-- Account Statement -->
+
+                <af:panelGroupLayout id="pglStatement"
+                                     layout="horizontal"
+                                     styleClass="tool-card">
+
+                    <af:panelGroupLayout id="pglStatementIcon"
+                                         layout="vertical"
+                                         styleClass="tool-icon-box">
+
+                        <af:outputText id="otStatementIcon"
+                                       value="☰"
+                                       styleClass="tool-icon"/>
+
+                    </af:panelGroupLayout>
+
+                    <af:panelGroupLayout id="pglStatementText"
+                                         layout="vertical"
+                                         styleClass="tool-content">
+
+                        <af:commandLink id="lnkStatement"
+                                        text="Account Statement"
+                                        action="#{pageFlowScope.selfServiceBean.accountStatement}"
+                                        styleClass="tool-title"/>
+
+                        <af:outputText id="otStatementDesc"
+                                       value="Ledger &amp; outstanding"
+                                       styleClass="tool-description"/>
+
+                    </af:panelGroupLayout>
+
+                </af:panelGroupLayout>
+
+
+                <!-- Raise a Ticket -->
+
+                <af:panelGroupLayout id="pglTicket"
+                                     layout="horizontal"
+                                     styleClass="tool-card">
+
+                    <af:panelGroupLayout id="pglTicketIcon"
+                                         layout="vertical"
+                                         styleClass="tool-icon-box">
+
+                        <af:outputText id="otTicketIcon"
+                                       value="☰"
+                                       styleClass="tool-icon"/>
+
+                    </af:panelGroupLayout>
+
+                    <af:panelGroupLayout id="pglTicketText"
+                                         layout="vertical"
+                                         styleClass="tool-content">
+
+                        <af:commandLink id="lnkTicket"
+                                        text="Raise a Ticket"
+                                        action="#{pageFlowScope.selfServiceBean.raiseTicket}"
+                                        styleClass="tool-title"/>
+
+                        <af:outputText id="otTicketDesc"
+                                       value="Complaints &amp; queries"
+                                       styleClass="tool-description"/>
+
+                    </af:panelGroupLayout>
+
+                </af:panelGroupLayout>
+
+
+                <!-- FAQs & Help -->
+
+                <af:panelGroupLayout id="pglFaq"
+                                     layout="horizontal"
+                                     styleClass="tool-card">
+
+                    <af:panelGroupLayout id="pglFaqIcon"
+                                         layout="vertical"
+                                         styleClass="tool-icon-box">
+
+                        <af:outputText id="otFaqIcon"
+                                       value="☰"
+                                       styleClass="tool-icon"/>
+
+                    </af:panelGroupLayout>
+
+                    <af:panelGroupLayout id="pglFaqText"
+                                         layout="vertical"
+                                         styleClass="tool-content">
+
+                        <af:commandLink id="lnkFaq"
+                                        text="FAQs &amp; Help"
+                                        action="#{pageFlowScope.selfServiceBean.faqHelp}"
+                                        styleClass="tool-title"/>
+
+                        <af:outputText id="otFaqDesc"
+                                       value="Guides and videos"
+                                       styleClass="tool-description"/>
+
+                    </af:panelGroupLayout>
+
+                </af:panelGroupLayout>
+
+
+                <!-- Active Sessions -->
+
+                <af:panelGroupLayout id="pglSessions"
+                                     layout="horizontal"
+                                     styleClass="tool-card">
+
+                    <af:panelGroupLayout id="pglSessionsIcon"
+                                         layout="vertical"
+                                         styleClass="tool-icon-box">
+
+                        <af:outputText id="otSessionsIcon"
+                                       value="☰"
+                                       styleClass="tool-icon"/>
+
+                    </af:panelGroupLayout>
+
+                    <af:panelGroupLayout id="pglSessionsText"
+                                         layout="vertical"
+                                         styleClass="tool-content">
+
+                        <af:commandLink id="lnkSessions"
+                                        text="Active Sessions"
+                                        action="#{pageFlowScope.selfServiceBean.activeSessions}"
+                                        styleClass="tool-title"/>
+
+                        <af:outputText id="otSessionsDesc"
+                                       value="Devices signed in"
+                                       styleClass="tool-description"/>
+
+                    </af:panelGroupLayout>
+
+                </af:panelGroupLayout>
+
+            </af:panelGroupLayout>
+
+        </af:panelGroupLayout>
+        
+        </af:panelGroupLayout>
+  
+  
+</jsp:root>

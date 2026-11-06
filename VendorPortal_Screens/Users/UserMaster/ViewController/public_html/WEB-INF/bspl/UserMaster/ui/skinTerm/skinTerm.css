@@ -1,0 +1,146 @@
+@charset "UTF-8";
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+@namespace af "http://xmlns.oracle.com/adf/faces/rich";
+@namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+af|button::text[theme="medium"] {
+    background-color: transparent; 
+}
+
+.AFPanelHeader {
+  background-color: #e0f0ff;
+  border: 1px solid #99c;
+  font-weight: bold;
+  font-size: 16px;
+  color: #003366;
+  padding: 10px;
+}
+
+.myButtonStyle {
+  background-color: #6770d2;  /* Green background */
+  color: #336699;               /* White text */
+  padding: 1px 2px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+af|table::data-row af|column::data-cell {
+        background-color: #FFFFFF; /* Color for non-banded rows */
+    }
+
+af|table::data-row af|column::banded-data-cell {
+        background-color: #F0F0F0; /* Color for banded (alternate) rows */
+    }
+    
+/* Table base style */
+.AFTable { 
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+/* Header cells */
+.AFTable .AFHeaderCell {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  font-size:medium;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 5px solid #3973ac;
+}
+
+/* Odd rows */
+.AFTable .AFOddRow {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  color: #333;
+  padding: 2px;
+  text-align: center;
+  border-bottom: 2px solid #3973ac;
+}
+
+/* Even rows */
+.AFTable .AFEvenRow {
+  background-color: #ffffff;
+}
+
+/* Hover effect */
+.AFTable .AFRow:hover {
+  background-color: #e6f2ff;
+}
+
+.myLabelStyle {
+        color: #2d5986;
+        font-weight: bold;
+        margin-right: 80px;
+        font-size: x-large;
+    }
+    
+
+af|panelBox::content {
+  background-color: #fafafa;
+  padding: 10px;
+}
+
+af|panelBox::header {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/*af|inputText {
+  font-size: 14px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+
+af|inputText::label {
+  color: black;
+  font-weight: bold;
+}*/
+
+af|outputText {
+  font-family: "Segoe UI", sans-serif;
+  color: red;
+  font-size: 14px;
+}
+
+.myOutputTextStyle {
+  color: #2c3e50;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+af|inputDate {
+  font-size: 14px;
+  color: #333;
+}
+
+af|inputDate::content {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 1px;
+}
+
+af|inputDate::label {
+  color: #666;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+af|inputFile {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  padding: 2px;
+}
+
+af|inputFile::content {
+  border: 2px solid #ccc;
+  background-color: #fff;
+}

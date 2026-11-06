@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UserMostVisitVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="terms.erp.mainapp.model.view.UserMostVisitVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="PUserId"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"
+      CodeSourceName="UserMostVisitVO"/>
+  </Variable>
+  <Variable
+    Name="PUnit"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"
+      trustMode="trusted"
+      CodeSourceName="UserMostVisitVO"/>
+  </Variable>
+  <SQLQuery><![CDATA[select * from(SELECT UserMostVisitEO.TCODE, 
+       UserMostVisitEO.FLOW_PATH, 
+       UserMostVisitEO.FILE_ID, 
+       UserMostVisitEO.FILE_NAME, 
+       UserMostVisitEO.VISITED_TIME, 
+       UserMostVisitEO.USER_ID, 
+       UserMostVisitEO.VISIT_COUNT
+FROM  USER_MOST_VISIT UserMostVisitEO
+where UserMostVisitEO.FILE_ID in (select distinct file_id from User_Priv where user_id=:PUserId and unit=:PUnit)
+order by visit_count desc)]]></SQLQuery>
+  <EntityUsage
+    Name="UserMostVisitEO"
+    Entity="terms.erp.mainapp.model.entities.UserMostVisitEO"/>
+  <ViewAttribute
+    Name="Tcode"
+    PrecisionRule="true"
+    EntityAttrName="Tcode"
+    EntityUsage="UserMostVisitEO"
+    AliasName="TCODE"/>
+  <ViewAttribute
+    Name="FlowPath"
+    PrecisionRule="true"
+    EntityAttrName="FlowPath"
+    EntityUsage="UserMostVisitEO"
+    AliasName="FLOW_PATH"/>
+  <ViewAttribute
+    Name="FileId"
+    PrecisionRule="true"
+    EntityAttrName="FileId"
+    EntityUsage="UserMostVisitEO"
+    AliasName="FILE_ID"/>
+  <ViewAttribute
+    Name="FileName"
+    PrecisionRule="true"
+    EntityAttrName="FileName"
+    EntityUsage="UserMostVisitEO"
+    AliasName="FILE_NAME"/>
+  <ViewAttribute
+    Name="VisitedTime"
+    PrecisionRule="true"
+    EntityAttrName="VisitedTime"
+    EntityUsage="UserMostVisitEO"
+    AliasName="VISITED_TIME"/>
+  <ViewAttribute
+    Name="UserId"
+    PrecisionRule="true"
+    EntityAttrName="UserId"
+    EntityUsage="UserMostVisitEO"
+    AliasName="USER_ID"/>
+  <ViewAttribute
+    Name="VisitCount"
+    PrecisionRule="true"
+    EntityAttrName="VisitCount"
+    EntityUsage="UserMostVisitEO"
+    AliasName="VISIT_COUNT"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="terms.erp.mainapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

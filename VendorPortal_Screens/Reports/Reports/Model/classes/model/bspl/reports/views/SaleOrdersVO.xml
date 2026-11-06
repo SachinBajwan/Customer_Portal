@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SaleOrdersVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.bspl.reports.views.SaleOrdersVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bindCustCd"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_FROM_DATE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_TO_DATE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_CUST_CD"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_ACK_NUMBER"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT A.ACK_NUMBER
+           ,
+       A.AMEND_ACK_NUMBER
+           ,
+       A.ACK_DATE
+           ,
+       A.CUST_PO_NUMBER
+           ,
+       A.CUST_PO_DATE
+           ,
+       A.CUST_AMEND_NUMBER
+           ,
+       A.DESTINATION
+           ,
+       A.SHIP_MODE
+           ,
+       A.VALID_UPTO
+           ,
+       A.CURRANCY_CODE
+           ,
+       DECODE (A.STATUS, 'A', 'ACTIVE')
+           STATUS,
+       A.CUST_CODE
+           ,
+       DECODE (A.CUST_PLANT_CODE, 'HO', 'HEAD OFFICE')
+         CUST_PLANT_CODE  ,
+       D.NAME
+           ,
+       A.CUST_CITY_CODE
+           ,
+       DECODE (D.CUST_TYPE,  'OE', 'OPEN MARKET',  'EXP', 'EXPORT')
+           CUST_TYPE,
+       A.SALES_TAX_CODE
+           ,
+       DECODE (A.SALES_TAX_TYPE,  'V', 'VAT',  'C', 'CESS')
+        SALES_TAX_TYPE   ,
+       C.TAX_RATE
+           ,
+       A.UNIT_CODE
+           ,
+       DECODE (A.PO_TYPE,
+               'PO', 'PURCHASE ORDER',
+               'JO', 'JOB ORDER',
+               'RM', 'RAW MATERIAL')
+           PO_TYPE,
+       DECODE (A.MARKET_TYPE,  'DOM', 'DOMESTIC',  'EXP', 'EXPORT')
+           MKT_TYPE,
+       B.DISCOUNT
+           ,
+       B.PRICE
+           ,
+       B.QUANTITY
+           ,
+       B.HSN_NO,
+       A.GST_CODE,
+       A.SHIP_CUST_CD,
+       B.SGST,
+       B.CGST,
+       ROUND (B.IGST, 0)
+           IGST,
+       B.SGST_RATE,
+       B.CGST_RATE,
+       B.IGST_RATE,
+       B.UOM,
+       B.PACK_UOM,
+       B.PACK_QTY,
+       B.CUST_MRP_PRICE
+           ,
+       A.APPROVED_BY,
+       INITCAP (em.EMP_FIRST_NAME || ' ' || em.EMP_LAST_NAME)
+           APPROVED_BY_NAME,
+       A.CREATED_BY,
+       INITCAP (em1.EMP_FIRST_NAME || ' ' || em1.EMP_LAST_NAME)
+           CREATED_BY_NAME,
+       A.SHIP_CUST_CD
+           SHIP_TO,
+       vm.NAME
+           SHIP_TO_NAME,
+       da.DA_NO
+           DESPATCH_ADVICE_NO,
+       IM.ITEM_DESC
+           ITEM_DESCRIPTION,
+       B.BRAND_CODE,
+       bm.BRAND_DESCRIPTION
+           BRAND_DESCRIPTION,
+       B.PROD_CODE
+           ITEM_CODE,
+       b.CUST_CODE
+           BILL_TO,
+       vm1.NAME
+           BILL_TO_NAME
+  FROM PURCHASE_ORDER_HEADER_SYN  A
+       LEFT JOIN PURCHASE_ORDER_DETAIL_SYN B
+           ON A.ACK_NUMBER = B.PO_HEAD_ACK_NUMBER
+       LEFT JOIN SALES_TAX_SYN C
+           ON A.SALES_TAX_CODE = C.STAX_CD AND A.SALES_TAX_TYPE = C.STAX_TYPE
+       LEFT JOIN CUSTOMER_SYN D
+           ON A.UNIT_CODE = D.UNIT_CODE AND B.CUST_CODE = D.CODE
+       LEFT JOIN UNIT_SYN U ON A.UNIT_CODE = U.CODE
+       LEFT JOIN (  SELECT DA_NO, PO_ACK_NUMBER, COUNT (DA_NO)
+                      FROM DESPATCH_ADVICE_DETAIL_SYN
+                     WHERE status <> 'C'
+                  GROUP BY DA_NO, PO_ACK_NUMBER) da
+           ON da.PO_ACK_NUMBER = A.ACK_NUMBER
+       LEFT JOIN ITEM_STOCK_SYN IM ON IM.ITEM_CD = B.PROD_CODE
+       LEFT JOIN VENDOR_MASTER_SYN vm ON vm.VENDOR_CODE = A.SHIP_CUST_CD
+       LEFT JOIN VENDOR_MASTER_SYN vm1 ON vm1.VENDOR_CODE = b.CUST_CODE
+       LEFT JOIN EMP_MASTER_SYN em ON em.EMP_NUMBER = A.APPROVED_BY
+       LEFT JOIN EMP_MASTER_SYN em1 ON em1.EMP_NUMBER = A.CREATED_BY
+       LEFT JOIN BRAND_MASTER_SYN bm ON bm.BRAND_CODE = B.BRAND_CODE
+       WHERE A.CUST_CODE = :P_CUST_CD
+  AND (
+        -- Scenario 1: ACK Number + Customer Code
+        (
+            :P_ACK_NUMBER IS NOT NULL
+            AND A.ACK_NUMBER = :P_ACK_NUMBER
+        )
+
+        OR
+
+        -- Scenario 2: Date Range + Customer Code
+        (
+            :P_ACK_NUMBER IS NULL
+            AND :P_FROM_DATE IS NOT NULL
+            AND :P_TO_DATE IS NOT NULL
+            AND TRUNC(A.ACK_DATE) BETWEEN
+                TO_DATE(:P_FROM_DATE, 'DD-MM-YY')
+                AND TO_DATE(:P_TO_DATE, 'DD-MM-YY')
+        )
+
+        OR
+
+        -- Scenario 3: All Parameters
+        (
+            :P_ACK_NUMBER IS NOT NULL
+            AND :P_FROM_DATE IS NOT NULL
+            AND :P_TO_DATE IS NOT NULL
+            AND A.ACK_NUMBER = :P_ACK_NUMBER
+            AND TRUNC(A.ACK_DATE) BETWEEN
+                TO_DATE(:P_FROM_DATE, 'DD-MM-YY')
+                AND TO_DATE(:P_TO_DATE, 'DD-MM-YY')
+        )
+      )]]></SQLQuery>
+  <ViewAttribute
+    Name="AckNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACK_NUMBER"
+    Expression="ACK_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AmendAckNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AMEND_ACK_NUMBER"
+    Expression="AMEND_ACK_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="AckDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Date"
+    ColumnType="DATE"
+    AliasName="ACK_DATE"
+    Expression="ACK_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CustPoNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_PO_NUMBER"
+    Expression="CUST_PO_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustPoDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CUST_PO_DATE"
+    Expression="CUST_PO_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CustAmendNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_AMEND_NUMBER"
+    Expression="CUST_AMEND_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Destination"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESTINATION"
+    Expression="DESTINATION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipMode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_MODE"
+    Expression="SHIP_MODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ValidUpto"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VALID_UPTO"
+    Expression="VALID_UPTO"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CurrancyCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CURRANCY_CODE"
+    Expression="CURRANCY_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Status"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS"
+    Expression="STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_CODE"
+    Expression="CUST_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustPlantCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="11"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_PLANT_CODE"
+    Expression="CUST_PLANT_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustCityCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_CITY_CODE"
+    Expression="CUST_CITY_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="11"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_TYPE"
+    Expression="CUST_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SalesTaxCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SALES_TAX_CODE"
+    Expression="SALES_TAX_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SalesTaxType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SALES_TAX_TYPE"
+    Expression="SALES_TAX_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TaxRate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Scale="3"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TAX_RATE"
+    Expression="TAX_RATE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UnitCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="UNIT_CODE"
+    Expression="UNIT_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PoType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="14"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PO_TYPE"
+    Expression="PO_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="14"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MktType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MKT_TYPE"
+    Expression="MKT_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Discount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DISCOUNT"
+    Expression="DISCOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Price"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PRICE"
+    Expression="PRICE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Quantity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="QUANTITY"
+    Expression="QUANTITY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HsnNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HSN_NO"
+    Expression="HSN_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GstCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GST_CODE"
+    Expression="GST_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipCustCd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_CUST_CD"
+    Expression="SHIP_CUST_CD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Sgst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SGST"
+    Expression="SGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Cgst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CGST"
+    Expression="CGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Igst"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="IGST"
+    Expression="IGST"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SgstRate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SGST_RATE"
+    Expression="SGST_RATE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CgstRate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CGST_RATE"
+    Expression="CGST_RATE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="IgstRate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="IGST_RATE"
+    Expression="IGST_RATE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Uom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UOM"
+    Expression="UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PackUom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PACK_UOM"
+    Expression="PACK_UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PackQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PACK_QTY"
+    Expression="PACK_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CustMrpPrice"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CUST_MRP_PRICE"
+    Expression="CUST_MRP_PRICE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ApprovedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="APPROVED_BY"
+    Expression="APPROVED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApprovedByName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="61"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="APPROVED_BY_NAME"
+    Expression="APPROVED_BY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="61"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="64"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="64"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedByName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="61"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_BY_NAME"
+    Expression="CREATED_BY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="61"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipTo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO"
+    Expression="SHIP_TO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipToName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO_NAME"
+    Expression="SHIP_TO_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DespatchAdviceNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESPATCH_ADVICE_NO"
+    Expression="DESPATCH_ADVICE_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemDescription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESCRIPTION"
+    Expression="ITEM_DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BrandCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BRAND_CODE"
+    Expression="BRAND_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BrandDescription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BRAND_DESCRIPTION"
+    Expression="BRAND_DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItemCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_CODE"
+    Expression="ITEM_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BillTo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_TO"
+    Expression="BILL_TO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BillToName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_TO_NAME"
+    Expression="BILL_TO_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="SaleOrdersVOCriteria"
+    ViewObjectName="model.bspl.reports.views.SaleOrdersVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="SaleOrdersVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CustCode"
+        ViewAttribute="CustCode"
+        Operator="="
+        Conjunction="AND"
+        Value=":bindCustCd"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.bspl.reports.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

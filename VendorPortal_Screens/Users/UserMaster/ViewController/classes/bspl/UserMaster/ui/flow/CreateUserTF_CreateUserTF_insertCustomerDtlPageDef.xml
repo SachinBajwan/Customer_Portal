@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="CreateUserTF_CreateUserTF_insertCustomerDtlPageDef" Package="bspl.UserMaster.ui.flow"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="insertCustomerDtl" RequiresUpdateModel="true" Action="invokeMethod" MethodName="insertCustomerDtl"
+                  IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"
+                  ReturnName="data.UserMasAMDataControl.methodResults.insertCustomerDtl_UserMasAMDataControl_dataProvider_insertCustomerDtl_result"/>
+  </bindings>
+</pageDefinition>

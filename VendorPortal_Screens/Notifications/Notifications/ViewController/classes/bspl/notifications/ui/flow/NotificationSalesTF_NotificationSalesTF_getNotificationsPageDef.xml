@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="NotificationSalesTF_NotificationSalesTF_getNotificationsPageDef"
+                Package="bspl.notifications.ui.flow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="getNotifications" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getNotifications"
+                  IsViewObjectMethod="false" DataControl="NotificationAMDataControl"
+                  InstanceName="data.NotificationAMDataControl.dataProvider"
+                  ReturnName="data.NotificationAMDataControl.methodResults.getNotifications_NotificationAMDataControl_dataProvider_getNotifications_result"/>
+  </bindings>
+</pageDefinition>

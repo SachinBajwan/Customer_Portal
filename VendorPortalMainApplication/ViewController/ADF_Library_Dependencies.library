@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="true" xmlns="http://xmlns.oracle.com/jdeveloper/110000jlibrarynode">
+   <classPath>
+      <entries>
+         <Item protocol="jar" path="file:/dev/null/!/"/>
+         <Item path="../../../DEPLOYMENT/Library/approverApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/ApproverMainJarContainer.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/ASNApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/AsnMainJarContainer.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/DashboardApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/DashboardContainerJar.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/DocumentApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/DocumentContainerJar.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/NotificationApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/NotificationsJarApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/OrderGenContainerJar.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/OrderGenerateApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/OrderTrackApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/OrderTrackContainerApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/ReportsApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/ReportsContainerJarApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/SelfServContainerJarApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/SelfServiceApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/userMasApp.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/UserMasMainJarContainer.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/VendorMainJarContainer.jar" jar-entry=""/>
+         <Item path="../../../DEPLOYMENT/Library/VendorProfile.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath/>
+   <locked>true</locked>
+   <name>ADF Library Dependencies</name>
+   <sourcePath/>
+</JLibraryNode>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <af:pageTemplateDef var="attrs" definition="private">
+        <af:xmlContent>
+            <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+                <description/>
+                <display-name>MainWorkTemplate</display-name>
+                <facet>
+                    <facet-name>header</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>main</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>navigate</facet-name>
+                </facet>
+            </component>
+        </af:xmlContent>
+        <af:panelGridLayout id="pt_pgl2" > <!--inlineStyle='background-color:rgb(254,238,228);'-->
+            <af:gridRow height="50px" id="pt_gr2">
+                <af:gridCell width="100%" halign="stretch" valign="stretch" id="pt_gc1">
+                    <af:facetRef facetName="header"/>
+                </af:gridCell>
+            </af:gridRow>
+            <af:gridRow height="100%" id="pt_gr1">
+                <af:gridCell width="100%" halign="stretch" valign="stretch" id="pt_gc2">
+                    <af:decorativeBox id="pt_db1" theme="dark">
+                        <f:facet name="center">
+                            <af:decorativeBox id="pt_db3" theme="default"
+                                              inlineStyle="border:6px solid #e6ffff; background-color:#f5f5f5;">
+                                <f:facet name="center">
+                                    <af:panelSplitter orientation="horizontal" splitterPosition="230" id="pt_ps1">
+                                        <f:facet name="first">
+                                            <af:facetRef facetName="navigate"/>
+                                        </f:facet>
+                                        <f:facet name="second">
+                                            <af:panelStretchLayout id="pt_db2">
+                                                <!--inlineStyle="background-color:rgb(61, 86, 134);-->
+                                                <f:facet name="center">
+                                                    <af:panelStretchLayout id="pt_pgl1" styleClass="myPanelStretch">
+                                                        <f:facet name="center">
+                                                            <af:facetRef facetName="main"/>
+                                                        </f:facet>
+                                                        <f:facet name="start"/>
+                                                        <f:facet name="end"/>
+                                                        <f:facet name="top"/>
+                                                        <f:facet name="bottom"/>
+                                                    </af:panelStretchLayout>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                        </f:facet>
+                                    </af:panelSplitter>
+                                </f:facet>
+                            </af:decorativeBox>
+                        </f:facet>
+                    </af:decorativeBox>
+                </af:gridCell>
+            </af:gridRow>
+        </af:panelGridLayout>
+    </af:pageTemplateDef>
+</jsp:root>

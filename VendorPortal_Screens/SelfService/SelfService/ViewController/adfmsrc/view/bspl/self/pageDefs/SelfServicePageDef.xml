@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SelfServicePageDef"
+                Package="view.bspl.self.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="SelfServiceTF1" taskFlowId="/WEB-INF/bspl/self/ui/flow/SelfServiceTF.xml#SelfServiceTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="vendorId" value="200007769259"/>
+        <parameter id="userRole" value="CA"/>
+        <parameter id="userId" value="290"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

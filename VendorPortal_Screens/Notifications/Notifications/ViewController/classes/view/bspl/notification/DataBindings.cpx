@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="view.bspl.notification" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/Notifications.jspx" usageId="view_bspl_notification_NotificationsPageDef"/>
+    <page path="/fragments/NotificationScreen.jsff" usageId="view_bspl_notification_NotificationScreenPageDef"/>
+    <page path="/WEB-INF/bspl/notifications/ui/flow/NotificationSalesTF.xml#NotificationSalesTF@getNotifications"
+          usageId="view_bspl_notification_NotificationSalesTF_NotificationSalesTF_getNotificationsPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="view_bspl_notification_NotificationsPageDef" path="view.bspl.notification.pageDefs.NotificationsPageDef"/>
+    <page id="view_bspl_notification_NotificationScreenPageDef" path="fragments.NotificationScreenPageDef"/>
+    <page id="view_bspl_notification_NotificationSalesTF_NotificationSalesTF_getNotificationsPageDef"
+          path="bspl.notifications.ui.flow.NotificationSalesTF_NotificationSalesTF_getNotificationsPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="NotificationAMDataControl" Package="model.bspl.notification.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="NotificationAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

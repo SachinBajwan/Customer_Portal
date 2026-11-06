@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="kycDocumentsPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PortalDocAttachRefDtlVO2" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalDocAttachRefDtlVO2Iterator"/>
+    <iterator id="PortalVendorRegdVO1Iterator" Binds="PortalVendorRegdVO1" DataControl="TermsMainAppAMDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PortalDocAttachRefDtlVO2Iterator" id="PortalDocAttachRefDtlVO2">
+      <nodeDefinition DefName="terms.erp.mainapp.model.view.PortalDocAttachRefDtlVO" Name="PortalDocAttachRefDtlVO20">
+        <AttrNames>
+          <Item Value="RefDocType"/>
+          <Item Value="Path"/>
+          <Item Value="DocFileName"/>
+          <Item Value="Remarks"/>
+          <Item Value="RefDocNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="populateDocs" RequiresUpdateModel="true" Action="invokeMethod" MethodName="populateDocs"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.populateDocs_TermsMainAppAMDataControl_dataProvider_populateDocs_result">
+      <NamedData NDName="vendId" NDType="java.lang.Long"/>
+      <NamedData NDName="usrId" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Rollback" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="VendorId">
+      <AttrNames>
+        <Item Value="VendorId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="chkDupFile" RequiresUpdateModel="true" Action="invokeMethod" MethodName="chkDupFile"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.chkDupFile_TermsMainAppAMDataControl_dataProvider_chkDupFile_result">
+      <NamedData NDName="FileName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="uploadFilePath" RequiresUpdateModel="true" Action="invokeMethod" MethodName="uploadFilePath"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.uploadFilePath_TermsMainAppAMDataControl_dataProvider_uploadFilePath_result"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="GstRegNo">
+      <AttrNames>
+        <Item Value="GstRegNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="PanNo">
+      <AttrNames>
+        <Item Value="PanNo"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

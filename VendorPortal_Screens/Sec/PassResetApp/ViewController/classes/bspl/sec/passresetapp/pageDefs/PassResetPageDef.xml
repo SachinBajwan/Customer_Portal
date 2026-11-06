@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="PassResetPageDef"
+                Package="bspl.sec.passresetapp.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="UserLoginVVO1" RangeSize="25" DataControl="PassResetAppDataControl" id="UserLoginVVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="UserLoginVVO1Iterator" id="OldPassword">
+      <AttrNames>
+        <Item Value="OldPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UserLoginVVO1Iterator" id="NewPassword">
+      <AttrNames>
+        <Item Value="NewPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UserLoginVVO1Iterator" id="ConfirmPassword">
+      <AttrNames>
+        <Item Value="ConfirmPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updatePassword" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updatePassword"
+                  IsViewObjectMethod="false" DataControl="PassResetAppDataControl"
+                  InstanceName="data.PassResetAppDataControl.dataProvider">
+      <NamedData NDName="password" NDType="java.lang.String"/>
+      <NamedData NDName="emp_ID" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="userPassordDecrypt" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="userPassordDecrypt" IsViewObjectMethod="false" DataControl="PassResetAppDataControl"
+                  InstanceName="data.PassResetAppDataControl.dataProvider"
+                  ReturnName="data.PassResetAppDataControl.methodResults.userPassordDecrypt_PassResetAppDataControl_dataProvider_userPassordDecrypt_result">
+      <NamedData NDName="EMP_ID" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

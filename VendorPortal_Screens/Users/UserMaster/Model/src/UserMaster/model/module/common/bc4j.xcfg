@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="UserMaster.model.module.UserMasAM">
+      <AppModuleConfig name="UserMasAMLocal" jbo.project="UserMaster.model.Model" ApplicationName="UserMaster.model.module.UserMasAM" DeployPlatform="LOCAL">
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="UserMaster.model.module.UserMasAM"/>
+         <Custom ns0:JDBCDataSource="java:comp/env/jdbc/APPLICATIONDBDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="UserMasAMShared" jbo.project="UserMaster.model.Model" ApplicationName="UserMaster.model.module.UserMasAM" DeployPlatform="LOCAL">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="UserMaster.model.module.UserMasAM"/>
+         <Custom ns0:JDBCDataSource="java:comp/env/jdbc/APPLICATIONDBDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

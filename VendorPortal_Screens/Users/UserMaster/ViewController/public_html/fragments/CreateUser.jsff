@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+          
+       <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="content-area"
+                            binding="#{pageFlowScope.UserBean.bindMainPanelHdr}">
+  <!-- 1. Header & Draft Status -->
+    <af:panelGroupLayout id="co_pgl2" layout="vertical" styleClass="page-header" inlineStyle="margin-bottom: 20px;">
+      <af:outputText value="#{pageFlowScope.mode eq 'E' ? 'Edit User' :  'Create New User' }" id="co_ot1" styleClass="welcome-title"/>
+      <af:outputText value="#{pageFlowScope.vendorId} as #{pageFlowScope.userRole}" id="ot1" visible="false"/>
+      <!--<af:outputText value="#{CreateOrderBean.draftStatusMessage}" id="co_ot2" styleClass="welcome-subtitle"/>-->
+    </af:panelGroupLayout>
+  
+  <!-- 2. Top Form Input Fields Grid -->
+    <af:panelGridLayout id="co_pgl_form" styleClass="form-grid-container">
+      <af:gridRow id="co_gr1">
+        <af:gridCell id="co_gc1" width="23%">
+          <af:inputText value="#{bindings.CustomerCode.inputValue}" label="#{bindings.CustomerCode.hints.label}"
+                        required="#{bindings.CustomerCode.hints.mandatory}"
+                        columns="#{bindings.CustomerCode.hints.displayWidth}"
+                        maximumLength="#{bindings.CustomerCode.hints.precision}"
+                        shortDesc="#{bindings.CustomerCode.hints.tooltip}" id="it1" disabled="true">
+            <f:validator binding="#{bindings.CustomerCode.validator}"/>
+          </af:inputText>
+        </af:gridCell>
+        <af:gridCell id="co_gc2" width="70%">
+          <af:inputText value="#{bindings.Name.inputValue}" label="#{bindings.Name.hints.label}"
+                        required="#{bindings.Name.hints.mandatory}" columns="#{bindings.Name.hints.displayWidth}"
+                        maximumLength="#{bindings.Name.hints.precision}" shortDesc="#{bindings.Name.hints.tooltip}"
+                        id="it2" disabled="true" contentStyle="width:300px;">
+            <f:validator binding="#{bindings.Name.validator}"/>
+          </af:inputText>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    
+    <!-- 3. Product Search & Action Bar -->
+    <af:panelGroupLayout id="co_pgl_actions" layout="horizontal" styleClass="search-action-bar" inlineStyle="margin: 20px 0;"
+                         rendered="false">
+      <!--<af:inputText placeholder="Search product by code / name / scan..." id="co_it_search" styleClass="product-search-input"/>-->
+      <af:panelGroupLayout id="co_pgl_btns" layout="horizontal">
+        <af:button text="+ Add User" id="co_b1" styleClass="btn btn-primary"
+                   actionListener="#{pageFlowScope.UserBean.createDtl}"/>
+        <af:button text="Upload Excel" id="co_b2" styleClass="btn btn-outline" rendered="false"/>
+      </af:panelGroupLayout>
+      <f:facet name="separator">
+        <af:spacer width="15" id="co_sp1"/>
+      </f:facet>
+    </af:panelGroupLayout>
+  
+  
+  <!-- 4. Order Items Data Table -->
+    <af:panelGroupLayout id="co_pgl_table" styleClass="panel" inlineStyle="margin-bottom: 20px;">
+      <af:panelFormLayout id="pfl1" maxColumns="2" rows="5">
+        <af:inputText value="#{bindings.VendorId.inputValue}" label="#{bindings.VendorId.hints.label}"
+                      required="#{bindings.VendorId.hints.mandatory}" columns="#{bindings.VendorId.hints.displayWidth}"
+                      maximumLength="#{bindings.VendorId.hints.precision}"
+                      shortDesc="#{bindings.VendorId.hints.tooltip}" id="it3" contentStyle="width:180px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.VendorId.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.VendorId.format}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.LineId.inputValue}" label="#{bindings.LineId.hints.label}"
+                      required="#{bindings.LineId.hints.mandatory}" columns="#{bindings.LineId.hints.displayWidth}"
+                      maximumLength="#{bindings.LineId.hints.precision}" shortDesc="#{bindings.LineId.hints.tooltip}"
+                      id="it4" contentStyle="width:180px;" disabled="true">
+          <f:validator binding="#{bindings.LineId.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.LineId.format}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ContactPerson.inputValue}" label="#{bindings.ContactPerson.hints.label}"
+                      columns="#{bindings.ContactPerson.hints.displayWidth}"
+                      maximumLength="#{bindings.ContactPerson.hints.precision}"
+                      shortDesc="#{bindings.ContactPerson.hints.tooltip}" id="it5" contentStyle="width:180px;"
+                      required="true" binding="#{pageFlowScope.UserBean.bindContactP}"
+                      disabled="#{pageFlowScope.mode eq 'V' || pageFlowScope.mode eq 'E'}">
+          <f:validator binding="#{bindings.ContactPerson.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Email.inputValue}" label="#{bindings.Email.hints.label}" columns="#{bindings.Email.hints.displayWidth}"
+                      maximumLength="#{bindings.Email.hints.precision}" shortDesc="#{bindings.Email.hints.tooltip}"
+                      id="it9" contentStyle="width:180px;" required="true"
+                      binding="#{pageFlowScope.UserBean.bindEmail}"
+                      disabled="#{pageFlowScope.mode eq 'V' || pageFlowScope.mode eq 'E'}"
+                      validator="#{pageFlowScope.UserBean.chkEmailFormat}"
+                      valueChangeListener="#{pageFlowScope.UserBean.chkEmailDuplicacy}" autoSubmit="true">
+          <f:validator binding="#{bindings.Email.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Loginname.inputValue}" label="#{bindings.Loginname.hints.label}"
+                      columns="#{bindings.Loginname.hints.displayWidth}"
+                      maximumLength="#{bindings.Loginname.hints.precision}"
+                      shortDesc="#{bindings.Loginname.hints.tooltip}" id="it10" contentStyle="width:180px;"
+                      required="true" disabled="true">
+          <f:validator binding="#{bindings.Loginname.validator}"/>
+        </af:inputText>
+        <af:selectOneChoice value="#{bindings.CustRole.inputValue}" label="#{bindings.CustRole.label}"
+                            shortDesc="#{bindings.CustRole.hints.tooltip}" id="soc1" contentStyle="width:180px;"
+                            required="true" binding="#{pageFlowScope.UserBean.bindCustRole}"
+                            disabled="#{pageFlowScope.mode eq 'V' || pageFlowScope.mode eq 'E'}">
+          <f:selectItems value="#{bindings.CustRole.items}" id="si1"/>
+          <f:validator binding="#{bindings.CustRole.validator}"/>
+        </af:selectOneChoice>
+      </af:panelFormLayout>
+    </af:panelGroupLayout>
+    
+    <!-- 5. Bottom Split Section: Notes & Order Summary -->
+  
+  
+  <!-- 6. Footer Action Bar -->
+    <af:panelGroupLayout id="co_pgl_footer_btns" layout="horizontal">
+      <af:button text="Cancel" id="co_b_cancel" styleClass="btn btn-outline-danger" action="back" immediate="true"/>
+      <af:panelGroupLayout id="co_pgl_right_btns" layout="horizontal">
+        <af:button text="Save Draft" id="co_b_draft" styleClass="btn btn-outline" visible="false"/>
+        <af:button text="Submit" id="co_b_submit" styleClass="btn btn-primary"
+                   actionListener="#{pageFlowScope.UserBean.saveRecord}"/>
+        <f:facet name="separator">
+          <af:spacer width="10" id="co_sp2"/>
+        </f:facet>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+    
+    
+  </af:panelGroupLayout>
+  
+</jsp:root>

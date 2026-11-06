@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="Logout Page" id="d1"
+                     inlineStyle="background-image:-webkit-linear-gradient(215deg, rgb(189,223,246) 0%, rgb(252,245,236) 79%); background-attachment:fixed; background-repeat:no-repeat;">
+            <af:form id="f1" usesUpload="true">
+                <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <af:panelGroupLayout id="pgl1" layout="vertical" halign="center"
+                                             inlineStyle="background-color:#91BDAA;padding:4px;"
+                                             styleClass="AFStretchWidth">
+                            <img src="resource/image/Company_Logo.png" height="31" alt="Company Logo" width="107"/>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <af:panelGroupLayout id="pgl7" styleClass="AFStretchWidth"
+                                             inlineStyle="background-color:#91BDAA;padding:4px;" layout="vertical"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="AFStretchWidth">
+                            <af:spacer width="10" height="150" id="s4"/>
+                            <af:panelGroupLayout id="pgl3" layout="vertical" styleClass="AFStretchWidth">
+                                <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" layout="vertical"
+                                                     halign="center">
+                                    <af:outputText value="Session Time Out" id="ot3"
+                                                   inlineStyle="font-size:x-large; font-weight:bold;"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl4" styleClass="AFStretchWidth" layout="horizontal">
+                                    <af:panelGroupLayout id="pgl6" layout="vertical" styleClass="AFStretchWidth"
+                                                         halign="center">
+                                        <af:spacer width="300" height="10" id="s2"/>
+                                        <af:link text="CLICK HERE TO LOGIN AGAIN" id="l1" action="#{LoginBean.onLogout}"
+                                                 inlineStyle="font-weight:bolder;"
+                                                 icon="/resource/image/menu_shutdown_24.png"/>
+                                        <af:spacer width="50" height="10" id="s3"/>
+                                        <af:outputText value="Your Session has timed out." id="ot2"
+                                                       inlineStyle="font-weight:bolder; font-size:18px; "/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                            <af:spacer width="10" height="240" id="s1"/>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

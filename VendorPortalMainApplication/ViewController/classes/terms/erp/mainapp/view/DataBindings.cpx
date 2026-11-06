@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="terms.erp.mainapp.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/login.jspx" usageId="terms_erp_mainapp_view_loginPageDef"/>
+    <page path="/Landing.jspx" usageId="terms_erp_mainapp_view_LandingPageDef"/>
+    <page path="/MainWorkarea.jspx" usageId="terms_erp_mainapp_view_MainWorkareaPageDef"/>
+    <page path="PageFlow#onPageLoadExecute" usageId="terms_erp_mainapp_view_adfc_config___onPageLoadExecutePageDef"/>
+    <page path="/SignUp.jspx" usageId="terms_erp_mainapp_view_SignUpPageDef"/>
+    <page path="/CreateLogin.jspx" usageId="terms_erp_mainapp_view_CreateLoginPageDef"/>
+    <page path="/ForgotPassword.jspx" usageId="terms_erp_mainapp_view_ForgotPasswordPageDef"/>
+    <page path="/fragments/businessDetails.jsff" usageId="terms_erp_mainapp_view_businessDetailsPageDef"/>
+    <page path="/fragments/contactPerson.jsff" usageId="terms_erp_mainapp_view_contactPersonPageDef"/>
+    <page path="/WEB-INF/CustomerOnboardTF.xml#CustomerOnboardTF@CreateInsert"
+          usageId="terms_erp_mainapp_view_CustomerOnboardTF_CustomerOnboardTF_CreateInsertPageDef"/>
+    <page path="/fragments/kycDocuments.jsff" usageId="terms_erp_mainapp_view_kycDocumentsPageDef"/>
+    <page path="/fragments/reviewSubmit.jsff" usageId="terms_erp_mainapp_view_reviewSubmitPageDef"/>
+    <page path="/fragments/privacyConsent.jsff" usageId="terms_erp_mainapp_view_privacyConsentPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="terms_erp_mainapp_view_loginPageDef" path="terms.erp.mainapp.view.pageDefs.loginPageDef"/>
+    <page id="terms_erp_mainapp_view_LandingPageDef" path="terms.erp.mainapp.view.pageDefs.LandingPageDef"/>
+    <page id="terms_erp_mainapp_view_MainWorkareaPageDef" path="terms.erp.mainapp.view.pageDefs.MainWorkareaPageDef"/>
+    <page id="terms_erp_mainapp_view_adfc_config___onPageLoadExecutePageDef"
+          path="terms.erp.mainapp.view.pageDefs.adfc_config___onPageLoadExecutePageDef"/>
+    <page id="terms_erp_mainapp_view_SignUpPageDef" path="terms.erp.mainapp.view.pageDefs.SignUpPageDef"/>
+    <page id="terms_erp_mainapp_view_CreateLoginPageDef" path="terms.erp.mainapp.view.pageDefs.CreateLoginPageDef"/>
+    <page id="terms_erp_mainapp_view_ForgotPasswordPageDef"
+          path="terms.erp.mainapp.view.pageDefs.ForgotPasswordPageDef"/>
+    <page id="terms_erp_mainapp_view_businessDetailsPageDef" path="fragments.businessDetailsPageDef"/>
+    <page id="terms_erp_mainapp_view_contactPersonPageDef" path="fragments.contactPersonPageDef"/>
+    <page id="terms_erp_mainapp_view_CustomerOnboardTF_CustomerOnboardTF_CreateInsertPageDef"
+          path="terms.erp.mainapp.view.pageDefs.CustomerOnboardTF_CustomerOnboardTF_CreateInsertPageDef"/>
+    <page id="terms_erp_mainapp_view_kycDocumentsPageDef" path="fragments.kycDocumentsPageDef"/>
+    <page id="terms_erp_mainapp_view_reviewSubmitPageDef" path="fragments.reviewSubmitPageDef"/>
+    <page id="terms_erp_mainapp_view_privacyConsentPageDef" path="fragments.privacyConsentPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="TermsMainAppAMDataControl" Package="terms.erp.mainapp.model.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="TermsMainAppAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

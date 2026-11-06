@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PortalVendorDocR01Link"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="terms.erp.mainapp.model.view.link.PortalVendorDocR01Link_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="PortalVendorRegdVO"
+    Cardinality="1"
+    Source="true"
+    Owner="terms.erp.mainapp.model.view.PortalVendorRegdVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="PortalVendorRegdVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="terms.erp.mainapp.model.view.PortalVendorRegdVO.VendorId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="PortalDocAttachRefDtlVO"
+    Cardinality="-1"
+    Owner="terms.erp.mainapp.model.view.PortalDocAttachRefDtlVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="PortalDocAttachRefDtlVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="terms.erp.mainapp.model.view.PortalDocAttachRefDtlVO.VendorId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="terms.erp.mainapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

@@ -1,0 +1,601 @@
+@charset "UTF-8";
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+@namespace af "http://xmlns.oracle.com/adf/faces/rich";
+@namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+
+/* =========================================
+   STEP CONTENT
+   ========================================= */
+
+.step-content {
+    margin: 0 58px 40px 58px;
+    border: 1px solid #b8c1cc;
+    border-radius: 8px;
+    padding: 0;
+    background: white;
+}
+
+.contact-step {
+    padding: 0 18px 30px 18px;
+}
+
+.step-title {
+    color: #243f6d;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 0 10px 0;
+    border-bottom: 1px solid #d8dde4;
+}
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+.contact-form {
+    padding: 20px 10px;
+}
+
+.form-row {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-column {
+    width: 33.33%;
+    padding-right: 28px;
+}
+
+.address-column {
+    width: 66.66%;
+    padding-right: 28px;
+}
+
+.language-column {
+    width: 33.33%;
+}
+
+
+/* =========================================
+   INPUTS
+   ========================================= */
+
+.form-column input,
+.address-column input,
+.language-column select {
+    min-height: 36px;
+}
+
+
+/* =========================================
+   VERIFY BUTTON
+   ========================================= */
+
+.verify-button {
+    height: 38px;
+    min-width: 95px;
+    border: 2px solid #347bbb;
+    background: white;
+    color: #2871b4;
+    font-weight: bold;
+}
+
+.verify-input {
+    width: 100%;
+}
+
+
+/* =========================================
+   INFORMATION BOX
+   ========================================= */
+
+.info-box {
+    background: #dcebf8;
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-top: 4px;
+    margin-bottom: 24px;
+}
+
+.info-title {
+    color: #203f6c;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.info-text {
+    color: #294a76;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.mandatory-text {
+    color: #7d8795;
+    font-size: 13px;
+}
+
+
+ /* Header Styles */
+    .doc-page-header .af_panelHeader_title-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+    
+    .doc-page-subtext {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    /* 1. Drag & Drop Upload Zone */
+    .drop-zone {
+      border: 1.5px dashed #3b82f6;
+      background-color: #f0f7ff;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .drop-zone-icon {
+      font-size: 24px;
+      color: #2563eb;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .drop-zone-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+
+    .drop-zone-title-browse {
+      font-size: 15px;
+      font-weight: 700;
+      color: #2563eb;
+      cursor: pointer;
+    }
+
+    .drop-zone-info {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* 2. Upload Input Form Controls */
+    .form-field .af_inputText_content,
+    .form-field .af_selectOneChoice_content,
+    .form-field .af_inputDate_content {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 13px;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .btn-upload.af_button {
+      background-color: #2563eb;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 30px;
+    }
+
+    .btn-upload .af_button_text {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .btn-upload.af_button:hover {
+      background-color: #1d4ed8;
+    }
+
+    /* Filter Controls */
+    .search-filter-box .af_inputText_content,
+    .search-filter-box .af_selectOneChoice_content {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 13px;
+    }
+
+    /* 3. Custom Table Styling */
+    .custom-doc-table {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px 6px 0 0;
+      overflow: hidden;
+    }
+
+    .custom-doc-table .af_table_header-col {
+      background-color: #1e3a8a;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px;
+    }
+
+    /* Badges for Status Column */
+    .badge-verified {
+      background-color: #dcfce7;
+      color: #166534;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 12px;
+      display: inline-block;
+    }
+
+    .badge-pending {
+      background-color: #fef3c7;
+      color: #92400e;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 12px;
+      display: inline-block;
+    }
+
+    .badge-rejected {
+      background-color: #fee2e2;
+      color: #991b1b;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 12px;
+      display: inline-block;
+    }
+
+    /* Action Buttons */
+    .btn-action-blue.af_button {
+      border: 1px solid #3b82f6;
+      background-color: #ffffff;
+      border-radius: 4px;
+      padding: 2px 10px;
+    }
+    .btn-action-blue .af_button_text {
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .btn-action-danger.af_button {
+      border: 1px solid #ef4444;
+      background-color: #ffffff;
+      border-radius: 4px;
+      padding: 2px 10px;
+    }
+    .btn-action-danger .af_button_text {
+      color: #dc2626;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* 4. Footer Warnings */
+    .warning-text-orange {
+      color: #ea580c;
+      font-weight: 600;
+      font-size: 12px;
+      display: block;
+      margin-top: 8px;
+    }
+
+    .footer-note {
+      color: #64748b;
+      font-size: 12px;
+      display: block;
+      margin-top: 4px;
+    }
+    
+/* Main ADF table */
+.kyc-document-table {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    border: 1px solid #d5dce5;
+}
+
+/* Column headers */
+.kyc-document-table af|column::column-header-cell {
+    background-color: #e9eef5;
+    color: #222222;
+    font-size: 11px;
+    font-weight: normal;
+    padding: 3px 5px;
+    height: 22px;
+    border: 1px solid #d5dce5;
+}
+
+/* Header text */
+.kyc-document-table af|column::column-header-text {
+    color: #222222;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+/* Table body cells */
+.kyc-document-table af|column::data-cell {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    padding: 2px 5px;
+    height: 23px;
+    border: 1px solid #e1e5ea;
+}
+
+/* Selected row */
+.kyc-document-table af|column::data-cell:selected {
+    background-color: #b4c9df;
+}
+
+/* Document type */
+.kyc-document-type {
+    font-size: 11px;
+    color: #555555;
+}
+
+/* Remarks input field */
+.kyc-remarks af|inputText::content {
+    font-size: 11px;
+    height: 17px;
+    padding: 1px 4px;
+    border: 1px solid #d6dce5;
+    background-color: #ffffff;
+}
+
+/* Common button styling */
+.kyc-action-button {
+    font-size: 11px;
+    min-width: 66px;
+    height: 21px;
+    padding: 1px 5px;
+    border: 1px solid #9bb9d5;
+    border-radius: 2px;
+    background-color: #d7e8f8;
+    background-image: none;
+    color: #222222;
+    box-shadow: none;
+}
+
+/* Upload button */
+.kyc-upload-button {
+    font-size: 11px;
+    min-width: 52px;
+    height: 21px;
+    padding: 1px 5px;
+    border: 1px solid #9bb9d5;
+    border-radius: 2px;
+    background-color: #347bbb;
+    background-image: none;
+    color: white;
+    box-shadow: none;
+}
+
+/* Verified status */
+.kyc-status-verified {
+    color: #008000;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+/* Pending status */
+.kyc-status-pending {
+    color: #c47b00;
+    font-size: 11px;
+}
+
+/* Rejected status */
+.kyc-status-rejected {
+    color: #c62828;
+    font-size: 11px;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.button-row {
+    width: 100%;
+    margin-top: 45px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rightButtons {
+    align-items: center;
+}
+
+.back-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: #347bbb;
+    color: white;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    margin-left: 20px;
+}
+
+.draft-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: white;
+    color: #2874b9;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.next-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: #347bbb;
+    color: white;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    margin-left: 20px;
+}
+
+.cancel-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: white;
+    color: #2874b9;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.draft-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: white;
+    color: #2874b9;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/*---- Recent Orders Table -------*/
+
+/* Main card */
+.recent-orders-card {
+    border: 1px solid #b9c3cf;
+    border-radius: 5px;
+    padding: 10px;
+    background: #ffffff;
+    width: 500px;
+    box-sizing: border-box;
+}
+
+/* Title */
+.recent-orders-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1d3557;
+    margin-bottom: 8px;
+}
+
+/* Table */
+.recent-orders-table {
+    width: 100%;
+    border: 1px solid #c7cdd5;
+}
+
+/* Table header */
+.recent-orders-table af|column::header,
+.recent-orders-header {
+    background-color: #203d6b;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 8px 7px;
+}
+
+/* Table cells */
+.recent-orders-table af|column::data-cell {
+    font-size: 11px;
+    color: #28323c;
+    padding: 8px 7px;
+    vertical-align: middle;
+}
+
+/* Alternating rows */
+.recent-orders-table af|table::data-row {
+    background-color: #ffffff;
+}
+
+.recent-orders-table af|table::data-row:odd {
+    background-color: #f1f3f5;
+}
+
+/* Order number */
+.order-no {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Date */
+.order-date {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Amount */
+.order-amount {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Status common */
+.status-badge {
+    display: inline-block;
+    min-width: 70px;
+    text-align: center;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* In Transit */
+.status-transit {
+    background-color: #d9e9f5;
+    color: #3682b8;
+}
+
+/* Delivered */
+.status-delivered {
+    background-color: #dcefdc;
+    color: #3b8c42;
+}
+
+/* Approved */
+.status-approved {
+    background-color: #dcefdc;
+    color: #3b8c42;
+}
+
+/* Pending */
+.status-pending {
+    background-color: #ffe3cc;
+    color: #ef812c;
+}
+
+
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="createOrdersPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="OrderHeaderVO1" RangeSize="25" DataControl="OrderAMDataControl" id="OrderHeaderVO1Iterator"/>
+    <iterator Binds="OrderDetailVO2" RangeSize="25" DataControl="OrderAMDataControl" id="OrderDetailVO2Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="OrderHeaderVO1Iterator" id="CustCd">
+      <AttrNames>
+        <Item Value="CustCd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrderHeaderVO1Iterator" id="Address">
+      <AttrNames>
+        <Item Value="Address"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrderHeaderVO1Iterator" id="ReqDeliveryDate">
+      <AttrNames>
+        <Item Value="ReqDeliveryDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrderHeaderVO1Iterator" id="PoNo">
+      <AttrNames>
+        <Item Value="PoNo"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="OrderDetailVO2Iterator" id="OrderDetailVO2">
+      <nodeDefinition DefName="model.bspl.orders.views.OrderDetailVO" Name="OrderDetailVO20">
+        <AttrNames>
+          <Item Value="OrderLineId"/>
+          <Item Value="OrderId"/>
+          <Item Value="ProductCode"/>
+          <Item Value="Uom"/>
+          <Item Value="Quantity"/>
+          <Item Value="Rate"/>
+          <Item Value="Gst"/>
+          <Item Value="TaxableAmount"/>
+          <Item Value="BasicAmount"/>
+          <Item Value="TotalAmount"/>
+          <Item Value="GstAmount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="OrderHeaderVO1Iterator" id="Remarks">
+      <AttrNames>
+        <Item Value="Remarks"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="OrderDetailVO2Iterator" id="CreateInsert" InstanceName="OrderAMDataControl.OrderDetailVO2"
+            DataControl="OrderAMDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="OrderDetailVO2Iterator" id="Delete" InstanceName="OrderAMDataControl.OrderDetailVO2"
+            DataControl="OrderAMDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="OrderDetailVO2Iterator" id="SubTotal">
+      <AttrNames>
+        <Item Value="SubTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrderDetailVO2Iterator" id="Sgst">
+      <AttrNames>
+        <Item Value="Sgst"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrderDetailVO2Iterator" id="TotalAmount">
+      <AttrNames>
+        <Item Value="TotalAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OrderDetailVO2Iterator" id="Cgst">
+      <AttrNames>
+        <Item Value="Cgst"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="OrderAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

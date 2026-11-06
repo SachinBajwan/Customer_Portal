@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE OperationDefinitions SYSTEM "jbo_03_01.dtd">
+<OperationDefinitions xmlns="http://xmlns.oracle.com/bc4j" Name="DocumentFindListVVOOperations">
+  <ExpressionCodeSource
+    Name="DocumentFindListVVO"
+    Type="Static"
+    URI="terms/erp/mainapp/model/view/DocumentFindListVVO.bcs"/>
+</OperationDefinitions>

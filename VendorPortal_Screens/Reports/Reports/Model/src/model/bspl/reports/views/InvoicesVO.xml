@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvoicesVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.bspl.reports.views.InvoicesVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="P_CUST_CODE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_FROM_DATE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_TO_DATE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_INV_NO"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT
+    A.IDENTIFIER INV_NO,
+    A.DATES INV_DATE,
+    A.CUST_CODE,
+  --  V1.NAME CUSTOMER_NAME,
+    A.INV_HEAD_TYPE,
+     A.PAYMNT_DUE_DT AS DUE_DATE,
+   /*  DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(B.QUANTITY,0)*COALESCE(B.PRICE,0),
+        COALESCE(B.QUANTITY,0)*COALESCE(B.PRICE,0)) TAXABLE_AMOUNT,*/
+        CASE
+    WHEN A.INV_HEAD_TYPE = 'A'
+    THEN -1 * NVL(B.QUANTITY,0) * NVL(B.PRICE,0)
+    ELSE NVL(B.QUANTITY,0) * NVL(B.PRICE,0)
+END AS TAXABLE_AMOUNT,
+    --DECODE(A.INV_HEAD_TYPE,'A',-1,1) * (NVL(B.AMOUNT,0)+NVL(IGST_AMT,0)+NVL(SGST_AMT,0)+NVL(CGST_AMT,0)) "TOTAL_AMT",
+    CASE
+    WHEN A.INV_HEAD_TYPE = 'A' THEN -1
+    ELSE 1
+END * (NVL(B.AMOUNT,0) + NVL(B.IGST_AMT,0) + NVL(B.SGST_AMT,0) + NVL(B.CGST_AMT,0)) AS TOTAL_AMT,
+    --DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(A.TCS_AMT,0),COALESCE(A.TCS_AMT,0)) TCS_AMT,
+    --DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(A.OTHER_AMOUNT,0),COALESCE(A.OTHER_AMOUNT,0)) OTHER_AMOUNT,
+    --SL.NAME NAME,
+    --DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(B.QUANTITY,0),COALESCE(B.QUANTITY,0)) QTY,
+    A.UNIT_CODE,
+   -- UPPER(A.DISTINATION) DESTINATION,
+   -- B.PROD_CODE,
+  --  IM.UOM,
+   -- VW.ITEM_DESC PROD_NAME,
+   -- VW.ITEM_GROUP PRODUCT_GROUP,
+    --NVL(PCK.CONVER_FACT,0) AS "CLD SIZE",
+   /* B.PACK_QTY "Sale Qty in (CLD)",
+    B.BATCH_NO,
+    B.CUST_MRP_PRICE AS MRP,
+    B.MFG_DT AS MFG_DT,
+    B.EXP_DT AS EXP_DT,
+*/
+   -- COALESCE(B.PRICE,0) PRICE,
+    --DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(B.AMOUNT,0),COALESCE(B.AMOUNT,0)) AMOUNT,
+    CASE
+    WHEN A.INV_HEAD_TYPE = 'A' THEN -1 * NVL(B.AMOUNT,0)
+    ELSE NVL(B.AMOUNT,0)
+END AS AMOUNT,
+  /* DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(B.SGST_AMT,0),COALESCE(B.SGST_AMT,0)) SGST,
+    DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(B.CGST_AMT,0),COALESCE(B.CGST_AMT,0)) CGST,
+    DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(B.IGST_AMT,0),COALESCE(B.IGST_AMT,0)) IGST,*/
+   -- B.GST_CODE,
+   --- NULL TAX_NAME,
+    D.DA_NO SALE_NOTE_NO,
+  --  D.DA_DATE SALE_NOTE_DT,
+   -- A.CONSIGNEE_NAME CONSIG_NAME,
+   -- A.GR_NUMBER GR_NO,
+    --A.GR_DATE GR_DT,
+   --INITCAP(V2.NAME) TRANSPOTER,
+    --D.LC_NO,
+    --D.LC_DATE LC_DT,
+   -- NULL LC_BANK,
+    --I.INV_TYPE_DESC SALE_NOTE_TYPE,
+    --A.VEHICLE_NO,
+    (A.DATES + PAYMENT_PERIOD) PAY_DUE_DT,
+    B.CUST_PO_NO,
+    --P.CUST_PO_DATE PO_DT,
+    --D.PLANTHO,
+   -- A.EWAY_NO,
+--   A.DATES EWAY_DATE,
+  --  V1.GST_REG_NO GSTN_NO,
+    /*COALESCE(B.IGST_RATE,0) IGST_RATE,
+    COALESCE(B.SGST_RATE,0) SGST_RATE,
+    COALESCE(B.CGST_RATE,0) CGST_RATE,*/
+    --B.HSN_NO,
+  -- INITCAP(S.NAME) PLACE_OF_SUPPLY,
+    --SUBSTR(SL.GST_REG_NO,1,2) PLACE_OF_SUPPLY_STCD,
+    --0 REBIT_RATE,
+    --0 REBIT_AMT,
+    --A.VOU_NO,
+   -- A.VOU_DATE VOU_DT,
+   -- DECODE(A.INV_HEAD_TYPE,'A',-1*COALESCE(A.NET_AMOUNT_FC,0),COALESCE(A.NET_AMOUNT_FC,0)) AMOUNT_FC,
+    --NULL PLACE_OF_RECEIPT,
+    --COALESCE(A.CURR_RATE1,0) EXC_RATE,
+  --  NULL SHIPING_NO,
+  --  COALESCE(D.COMM_DISC,0) TRAD_DIS,
+    /*DECODE(A.INV_HEAD_TYPE,'A',-1*
+        ROUND(
+            ROUND(
+                COALESCE(AMOUNT,0)
+                + COALESCE(B.SGST_AMT,0)
+                + COALESCE(B.CGST_AMT,0)
+                + COALESCE(B.IGST_AMT,0)
+                + COALESCE(A.TCS_AMT,0)
+                - (COALESCE(DISCOUNT_AMOUNT,0)+COALESCE(TOOL_DISCOUNT,0)),
+            2) * COALESCE(D.COMM_DISC,0),
+        2),
+        ROUND(
+            ROUND(
+                COALESCE(AMOUNT,0)
+                + COALESCE(B.SGST_AMT,0)
+                + COALESCE(B.CGST_AMT,0)
+                + COALESCE(B.IGSTAND A.CUST_CODE = :P_CUST_CODE
+
+  AND (
+        -- Case 1: Invoice Number + Customer Code
+        (
+            :P_INV_NO IS NOT NULL
+            AND A.IDENTIFIER = :P_INV_NO
+            AND :P_FROM_DATE IS NULL
+            AND :P_TO_DATE IS NULL
+        )
+
+        OR
+
+        -- Case 2: Date Range + Customer Code
+        (
+            :P_INV_NO IS NULL
+            AND :P_FROM_DATE IS NOT NULL
+            AND :P_TO_DATE IS NOT NULL
+            AND TRUNC(A.DATES) BETWEEN
+                TO_DATE(:P_FROM_DATE, 'DD-MM-YY')
+                AND TO_DATE(:P_TO_DATE, 'DD-MM-YY')
+        )
+
+        OR
+
+        -- Case 3: Invoice Number + Date Range + Customer Code
+        (
+            :P_INV_NO IS NOT NULL
+            AND A.IDENTIFIER = :P_INV_NO
+            AND :P_FROM_DATE IS NOT NULL
+            AND :P_TO_DATE IS NOT NULL
+            AND TRUNC(A.DATES) BETWEEN
+                TO_DATE(:P_FROM_DATE, 'DD-MM-YY')
+                AND TO_DATE(:P_TO_DATE, 'DD-MM-YY')
+        )
+      )_AMT,0)
+                + COALESCE(A.TCS_AMT,0)
+                - (COALESCE(DISCOUNT_AMOUNT,0)+COALESCE(TOOL_DISCOUNT,0)),
+            2) * COALESCE(D.COMM_DISC,0),
+        2)
+    ) TRAD_AMT,*/
+    --COALESCE(D.CASH_DISC,0) CASH_DIS_PER,
+  --  SUBSTR(B.HSN_NO,1,4) HSN_NO4,
+  --  A.DRIVER_NAME DRIVER_NAME,
+    VRA.STATE_GST_CODE||'-'||VRA.STATE STATE,
+   -- SCV.MEANING CHANGE_TYPE,
+
+   -- VRA.ADDRESS1||' '||VRA.ADDRESS2||' '||VRA.ADDRESS3||' '||
+  --  VRA.CITY||' '||VRA.STATE||'-'||VRA.PIN_CODE ADDRESS,
+    B.DISCOUNT AS DISCOUNT,
+   /* DECODE(A.INV_HEAD_TYPE,'A',
+        -1*(COALESCE(B.QUANTITY,0)*COALESCE(B.PRICE,0))
+        -(COALESCE(B.DISCOUNT,0)+COALESCE(B.LINE_DISCOUNT,0)),
+        (COALESCE(B.QUANTITY,0)*COALESCE(B.PRICE,0))
+        -(COALESCE(B.DISCOUNT,0)+COALESCE(B.LINE_DISCOUNT,0))
+    ) TAXABLE_VAL_AFTR_DIS,*/
+  /*  B.GROSS_WT GROSS_WEIGHT,
+    B.NET_WEIGHT FINISH_WEIGHT,
+    A.VOU_DATE VOUCHER_DATE,
+    A.PHONE_NO DRIVER_NO,
+*/
+   -- ROUND(IG.GROSS_WT,2) INV_GROSS_WT,
+    --DECODE(A.CANCELLED,'N','Active','Y','Cancelled') STATUS,
+    CASE
+    WHEN A.CANCELLED = 'N' THEN 'Active'
+    WHEN A.CANCELLED = 'Y' THEN 'Cancelled'
+END AS STATUS,
+    A.REMARKS REMARKS,
+   'acb2067a85dc1f114019aabbbbc72c9b538dfa4afb2849fcdd1f277107c09951' IRN_NO,
+    A.NET_AMOUNT INV_AMOUNT,
+   -- A.CONSIGNEE_CODE CONSIGNEE_CODE,
+--   U.GST_REG_NO,
+  --  V1.CUST_GROUP CUSTOMER_GROUP,
+   -- INVT.INV_TYPE_DESC BILL_TYPE,
+   -- INITCAP(CG.CODE_DESC) CUSTOMER_GROUP_DESCRIPTION,
+  /*  V1.SEARCH_TERMS2,
+    V1.SEARCH_TERMS,
+    V1.SEARCH_TERM3,
+    V1.SEARCH_TERM2,
+    V1.SEARCH_TERM1,*/
+    B.ACK_NO as SALE_ORDER_NUMBER
+   -- COALESCE(B.LINE_DISCOUNT,0) LINE_DISCOUNT
+FROM INVOICE_HEADER_SYS A
+LEFT JOIN INVOICE_DETAIL_SYS B
+    ON A.INV_ID = B.INV_ID
+   AND B.APPROVE = 'Y'
+LEFT JOIN INVOICE_TYPE_MASTER_SYS I
+    ON A.UNIT_CODE = I.UNIT_CODE
+   AND A.INV_HEAD_TYPE = I.INV_TYPE
+   AND A.STOCK_TYPE = I.STOCK_TYPE
+   AND I.SALE_REGISTER = 'Y'
+LEFT JOIN UNIT_SYS U
+    ON A.UNIT_CODE = U.CODE
+LEFT JOIN VENDOR_MASTER_SYS V1
+    ON A.CUST_CODE = V1.VENDOR_CODE
+LEFT JOIN CUST_GROUP_SYS CG
+    ON CG.CODE = V1.CUST_GROUP
+LEFT JOIN VENDOR_REGD_ADDRESS_SYS VRA
+    ON V1.VENDOR_ID = VRA.VENDOR_ID
+LEFT JOIN MST_SEC_CONTROL_VALUES_SYS SCV
+    ON V1.CUST_TYPE = SCV.CONTROL_CODE
+   AND SCV.CONTROL_TYPE = 'CUS_CUSTOMER_TYPE'
+   AND SCV.SBU_CODE = U.SBU_CODE
+LEFT JOIN
+(
+    SELECT INV_HEAD_IDENTIFIER, SUM(GROSS_WT) GROSS_WT
+    FROM INVOICE_DETAIL_SYS
+    GROUP BY INV_HEAD_IDENTIFIER
+) IG
+    ON IG.INV_HEAD_IDENTIFIER = A.IDENTIFIER
+LEFT JOIN
+(
+    SELECT ITEM_CD, MAX(CONVER_FACT) CONVER_FACT
+    FROM ITEM_PACKING_UOM_SYS
+    GROUP BY ITEM_CD
+) PCK
+    ON PCK.ITEM_CD = B.PROD_CODE
+LEFT JOIN VENDOR_MASTER_SYS V2
+    ON A.TRANSPORTER_CODE = V2.VENDOR_CODE
+LEFT JOIN DESPATCH_ADVICE_HEADER_SYS D
+    ON B.DISP_ADVICE_NO = D.DA_NO
+LEFT JOIN PURCHASE_ORDER_HEADER_SYS P
+    ON B.ACK_NO = P.ACK_NUMBER
+LEFT JOIN SUB_LED_SYS SL
+    ON A.UNIT_CODE = SL.UNIT
+   AND A.CUST_CODE = SL.CODE
+LEFT JOIN
+(
+    SELECT STATE_GST_CODE, NAME, COUNT(*)
+    FROM STATE_SYS
+    WHERE STATE_GST_CODE IS NOT NULL
+    GROUP BY STATE_GST_CODE, NAME
+) S
+    ON S.STATE_GST_CODE = SUBSTR(SL.GST_REG_NO,1,2)
+LEFT JOIN INVOICE_TYPE_MASTER_SYS INVT
+    ON INVT.INV_TYPE = A.INV_HEAD_TYPE
+   AND INVT.UNIT_CODE = A.UNIT_CODE
+   AND INVT.STOCK_TYPE = A.STOCK_TYPE
+LEFT JOIN VW_ALL_ITEM_DEF_LOC_MAS_SYS VW
+    ON A.UNIT_CODE = VW.UNIT_CD
+   AND B.PROD_CODE = VW.ITEM_CD
+LEFT JOIN
+(
+    SELECT DISTINCT ITEM_CD, ITEM_UOM AS UOM
+    FROM VW_ALL_ITEM_MAS_SYS
+) IM
+    ON IM.ITEM_CD = B.PROD_CODE
+WHERE U.COMPANY_TYPE = 'FMCG'
+  AND A.IDENTIFIER NOT LIKE '%DI%'
+  AND A.INV_HEAD_TYPE <> 'X'
+  AND A.CUST_CODE = :P_CUST_CODE
+
+  AND (
+        -- Case 1: Invoice Number + Customer Code
+        (
+            :P_INV_NO IS NOT NULL
+            AND A.IDENTIFIER = :P_INV_NO
+            AND :P_FROM_DATE IS NULL
+            AND :P_TO_DATE IS NULL
+        )
+
+        OR
+
+        -- Case 2: Date Range + Customer Code
+        (
+            :P_INV_NO IS NULL
+            AND :P_FROM_DATE IS NOT NULL
+            AND :P_TO_DATE IS NOT NULL
+            AND TRUNC(A.DATES) BETWEEN
+                TO_DATE(:P_FROM_DATE, 'DD-MM-YY')
+                AND TO_DATE(:P_TO_DATE, 'DD-MM-YY')
+        )
+
+        OR
+
+        -- Case 3: Invoice Number + Date Range + Customer Code
+        (
+            :P_INV_NO IS NOT NULL
+            AND A.IDENTIFIER = :P_INV_NO
+            AND :P_FROM_DATE IS NOT NULL
+            AND :P_TO_DATE IS NOT NULL
+            AND TRUNC(A.DATES) BETWEEN
+                TO_DATE(:P_FROM_DATE, 'DD-MM-YY')
+                AND TO_DATE(:P_TO_DATE, 'DD-MM-YY')
+        )
+      )]]></SQLQuery>
+  <ViewAttribute
+    Name="InvNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INV_NO"
+    Expression="INV_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="INV_DATE"
+    Expression="INV_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CustCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_CODE"
+    Expression="CUST_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvHeadType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="6"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="INV_HEAD_TYPE"
+    Expression="INV_HEAD_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DueDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="DUE_DATE"
+    Expression="DUE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TaxableAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TAXABLE_AMOUNT"
+    Expression="TAXABLE_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotalAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_AMT"
+    Expression="TOTAL_AMT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UnitCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="UNIT_CODE"
+    Expression="UNIT_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Amount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AMOUNT"
+    Expression="AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SaleNoteNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SALE_NOTE_NO"
+    Expression="SALE_NOTE_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PayDueDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="PAY_DUE_DT"
+    Expression="PAY_DUE_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CustPoNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_PO_NO"
+    Expression="CUST_PO_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="State"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="53"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATE"
+    Expression="STATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="53"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Discount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DISCOUNT"
+    Expression="DISCOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Status"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="9"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS"
+    Expression="STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="9"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Remarks"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REMARKS"
+    Expression="REMARKS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IrnNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="IRN_NO"
+    Expression="IRN_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="2"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="INV_AMOUNT"
+    Expression="INV_AMOUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SaleOrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SALE_ORDER_NUMBER"
+    Expression="SALE_ORDER_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.bspl.reports.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

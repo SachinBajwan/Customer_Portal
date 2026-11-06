@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <exception-handler>Error</exception-handler>
+  <view id="Landing">
+    <page>/Landing.jspx</page>
+  </view>
+  <view id="login">
+    <page>/login.jspx</page>
+  </view>
+  <view id="MainWorkarea">
+    <page>/MainWorkarea.jspx</page>
+  </view>
+  <view id="Error">
+    <page>/Error.jspx</page>
+  </view>
+  <view id="ErpSession">
+    <page>/ErpSession.jspx</page>
+  </view>
+  <method-call id="onPageLoadExecute">
+    <method>#{bindings.onPageLoadExecute.execute}</method>
+    <outcome>
+      <fixed-outcome>onPageLoadExecute</fixed-outcome>
+    </outcome>
+  </method-call>
+  <control-flow-rule id="__4">
+    <from-activity-id>*</from-activity-id>
+    <control-flow-case id="__5">
+      <from-outcome>goToDashboard</from-outcome>
+      <to-activity-id>onPageLoadExecute</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__6">
+      <from-outcome>login</from-outcome>
+      <to-activity-id>login</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__8">
+      <from-outcome>goToMainwork</from-outcome>
+      <to-activity-id>MainWorkarea</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__9">
+      <from-outcome>sessionOut</from-outcome>
+      <to-activity-id>ErpSession</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__11">
+    <from-activity-id>onPageLoadExecute</from-activity-id>
+    <control-flow-case id="__12">
+      <from-outcome>onPageLoadExecute</from-outcome>
+      <to-activity-id>Landing</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__1">
+    <managed-bean-name>LoginBean</managed-bean-name>
+    <managed-bean-class>terms.erp.mainapp.view.bean.LoginBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__2">
+    <managed-bean-name>TermsMainAppScopeBean</managed-bean-name>
+    <managed-bean-class>terms.erp.mainapp.view.bean.TermsMainAppScopeBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__3">
+    <managed-bean-name>AppDataBean</managed-bean-name>
+    <managed-bean-class>terms.erp.mainapp.view.bean.AppDataBean</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__7">
+    <managed-bean-name>MainWorkareaBean</managed-bean-name>
+    <managed-bean-class>terms.erp.mainapp.view.bean.MainWorkareaBean</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__10">
+    <managed-bean-name>ResetPasswordBean</managed-bean-name>
+    <managed-bean-class>terms.erp.mainapp.view.bean.ResetPasswordBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

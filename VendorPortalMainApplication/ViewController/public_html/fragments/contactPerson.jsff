@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core">
+     
+<af:panelGroupLayout styleClass="onboarding-wrapper"> 
+    <af:panelGroupLayout styleClass="onboarding-title">
+        <af:outputText value="Customer Onboarding" styleClass="onboarding-heading"/>
+        <af:outputText value="Fields marked * are mandatory." id="ot4" styleClass="mandatory-note"/>
+    </af:panelGroupLayout>
+  <af:panelHeader text="" id="ph1" binding="#{LoginBean.bindPersonalDtlMainHdr}" styleClass="hide-panel-header-title">
+    <f:facet name="toolbar"/>
+    <af:panelGroupLayout id="trainContainer" layout="vertical" styleClass="customer-train-container">
+      <af:train id="t4" value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                styleClass="customer-train" visible="true"/>
+    </af:panelGroupLayout>
+    <af:panelGroupLayout id="root" styleClass="contact-step">
+      <!-- STEP TITLE -->
+      <!--<af:outputText
+            value="Step 3: Contact Person Details"
+            id="stepTitle"
+            styleClass="step-title"/>-->
+      <!--- FORM -->
+      <af:panelHeader text="Step 2: Contact Person Details" id="ph2" styleClass="AFStretchWidth custom-form-header">
+        
+          <!-- Form Grid layout with 3 columns -->
+            <af:panelGroupLayout id="pgl2" styleClass="AFStretchWidth custom-form-layout">
+                <af:panelGroupLayout id="pgl3" styleClass="AFStretchWidth container-fluid">
+                    <af:panelGroupLayout styleClass="row">
+                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.Name.inputValue}" label="#{bindings.Name.hints.label}"
+                                      columns="#{bindings.Name.hints.displayWidth}" maximumLength="#{bindings.Name.hints.precision}"
+                                      shortDesc="#{bindings.Name.hints.tooltip}" id="it7" styleClass="input-field"
+                                      required="true">
+                          <f:validator binding="#{bindings.Name.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.Designation.inputValue}" label="#{bindings.Designation.hints.label}"
+                                      columns="#{bindings.Designation.hints.displayWidth}"
+                                      maximumLength="#{bindings.Designation.hints.precision}"
+                                      shortDesc="#{bindings.Designation.hints.tooltip}" id="it8" styleClass="input-field">
+                          <f:validator binding="#{bindings.Designation.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.CustRole.inputValue}" label="#{bindings.CustRole.hints.label}"
+                                      columns="#{bindings.CustRole.hints.displayWidth}"
+                                      maximumLength="#{bindings.CustRole.hints.precision}"
+                                      shortDesc="#{bindings.CustRole.hints.tooltip}" id="it2" styleClass="input-field"
+                                      required="true" disabled="true">
+                          <f:validator binding="#{bindings.CustRole.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.Mobile.inputValue}" label="#{bindings.Mobile.hints.label}"
+                                      columns="#{bindings.Mobile.hints.displayWidth}" maximumLength="10"
+                                      shortDesc="#{bindings.Mobile.hints.tooltip}" id="it9" styleClass="input-field"
+                                      required="true" autoSubmit="true" binding="#{LoginBean.bindMobileNo}"
+                                      valueChangeListener="#{LoginBean.chkValidMobile}">
+                          <f:validator binding="#{bindings.Mobile.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.Email.inputValue}" label="#{bindings.Email.hints.label}"
+                                      columns="#{bindings.Email.hints.displayWidth}"
+                                      maximumLength="#{bindings.Email.hints.precision}" shortDesc="#{bindings.Email.hints.tooltip}"
+                                      id="it10" autoSubmit="true"
+                                      validator="#{LoginBean.chkEmailFormat}" valueChangeListener="#{LoginBean.verifyEmail}"
+                                      binding="#{LoginBean.bindEmail}" styleClass="input-field">
+                          <f:validator binding="#{bindings.Email.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                        <af:inputText value="#{bindings.Phones.inputValue}" label="#{bindings.Phones.hints.label}"
+                                      required="#{bindings.Phones.hints.mandatory}" columns="#{bindings.Phones.hints.displayWidth}"
+                                      maximumLength="#{bindings.Phones.hints.precision}"
+                                      shortDesc="#{bindings.Phones.hints.tooltip}" id="it11" styleClass="input-field">
+                          <f:validator binding="#{bindings.Phones.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+          <!-- Info Box Section -->
+          <!--<af:panelBox text="" id="pb1" showHeader="never" background="light"
+                       inlineStyle="border-radius: 4px; padding: 5px;">-->
+            <af:panelGroupLayout id="pgl4" styleClass="info-box">
+              <af:outputText value="(i) Why we collect this:" id="ot1" styleClass="info-title"/>
+              <af:outputText value="Contact details are used only to create your login, send OTPs, and share order/dispatch/invoice updates."
+                             id="ot2" styleClass="info-text"/>
+              <af:outputText value="Only fields marked * are required for the service. Optional fields can be left blank."
+                             id="ot3" styleClass="info-text"/>
+            </af:panelGroupLayout>
+          <!--</af:panelBox>-->
+          <!-- Footer note -->
+          <!--<af:outputText value="Fields marked * are mandatory." id="ot4" styleClass="mandatory-note"/>-->
+        
+      </af:panelHeader>
+      <!-- BUTTONS -->
+      <af:panelGroupLayout id="buttons" styleClass="button-row">
+        <af:panelGroupLayout styleClass="button-section">
+            <af:commandButton text="← Back" id="backButton" action="back" styleClass="common-button back-button"/>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="rightButtons" styleClass="button-section">
+          <af:commandButton text="Save" id="draftButton" styleClass="draft-button"
+                            actionListener="#{LoginBean.saveNewRegistration}" rendered="false"/>
+          <af:commandButton text="Next →" id="nextButton" action="next" styleClass="common-button next-button"/>
+          <af:commandButton text="Cancel" id="cancelButton" styleClass="common-button" immediate="true"
+                            actionListener="#{LoginBean.backToLoginMain}"/>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+  </af:panelHeader>
+</af:panelGroupLayout>
+</jsp:root>

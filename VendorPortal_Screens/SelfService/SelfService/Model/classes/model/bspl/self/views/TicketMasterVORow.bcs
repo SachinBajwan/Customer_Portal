@@ -1,0 +1,24 @@
+//Groovy Scripts for model.bspl.self.views.TicketMasterVO
+
+package model.bspl.self.views
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+import groovy.transform.TypeChecked;
+import groovy.transform.TypeCheckingMode;
+ 
+@TypeChecked(TypeCheckingMode.SKIP)
+
+
+@TransientValueExpression(attributeName="RaisedBy")
+def RaisedBy_ExpressionScript_Expression()
+{
+adf.context.expressionEvaluator.evaluate('#{pageFlowScope.vendorId}')
+}
+
+
+@TransientValueExpression(attributeName="RaisedOn")
+def RaisedOn_ExpressionScript_Expression()
+{
+adf.currentDate
+}
+

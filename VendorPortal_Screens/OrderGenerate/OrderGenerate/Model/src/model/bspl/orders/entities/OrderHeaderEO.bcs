@@ -1,0 +1,16 @@
+//Groovy Scripts for model.bspl.orders.entities.OrderHeaderEO
+
+package model.bspl.orders.entities
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+import groovy.transform.TypeChecked;
+import groovy.transform.TypeCheckingMode;
+ 
+@TypeChecked(TypeCheckingMode.SKIP)
+
+@TransientValueExpression(attributeName="OrderId")
+def OrderId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("GLOBAL_OCI_SEQ",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

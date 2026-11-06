@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="DocumentsUploadPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="25" DataControl="DocumentAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+    <iterator Binds="PortalDocAttachRefDtlVO2" RangeSize="25" DataControl="DocumentAMDataControl"
+              id="PortalDocAttachRefDtlVO2Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="VendorId">
+      <AttrNames>
+        <Item Value="VendorId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="GstRegNo">
+      <AttrNames>
+        <Item Value="GstRegNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="PanNo">
+      <AttrNames>
+        <Item Value="PanNo"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="PortalDocAttachRefDtlVO2Iterator" id="PortalDocAttachRefDtlVO2">
+      <nodeDefinition DefName="model.bspl.docs.views.PortalDocAttachRefDtlVO" Name="PortalDocAttachRefDtlVO20">
+        <AttrNames>
+          <Item Value="RefDocType"/>
+          <Item Value="RefDocNo"/>
+          <Item Value="Path"/>
+          <Item Value="DocFileName"/>
+          <Item Value="Remarks"/>
+          <Item Value="UnitCd"/>
+          <Item Value="DocSlNo"/>
+          <Item Value="FinDocNo"/>
+          <Item Value="RefDocDate"/>
+          <Item Value="DocIdRef"/>
+          <Item Value="DocLineId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="ObjectVersionNumber"/>
+          <Item Value="ContentType"/>
+          <Item Value="AthDocType"/>
+          <Item Value="ManatFlg"/>
+          <Item Value="RefLineId"/>
+          <Item Value="VendorId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="chkDupFile" RequiresUpdateModel="true" Action="invokeMethod" MethodName="chkDupFile"
+                  IsViewObjectMethod="false" DataControl="DocumentAMDataControl"
+                  InstanceName="data.DocumentAMDataControl.dataProvider"
+                  ReturnName="data.DocumentAMDataControl.methodResults.chkDupFile_DocumentAMDataControl_dataProvider_chkDupFile_result">
+      <NamedData NDName="FileName" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" DataControl="DocumentAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

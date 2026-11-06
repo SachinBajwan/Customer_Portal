@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SelfServiceTF">
+    <default-activity>SelfService</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__3">
+      <name>vendorId</name>
+      <value>#{pageFlowScope.vendorId}</value>
+      <class>java.lang.Long</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__9">
+      <name>userRole</name>
+      <value>#{pageFlowScope.userRole}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__12">
+      <name>userId</name>
+      <value>#{pageFlowScope.userId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__5">
+      <managed-bean-name>selfServiceBean</managed-bean-name>
+      <managed-bean-class>view.bspl.self.beans.selfServiceBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="SelfService">
+      <page>/fragments/SelfService.jsff</page>
+    </view>
+    <task-flow-call id="ProfileTF">
+      <task-flow-reference>
+        <document>/WEB-INF/bspl/self/ui/flow/ProfileTF.xml</document>
+        <id>ProfileTF</id>
+      </task-flow-reference>
+      <input-parameter id="__4">
+        <name>vendorId</name>
+        <value>#{pageFlowScope.vendorId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="TicketsTF">
+      <task-flow-reference>
+        <document>/WEB-INF/bspl/self/ui/flow/TicketsTF.xml</document>
+        <id>TicketsTF</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>vendorId</name>
+        <value>#{pageFlowScope.vendorId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="SearchUserTF">
+      <task-flow-reference>
+        <document>/WEB-INF/bspl/UserMaster/ui/flow/SearchUserTF.xml</document>
+        <id>SearchUserTF</id>
+      </task-flow-reference>
+      <input-parameter id="__10">
+        <name>vendorId</name>
+        <value>#{pageFlowScope.vendorId}</value>
+      </input-parameter>
+      <input-parameter id="__11">
+        <name>userRole</name>
+        <value>#{pageFlowScope.userRole}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="ChangePasswordTF">
+      <task-flow-reference>
+        <document>/WEB-INF/bspl/self/ui/flow/ChangePasswordTF.xml</document>
+        <id>ChangePasswordTF</id>
+      </task-flow-reference>
+      <input-parameter id="__14">
+        <name>userId</name>
+        <value>#{pageFlowScope.userId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>SelfService</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>profile</from-outcome>
+        <to-activity-id>ProfileTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>raiseTicket</from-outcome>
+        <to-activity-id>TicketsTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>manageUsers</from-outcome>
+        <to-activity-id>SearchUserTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__13">
+        <from-outcome>changePassword</from-outcome>
+        <to-activity-id>ChangePasswordTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="model.bspl.self.services.SelfServiceAM">
+      <AppModuleConfig name="1A153B33DB5" JDBCName="APPLICATIONDB" DeployPlatform="LOCAL" jbo.project="model.bspl.self.Model" IsLazyLoadingTrue="true" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory" BC4JConfigName="SelfServiceAMLocal" ApplicationName="model.bspl.self.services.SelfServiceAM" DBconnection="java:comp/env/jdbc/APPLICATIONDBDS">
+         <Database jbo.locking.mode="optimistic" jbo.TypeMapEntries="OracleApps" jbo.SQLBuilder="Oracle"/>
+         <Security AppModuleJndiName="model.bspl.self.services.SelfServiceAM"/>
+         <Tester FullProxyInterfaceName="model.bspl.self.services.common.SelfServiceAM"/>
+         <Custom ns0:_testers_credentials_needed="false" ns0:JDBCDataSource="java:comp/env/jdbc/APPLICATIONDBDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>
