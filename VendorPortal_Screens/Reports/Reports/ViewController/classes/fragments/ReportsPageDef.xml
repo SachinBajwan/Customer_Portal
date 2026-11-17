@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="ReportsPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SaleOrdersVO1" RangeSize="2" DataControl="ReportsAMDataControl" id="SaleOrdersVO1Iterator"/>
+    <searchRegion Binds="SaleOrdersVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SaleOrdersVO1Query"/>
+    <iterator Binds="DispatchOrdersVO1" RangeSize="2" DataControl="ReportsAMDataControl"
+              id="DispatchOrdersVO1Iterator"/>
+    <searchRegion Binds="DispatchOrdersVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="DispatchOrdersVO1Query"/>
+    <iterator Binds="InvoicesVO1" RangeSize="2" DataControl="ReportsAMDataControl" id="InvoicesVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SaleOrdersVO1Iterator" id="SaleOrdersVO1">
+      <nodeDefinition DefName="model.bspl.reports.views.SaleOrdersVO" Name="SaleOrdersVO10">
+        <AttrNames>
+          <Item Value="UnitCode"/>
+          <Item Value="AckNumber"/>
+          <Item Value="AckDate"/>
+          <Item Value="CustPoNumber"/>
+          <Item Value="ShipToName"/>
+          <Item Value="Quantity"/>
+          <Item Value="Price"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="getCustomerCode" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getCustomerCode"
+                  IsViewObjectMethod="false" DataControl="ReportsAMDataControl"
+                  InstanceName="data.ReportsAMDataControl.dataProvider"
+                  ReturnName="data.ReportsAMDataControl.methodResults.getCustomerCode_ReportsAMDataControl_dataProvider_getCustomerCode_result">
+      <NamedData NDName="vendorId" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="DispatchOrdersVO1Iterator" id="DispatchOrdersVO1">
+      <nodeDefinition DefName="model.bspl.reports.views.DispatchOrdersVO" Name="DispatchOrdersVO10">
+        <AttrNames>
+          <Item Value="DaNo"/>
+          <Item Value="DaDate"/>
+          <Item Value="SoRef"/>
+          <Item Value="Transporter"/>
+          <Item Value="Vehicle"/>
+          <Item Value="Qty"/>
+          <Item Value="Status"/>
+          <Item Value="Unitcode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="InvoicesVO1Iterator" id="InvoicesVO1">
+      <nodeDefinition DefName="model.bspl.reports.views.InvoicesVO" Name="InvoicesVO10">
+        <AttrNames>
+          <Item Value="InvNo"/>
+          <Item Value="InvDate"/>
+          <Item Value="SaleOrderNumber"/>
+          <Item Value="TaxableAmount"/>
+          <Item Value="TotalAmt"/>
+          <Item Value="DueDate"/>
+          <Item Value="Status"/>
+          <Item Value="UnitCode"/>
+          <Item Value="IrnNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

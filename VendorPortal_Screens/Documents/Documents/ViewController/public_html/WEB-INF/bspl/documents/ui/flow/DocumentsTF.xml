@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="DocumentsTF">
+    <default-activity>getDocDetail</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>vendorId</name>
+      <value>#{pageFlowScope.vendorId}</value>
+      <class>java.lang.Long</class>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>DocsUplaodBean</managed-bean-name>
+      <managed-bean-class>view.bspl.docs.bean.DocsUplaodBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="DocumentsUpload">
+      <page>/fragments/DocumentsUpload.jsff</page>
+    </view>
+    <method-call id="getDocDetail">
+      <method>#{bindings.getDocDetail.execute}</method>
+      <outcome>
+        <fixed-outcome>getDocDetail</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>getDocDetail</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>getDocDetail</from-outcome>
+        <to-activity-id>DocumentsUpload</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

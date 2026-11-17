@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="searchOrdersPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SearchOrderHeaderVO1" RangeSize="25" DataControl="OrderAMDataControl"
+              id="SearchOrderHeaderVO1Iterator"/>
+    <searchRegion Criteria="SearchOrderHeaderVOCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchOrderHeaderVO1Iterator" id="SearchOrderHeaderVOCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchOrderHeaderVO1Iterator" id="SearchOrderHeaderVO1">
+      <nodeDefinition DefName="model.bspl.orders.views.SearchOrderHeaderVO" Name="SearchOrderHeaderVO10">
+        <AttrNames>
+          <Item Value="OrderId"/>
+          <Item Value="OrderDate"/>
+          <Item Value="ReqDeliveryDate"/>
+          <Item Value="Address"/>
+          <Item Value="PoNo"/>
+          <Item Value="Status"/>
+          <Item Value="Remarks"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

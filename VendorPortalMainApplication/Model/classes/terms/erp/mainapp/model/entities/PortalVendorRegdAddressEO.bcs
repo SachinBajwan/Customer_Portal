@@ -1,0 +1,12 @@
+//Groovy Scripts for terms.erp.mainapp.model.entities.PortalVendorRegdAddressEO
+
+package terms.erp.mainapp.model.entities
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="VendorLineId")
+def VendorLineId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("GLOBAL_OCI_SEQ",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

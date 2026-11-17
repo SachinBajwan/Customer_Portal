@@ -1,0 +1,1165 @@
+@charset "UTF-8";
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+@namespace af "http://xmlns.oracle.com/adf/faces/rich";
+@namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+
+/* =========================================
+   MAIN PAGE
+   ========================================= */
+
+.self-service-page {
+    width: 100%;
+    padding: 10px 18px 16px 18px;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.self-service-header {
+    margin-bottom: 14px;
+}
+
+.self-service-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #243f68;
+    line-height: 22px;
+}
+
+.self-service-subtitle {
+    margin-top: 3px;
+    font-size: 10px;
+    color: #858b94;
+}
+
+
+/* =========================================
+   TOOL CONTAINER
+   ========================================= */
+
+.tools-container {
+    width: 100%;
+}
+
+.tool-row {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   TOOL CARD
+   ========================================= */
+
+.tool-card {
+    position: relative;
+
+    width: 24%;
+    height: 72px;
+
+    margin-right: 1.2%;
+
+    padding: 10px 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #c8d0da;
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    vertical-align: middle;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Remove right margin from last card */
+
+.tool-card:last-child {
+    margin-right: 0;
+}
+
+
+/* Hover */
+
+.tool-card:hover {
+    border-color: #7fa9d8;
+
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.10);
+
+    background: #fbfdff;
+}
+
+
+/* =========================================
+   ICON BOX
+   ========================================= */
+
+.tool-icon-box {
+    width: 36px;
+    height: 36px;
+
+    min-width: 36px;
+
+    margin-right: 10px;
+
+    border-radius: 9px;
+
+    background: #e5f0fb;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Icon */
+
+.tool-icon {
+    color: #2d80c7;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    line-height: 36px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   CONTENT
+   ========================================= */
+
+.tool-content {
+    padding-top: 2px;
+    min-width: 0;
+}
+
+
+/* Tool title */
+
+.tool-title {
+    display: block;
+
+    color: #2d466e;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+/* Remove normal link underline */
+
+.tool-title:hover {
+    color: #1c6fae;
+    text-decoration: none;
+}
+
+
+/* Description */
+
+.tool-description {
+    margin-top: 5px;
+
+    color: #969ba2;
+
+    font-size: 9px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   NOTIFICATION BADGE
+   ========================================= */
+
+.notification-badge {
+    position: absolute;
+
+    top: 7px;
+    right: -16px;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background: #d62828;
+
+    color: #ffffff;
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    line-height: 14px;
+}
+
+
+/* =========================================
+   STEP CONTENT
+   ========================================= */
+
+.step-content {
+    margin: 0 58px 40px 58px;
+    border: 1px solid #b8c1cc;
+    border-radius: 8px;
+    padding: 0;
+    background: white;
+}
+
+.contact-step {
+    padding: 0 18px 30px 18px;
+}
+
+.step-title {
+    color: #243f6d;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 0 10px 0;
+    border-bottom: 1px solid #d8dde4;
+}
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+.contact-form {
+    padding: 20px 10px;
+}
+
+.form-row {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-column {
+    width: 33.33%;
+    padding-right: 28px;
+}
+
+.address-column {
+    width: 66.66%;
+    padding-right: 28px;
+}
+
+.language-column {
+    width: 33.33%;
+}
+
+
+/* =========================================
+   INPUTS
+   ========================================= */
+
+.form-column input,
+.address-column input,
+.language-column select {
+    min-height: 36px;
+}
+
+
+/* =========================================
+   VERIFY BUTTON
+   ========================================= */
+
+.verify-button {
+    height: 38px;
+    min-width: 95px;
+    border: 2px solid #347bbb;
+    background: white;
+    color: #2871b4;
+    font-weight: bold;
+}
+
+.verify-input {
+    width: 100%;
+}
+
+
+/* =========================================
+   PAGE HEADER
+   ========================================= */
+
+.review-header {
+    background-color: #1f4e79;
+    color: #ffffff;
+    border: none;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+}
+
+.review-instruction {
+    color: #ffffff;
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+/* =========================================
+   SECTION HEADERS
+   ========================================= */
+
+.review-section {
+    background-color: #ffffff;
+    border: 1px solid #d6e0eb;
+    margin-bottom: 18px;
+    padding: 12px;
+}
+
+.review-section af|panelHeader::header {
+    color: #1f4e79;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px 12px;
+    background-color: #eaf2f8;
+    border-bottom: 2px solid #1f4e79;
+}
+
+/* =========================================
+   BUSINESS AND PERSON DETAILS
+   ========================================= */
+
+.review-section af|panelFormLayout {
+    padding: 15px;
+}
+
+.review-section af|outputText {
+    font-size: 13px;
+    color: #333333;
+}
+
+/* =========================================
+   DOCUMENT TABLE
+   ========================================= */
+
+.review-table {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.review-table af|column::column-header-cell {
+    background-color: #1f4e79;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.review-table af|column::data-cell {
+    padding: 9px;
+    border-bottom: 1px solid #e0e6ed;
+    color: #333333;
+    font-size: 13px;
+}
+
+/* =========================================
+   CONFIRMATION AREA
+   ========================================= */
+
+.review-confirmation {
+    background-color: #ffffff;
+    border: 1px solid #d6e0eb;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.review-confirmation af|outputText {
+    color: #333333;
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 8px;
+}
+
+/* =========================================
+   BUTTON CONTAINER
+   ========================================= */
+
+.review-buttons {
+    padding: 15px 0;
+    margin-top: 10px;
+}
+
+/* =========================================
+   BACK TO EDIT BUTTON
+   ========================================= */
+
+.review-back-button {
+    margin-right: 10px;
+}
+
+/* =========================================
+   CONFIRM AND SAVE BUTTON
+   ========================================= */
+
+.review-save-button {
+    margin-right: 10px;
+}
+
+/* =========================================
+   CANCEL BUTTON
+   ========================================= */
+
+.review-cancel-button {
+    margin-right: 5px;
+}
+
+/* ==========================================
+   BUSINESS DETAILS FORM LAYOUT
+   ========================================== */
+
+.custom-form-layout {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    border: 1px solid #d6e0eb;
+    border-radius: 4px;
+}
+
+/* ==========================================
+   LABEL AND MESSAGE CONTAINER
+   ========================================== */
+
+.custom-form-layout af|panelLabelAndMessage {
+    padding: 10px 12px;
+    margin: 4px;
+    background-color: #f7f9fc;
+    border: 1px solid #e1e7ef;
+    border-radius: 4px;
+}
+
+/* ==========================================
+   FIELD LABELS
+   ========================================== */
+
+.custom-form-layout af|panelLabelAndMessage::label {
+    color: #34495e;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ==========================================
+   OUTPUT VALUES
+   ========================================== */
+
+.custom-form-layout af|outputText {
+    color: #1f2937;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 4px 0;
+}
+
+/* ==========================================
+   HOVER EFFECT
+   ========================================== */
+
+.custom-form-layout af|panelLabelAndMessage:hover {
+    background-color: #eef5fc;
+    border-color: #b8cfe5;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.button-row {
+    width: 100%;
+    margin-top: 45px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rightButtons {
+    align-items: center;
+}
+
+.back-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: #347bbb;
+    color: white;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    margin-left: 20px;
+}
+
+.draft-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: white;
+    color: #2874b9;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.next-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: #347bbb;
+    color: white;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    margin-left: 20px;
+}
+
+.cancel-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: white;
+    color: #2874b9;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* --- Global Reset & Variables --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-dark: #12223c;
+    --accent-blue: #1b6ca8;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --card-bg: #ffffff;
+    --border-color: #d0d7de;
+}
+
+body {
+    background-color: #f8fafc;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Content Area & Layout Panels --- */
+.content-area {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    vertical-align: top;
+}
+
+.panel-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* --- Form Grid & Input Styling --- */
+.form-grid-container {
+    width: 100%;
+    margin-bottom: 15px;
+    border-spacing: 15px 0;
+}
+
+.notes-textarea textarea {
+    width: 100% !important;
+    height: 90px !important;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    font-size: 13px;
+}
+
+.search-action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.attachment-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.file-chooser-input input {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #f8fafc;
+}
+
+/* --- Action Buttons --- */
+.btn {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    background: white;
+}
+
+.btn-primary {
+    background-color: #1b6ca8 !important;
+    color: white !important;
+    border-color: #1b6ca8 !important;
+}
+
+.btn-primary:hover {
+    background-color: #155584 !important;
+}
+
+/* --- Data Table & Status Pills --- */
+.data-table {
+    width: 100%;
+}
+
+.status-pill {
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+}
+
+.status-pending {
+    background-color: #feebc8;
+    color: #744210;
+}
+
+.status-approved {
+    background-color: #c6f6d5;
+    color: #22543d;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    background: white;
+}
+
+.btn-primary {
+    background-color: #1b6ca8 !important;
+    color: white !important;
+    border-color: #1b6ca8 !important;
+}
+
+.btn-primary:hover {
+    background-color: #155584 !important;
+}
+
+.btn-outline {
+    background-color: #ffffff !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+.btn-outline:hover {
+    background-color: #f4f6f9 !important;
+}
+
+.btn-outline-danger {
+    border-color: #e53e3e !important;
+    color: #e53e3e !important;
+    background: white !important;
+}
+
+.btn-outline-danger:hover {
+    background-color: #fff5f5 !important;
+}
+
+/*---- Recent Orders Table -------*/
+
+/* Main card */
+.recent-orders-card {
+    border: 1px solid #b9c3cf;
+    border-radius: 5px;
+    padding: 10px;
+    background: #ffffff;
+    width: 500px;
+    box-sizing: border-box;
+}
+
+/* Title */
+.recent-orders-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1d3557;
+    margin-bottom: 8px;
+}
+
+/* Table */
+.recent-orders-table {
+    width: 100%;
+    border: 1px solid #c7cdd5;
+}
+
+/* Table header */
+.recent-orders-table af|column::header,
+.recent-orders-header {
+    background-color: #203d6b;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 8px 7px;
+}
+
+/* Table cells */
+.recent-orders-table af|column::data-cell {
+    font-size: 11px;
+    color: #28323c;
+    padding: 8px 7px;
+    vertical-align: middle;
+}
+
+/* Alternating rows */
+.recent-orders-table af|table::data-row {
+    background-color: #ffffff;
+}
+
+.recent-orders-table af|table::data-row:odd {
+    background-color: #f1f3f5;
+}
+
+/* Order number */
+.order-no {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Date */
+.order-date {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Amount */
+.order-amount {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Status common */
+.status-badge {
+    display: inline-block;
+    min-width: 70px;
+    text-align: center;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* In Transit */
+.status-transit {
+    background-color: #d9e9f5;
+    color: #3682b8;
+}
+
+/* Delivered */
+.status-delivered {
+    background-color: #dcefdc;
+    color: #3b8c42;
+}
+
+/* Approved */
+.status-approved {
+    background-color: #dcefdc;
+    color: #3b8c42;
+}
+
+/* Pending */
+.status-pending {
+    background-color: #ffe3cc;
+    color: #ef812c;
+}
+
+
+/*------Change Password------------------*/
+
+
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+
+
+/* =========================================
+   MAIN PAGE
+========================================= */
+
+.change-password-page {
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    padding: 35px 20px !important;
+
+    background-color: #f4f7fb !important;
+
+    font-family: Arial, sans-serif !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.password-header {
+    width: 440px !important;
+    max-width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    align-items: center !important;
+
+    margin-bottom: 25px !important;
+
+    text-align: center !important;
+}
+
+.password-title {
+    display: block !important;
+
+    font-size: 24px !important;
+    font-weight: bold !important;
+
+    color: #243f6e !important;
+
+    margin-bottom: 10px !important;
+}
+
+.password-subtitle {
+    display: block !important;
+
+    font-size: 13px !important;
+
+    color: #7c8798 !important;
+
+    line-height: 20px !important;
+}
+
+
+/* =========================================
+   PASSWORD CARD
+========================================= */
+
+.password-card {
+    width: 440px !important;
+    max-width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    padding: 30px !important;
+
+    background-color: #ffffff !important;
+
+    border: 1px solid #dce3ed !important;
+    border-radius: 10px !important;
+
+    box-shadow: 0 4px 15px rgba(30, 60, 100, 0.08) !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================
+   LABELS
+========================================= */
+
+.password-label {
+    display: block !important;
+
+    font-size: 12px !important;
+    font-weight: bold !important;
+
+    color: #344563 !important;
+
+    margin-top: 15px !important;
+    margin-bottom: 8px !important;
+}
+
+
+/* =========================================
+   INPUT ROW
+========================================= */
+
+.password-input-row {
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+
+    align-items: center !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================
+   INPUT FIELDS
+========================================= */
+
+.password-input {
+    width: 100% !important;
+    height: 38px !important;
+
+    font-size: 13px !important;
+    color: #333333 !important;
+
+    background-color: #ffffff !important;
+
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 5px !important;
+
+    padding: 8px 12px !important;
+
+    box-sizing: border-box !important;
+
+    outline: none !important;
+}
+
+
+/* =========================================
+   PASSWORD RULES
+========================================= */
+
+.password-rules {
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    padding: 12px 15px !important;
+
+    margin-top: 12px !important;
+    margin-bottom: 10px !important;
+
+    background-color: #f7f9fc !important;
+
+    border: 1px solid #e1e7ef !important;
+    border-radius: 5px !important;
+
+    box-sizing: border-box !important;
+}
+
+.rules-heading {
+    display: block !important;
+
+    font-size: 11px !important;
+    font-weight: bold !important;
+
+    color: #46566b !important;
+
+    margin-bottom: 6px !important;
+}
+
+.rule-text {
+    display: block !important;
+
+    font-size: 11px !important;
+
+    color: #7c8798 !important;
+
+    line-height: 19px !important;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.password-messages {
+    display: block !important;
+
+    width: 100% !important;
+
+    margin-top: 12px !important;
+    margin-bottom: 5px !important;
+}
+
+
+/* =========================================
+   BUTTON ROW
+========================================= */
+
+.password-button-row {
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin-top: 25px !important;
+}
+
+
+/* =========================================
+   CHANGE PASSWORD BUTTON
+========================================= */
+
+.change-password-button {
+    width: 180px !important;
+    height: 38px !important;
+
+    background-color: #2878b8 !important;
+
+    border: none !important;
+    border-radius: 5px !important;
+
+    color: #ffffff !important;
+
+    font-size: 12px !important;
+    font-weight: bold !important;
+
+    cursor: pointer !important;
+
+    margin-right: 10px !important;
+}
+
+
+/* =========================================
+   CANCEL BUTTON
+========================================= */
+
+.cancel-password-button {
+    width: 100px !important;
+    height: 38px !important;
+
+    background-color: #ffffff !important;
+
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 5px !important;
+
+    color: #526176 !important;
+
+    font-size: 12px !important;
+    font-weight: bold !important;
+
+    cursor: pointer !important;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.password-footer {
+    width: 440px !important;
+    max-width: 100% !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin-top: 20px !important;
+}
+
+.security-icon {
+    font-size: 13px !important;
+    margin-right: 8px !important;
+}
+
+.security-text {
+    font-size: 11px !important;
+    color: #89929d !important;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media screen and (max-width: 600px) {
+
+    .change-password-page {
+        padding: 20px 10px !important;
+    }
+
+    .password-card {
+        width: 100% !important;
+        padding: 20px !important;
+    }
+
+    .password-header,
+    .password-footer {
+        width: 100% !important;
+    }
+
+    .password-title {
+        font-size: 20px !important;
+    }
+
+    .change-password-button {
+        width: 65% !important;
+    }
+
+    .cancel-password-button {
+        width: 35% !important;
+    }
+}
+

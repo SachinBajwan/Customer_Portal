@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchUserTF">
+    <default-activity>getUsers</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__3">
+      <name>userId</name>
+      <value>#{pageFlowScope.userId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__5">
+      <name>mode</name>
+      <value>#{pageFlowScope.mode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name>vendorId</name>
+      <value>#{pageFlowScope.vendorId}</value>
+      <class>java.lang.Long</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name>lineId</name>
+      <value>#{pageFlowScope.lineId}</value>
+      <class>java.lang.Long</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__13">
+      <name>userRole</name>
+      <value>#{pageFlowScope.userRole}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__16">
+      <managed-bean-name>SearchUser</managed-bean-name>
+      <managed-bean-class>UserMaster.view.beans.SearchUser</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchUser">
+      <page>/fragments/SearchUser.jsff</page>
+    </view>
+    <task-flow-call id="CreateUserTF">
+      <task-flow-reference>
+        <document>/WEB-INF/bspl/UserMaster/ui/flow/CreateUserTF.xml</document>
+        <id>CreateUserTF</id>
+      </task-flow-reference>
+      <input-parameter id="__4">
+        <name>userId</name>
+        <value>#{pageFlowScope.userId}</value>
+      </input-parameter>
+      <input-parameter id="__6">
+        <name>mode</name>
+        <value>#{pageFlowScope.mode}</value>
+      </input-parameter>
+      <input-parameter id="__10">
+        <name>vendorId</name>
+        <value>#{pageFlowScope.vendorId}</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>lineId</name>
+        <value>#{pageFlowScope.lineId}</value>
+      </input-parameter>
+      <input-parameter id="__14">
+        <name>userRole</name>
+        <value>#{pageFlowScope.userRole}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="getUsers">
+      <method>#{bindings.getUsers.execute}</method>
+      <outcome>
+        <fixed-outcome>getUsers</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__1">
+      <from-activity-id>SearchUser</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>CreateUserTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__15">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>getUsers</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>getUsers</from-outcome>
+        <to-activity-id>SearchUser</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

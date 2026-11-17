@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="loginPageDef"
+                Package="terms.erp.mainapp.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="UserLoginVVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl" id="UserLoginVVO1Iterator"/>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="10" DataControl="TermsMainAppAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="UserLoginVVO1Iterator" id="UserName">
+      <AttrNames>
+        <Item Value="UserName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UserLoginVVO1Iterator" id="Password">
+      <AttrNames>
+        <Item Value="Password"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="Visit_Limit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="Visit_Limit"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider">
+      <NamedData NDName="UserId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="authenticateUser" RequiresUpdateModel="true" Action="invokeMethod" MethodName="authenticateUser"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.authenticateUser_TermsMainAppAMDataControl_dataProvider_authenticateUser_result">
+      <NamedData NDName="username" NDType="java.lang.String"/>
+      <NamedData NDName="password" NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="PortalVendorRegdVO1Iterator" id="CreateInsert"
+            InstanceName="TermsMainAppAMDataControl.PortalVendorRegdVO1" DataControl="TermsMainAppAMDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="UserLoginVVO1Iterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UserLoginVVO1Iterator" id="Email_otp">
+      <AttrNames>
+        <Item Value="Email_otp"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

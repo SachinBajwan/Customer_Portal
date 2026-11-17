@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkVendorIdLink"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  EntityAssociation="UserMaster.model.entities.association.FkVendorIdAssoc">
+  <ViewLinkDefEnd
+    Name="PortalVendorRegdVO"
+    Cardinality="1"
+    Source="true"
+    Owner="UserMaster.model.views.PortalVendorRegdVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+      <Attr Name="_finderName" Value="PortalVendorRegdVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="UserMaster.model.views.PortalVendorRegdVO.VendorId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="PortalVendorUserVO"
+    Cardinality="-1"
+    Owner="UserMaster.model.views.PortalVendorUserVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="PortalVendorUserVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="UserMaster.model.views.PortalVendorUserVO.VendorId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

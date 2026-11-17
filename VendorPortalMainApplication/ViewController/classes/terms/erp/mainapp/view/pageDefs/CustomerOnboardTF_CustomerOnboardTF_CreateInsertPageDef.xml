@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="CustomerOnboardTF_CustomerOnboardTF_CreateInsertPageDef" Package="terms.erp.mainapp.view.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="PortalVendorRegdVO1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

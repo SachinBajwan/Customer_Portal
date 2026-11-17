@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth" layout="scroll">
+        <af:panelGroupLayout id="pb1" layout="vertical" inlineStyle="padding:6px;" 
+                             styleClass="AFStretchWidth"> <!--background-color:#91BDAA;-->
+          <af:panelFormLayout id="pfl1">
+            <af:outputLabel value="Welcome" id="ol1" inlineStyle="font-weight:bolder; font-size:large;"/>
+          </af:panelFormLayout>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

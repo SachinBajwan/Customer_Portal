@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE OperationDefinitions SYSTEM "jbo_03_01.dtd">
+<OperationDefinitions xmlns="http://xmlns.oracle.com/bc4j" Name="PortalVendorUserEOOperations">
+  <ExpressionCodeSource
+    Name="PortalVendorUserEORow"
+    Type="Static"
+    URI="UserMaster/model/entities/PortalVendorUserEO.bcs"/>
+</OperationDefinitions>

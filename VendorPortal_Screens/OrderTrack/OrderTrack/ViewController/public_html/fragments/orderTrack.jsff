@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+          <!-- PAGE TITLE -->
+
+    <af:outputText value="Real-time Order Tracking"
+                   styleClass="tracking-main-title"/>
+
+
+    <!-- SEARCH SECTION -->
+
+    <af:panelGroupLayout id="searchPanel"
+                         layout="horizontal"
+                         styleClass="tracking-search">
+
+        <af:inputText id="searchNo"
+                      placeholder="Enter Order No / Invoice No / LR No"
+                      styleClass="tracking-input"
+                      value="#{pageFlowScope.OrderTrackingBean.searchNumber}"/>
+
+        <af:commandButton id="trackBtn"
+                          text="Track"
+                          action="#{pageFlowScope.OrderTrackingBean.trackOrder}"
+                          partialSubmit="true"
+                          styleClass="tracking-button"/>
+
+    </af:panelGroupLayout>
+
+
+    <!-- ORDER TRACKING CARD -->
+
+    <af:panelGroupLayout id="statusPanel"
+                         layout="vertical"
+                         styleClass="tracking-status-card"
+                         partialTriggers="trackBtn">
+
+        <!-- HEADER -->
+
+        <af:panelGroupLayout id="statusHeader"
+                             layout="horizontal"
+                             styleClass="tracking-card-header">
+
+            <af:outputText value="#{pageFlowScope.OrderTrackingBean.orderNo}"
+                           styleClass="tracking-order-no"/>
+
+            <af:outputText value="#{pageFlowScope.OrderTrackingBean.currentStatus}"
+                           styleClass="status-pill"/>
+
+        </af:panelGroupLayout>
+
+
+        <!-- TIMELINE -->
+
+        <af:panelGroupLayout id="progressPanel"
+                             layout="horizontal"
+                             styleClass="tracking-steps">
+
+            <af:iterator id="stepIterator"
+                         value="#{pageFlowScope.OrderTrackingBean.trackingSteps}"
+                         var="step">
+
+                <af:panelGroupLayout id="stepItem"
+                                     layout="horizontal"
+                                     styleClass="tracking-step">
+
+                    <!-- STATUS ICON -->
+
+                    <af:panelGroupLayout id="stepCircle"
+                                         layout="vertical"
+                                         styleClass="step-circle #{step.styleClass}">
+
+                        <af:outputText value="#{step.icon}"
+                                       styleClass="step-icon"/>
+
+                    </af:panelGroupLayout>
+
+
+                    <!-- ACTUAL CONNECTING LINE -->
+
+                    <af:outputText id="connector"
+                                   value=" "
+                                   styleClass="step-connector #{step.connectorClass}"/>
+
+
+                    <!-- STATUS NAME AND DATE -->
+
+                    <af:panelGroupLayout id="stepDetails"
+                                         layout="vertical"
+                                         styleClass="step-details">
+
+                        <af:outputText value="#{step.name}"
+                                       styleClass="step-name"/>
+
+                        <af:outputText value="#{step.creationDate}"
+                                       styleClass="step-date"/>
+
+                    </af:panelGroupLayout>
+
+                </af:panelGroupLayout>
+
+            </af:iterator>
+
+        </af:panelGroupLayout>
+
+    </af:panelGroupLayout>
+
+
+    <!-- BOTTOM SECTION -->
+
+    <af:panelGroupLayout id="bottomSection"
+                         layout="horizontal"
+                         styleClass="tracking-bottom"
+                         partialTriggers="trackBtn">
+
+        <!-- ORDER DETAILS -->
+
+        <af:panelGroupLayout id="shipmentPanel"
+                             layout="vertical"
+                             styleClass="shipment-card">
+
+            <af:outputText value="Order Details"
+                           styleClass="section-heading"/>
+
+            <af:panelGroupLayout layout="horizontal"
+                                 styleClass="detail-row">
+
+                <af:outputText value="Session ID"
+                               styleClass="detail-label"/>
+
+                <af:outputText value="#{pageFlowScope.OrderTrackingBean.sessionId}"
+                               styleClass="detail-value"/>
+
+            </af:panelGroupLayout>
+
+            <af:panelGroupLayout layout="horizontal"
+                                 styleClass="detail-row">
+
+                <af:outputText value="Customer Code"
+                               styleClass="detail-label"/>
+
+                <af:outputText value="#{pageFlowScope.OrderTrackingBean.customerCode}"
+                               styleClass="detail-value"/>
+
+            </af:panelGroupLayout>
+
+            <af:panelGroupLayout layout="horizontal"
+                                 styleClass="detail-row">
+
+                <af:outputText value="Unit Code"
+                               styleClass="detail-label"/>
+
+                <af:outputText value="#{pageFlowScope.OrderTrackingBean.unitCode}"
+                               styleClass="detail-value"/>
+
+            </af:panelGroupLayout>
+
+            <af:panelGroupLayout layout="horizontal"
+                                 styleClass="detail-row">
+
+                <af:outputText value="Document No"
+                               styleClass="detail-label"/>
+
+                <af:outputText value="#{pageFlowScope.OrderTrackingBean.documentNo}"
+                               styleClass="detail-value"/>
+
+            </af:panelGroupLayout>
+
+            <af:panelGroupLayout layout="horizontal"
+                                 styleClass="detail-row">
+
+                <af:outputText value="Amount"
+                               styleClass="detail-label"/>
+
+                <af:outputText value="#{pageFlowScope.OrderTrackingBean.amount}"
+                               styleClass="detail-value"/>
+
+            </af:panelGroupLayout>
+
+            <af:panelGroupLayout layout="horizontal"
+                                 styleClass="detail-row">
+
+                <af:outputText value="Creation Date"
+                               styleClass="detail-label"/>
+
+                <af:outputText value="#{pageFlowScope.OrderTrackingBean.creationDate}"
+                               styleClass="detail-value"/>
+
+            </af:panelGroupLayout>
+
+        </af:panelGroupLayout>
+
+
+        <!-- LIVE LOCATION -->
+
+        <af:panelGroupLayout id="locationPanel"
+                             layout="vertical"
+                             styleClass="location-card"
+                             rendered="false">
+
+            <af:outputText value="Live Location"
+                           styleClass="section-heading"/>
+
+            <af:panelGroupLayout id="mapPanel"
+                                 layout="vertical"
+                                 styleClass="tracking-map">
+
+                <af:outputText value="#{pageFlowScope.OrderTrackingBean.mapHtml}"
+                               escape="false"/>
+
+            </af:panelGroupLayout>
+
+            <af:panelGroupLayout layout="horizontal"
+                                 styleClass="map-footer">
+
+                <af:outputText value="Location tracking API integration pending"
+                               styleClass="map-update-text"/>
+
+                <af:spacer width="10"/>
+
+                <af:commandButton id="shareEta"
+                                  text="Share Status"
+                                  action="#{pageFlowScope.OrderTrackingBean.shareEta}"
+                                  partialSubmit="true"
+                                  styleClass="share-eta-button"/>
+
+            </af:panelGroupLayout>
+
+        </af:panelGroupLayout>
+
+    </af:panelGroupLayout>
+
+</jsp:root>

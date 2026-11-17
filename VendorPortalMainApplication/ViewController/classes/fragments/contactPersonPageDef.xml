@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="contactPersonPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+    <iterator id="PortalDocAttachRefDtlVO2Iterator" Binds="PortalDocAttachRefDtlVO2"
+              DataControl="TermsMainAppAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Designation">
+      <AttrNames>
+        <Item Value="Designation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="CustRole">
+      <AttrNames>
+        <Item Value="CustRole"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Mobile">
+      <AttrNames>
+        <Item Value="Mobile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Phones">
+      <AttrNames>
+        <Item Value="Phones"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <methodAction id="InfoFunction" RequiresUpdateModel="true" Action="invokeMethod" MethodName="InfoFunction"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.InfoFunction_TermsMainAppAMDataControl_dataProvider_InfoFunction_result"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FileMasterErpToFileMasterSubErpVL"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="terms.erp.mainapp.model.view.link.FileMasterErpToFileMasterSubErpVL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="FileMasterErpVVO"
+    Cardinality="1"
+    Source="true"
+    Owner="terms.erp.mainapp.model.view.FileMasterErpVVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="FileMasterErpVVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="terms.erp.mainapp.model.view.FileMasterErpVVO.FileId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="FileMsterSubErpVVO"
+    Cardinality="-1"
+    Owner="terms.erp.mainapp.model.view.FileMsterSubErpVVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="FileMsterSubErpVVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="terms.erp.mainapp.model.view.FileMsterSubErpVVO.FileMenuId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="terms.erp.mainapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

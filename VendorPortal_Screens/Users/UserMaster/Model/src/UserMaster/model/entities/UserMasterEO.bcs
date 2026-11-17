@@ -1,0 +1,12 @@
+//Groovy Scripts for UserMaster.model.entities.UserMasterEO
+
+package UserMaster.model.entities
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="UserMasterId")
+def UserMasterId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("GLOBAL_OCI_SEQ",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

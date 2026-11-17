@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+  <skin>
+    <id>skinTerm.desktop</id>
+    <family>skinTerm</family>
+    <extends>alta-v1.desktop</extends>
+    <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+    <style-sheet-name>WEB-INF/bspl/UserMaster/ui/skinTerm/skinTerm.css</style-sheet-name>
+    <bundle-name>UserMaster.view.skinBundle</bundle-name>
+  </skin>
+  <skin>
+    <id>UserSkin.desktop</id>
+    <family>UserSkin</family>
+    <extends>alta-v1.desktop</extends>
+    <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+    <style-sheet-name>skins/UserSkin/UserSkin.css</style-sheet-name>
+    <bundle-name>UserMaster.view.skinBundle</bundle-name>
+  </skin>
+</skins>

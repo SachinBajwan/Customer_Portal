@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57"
+                id="SearchUserTF_SearchUserTF_getUsersPageDef" Package="bspl.UserMaster.ui.flow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="getUsers" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getUsers"
+                  IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"
+                  ReturnName="data.UserMasAMDataControl.methodResults.getUsers_UserMasAMDataControl_dataProvider_getUsers_result"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,14 @@
+//Groovy Scripts for UserMaster.model.views.SecControlVO
+
+package UserMaster.model.views
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="bindCode")
+def bindCode_VariableScript_Variable()
+{
+adf.context.expressionEvaluator.evaluate(
+    "#{pageFlowScope.userRole eq 'CA' ? 'CU' : (pageFlowScope.userRole eq 'PA' ? 'EX' : null)}"
+)
+}
+

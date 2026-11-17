@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="CreateUserPageDef"
+                Package="UserMaster.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="25" DataControl="UserMasAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+    <iterator Binds="PortalVendorUserVO2" RangeSize="25" DataControl="UserMasAMDataControl"
+              id="PortalVendorUserVO2Iterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="createUser" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createUser"
+                  IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"/>
+    <methodAction id="getUserDetails" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getUserDetails"
+                  IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider">
+      <NamedData NDName="userId" NDValue="#{pageFlowScope.userId}" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" DataControl="UserMasAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="findUserIdInUserMaster" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findUserIdInUserMaster" IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"/>
+    <methodAction id="generateUserLogin" RequiresUpdateModel="true" Action="invokeMethod" MethodName="generateUserLogin"
+                  IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"
+                  ReturnName="data.UserMasAMDataControl.methodResults.generateUserLogin_UserMasAMDataControl_dataProvider_generateUserLogin_result">
+      <NamedData NDName="First" NDType="java.lang.String"/>
+      <NamedData NDName="Middle" NDType="java.lang.String"/>
+      <NamedData NDName="Last" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="InfoFunction" RequiresUpdateModel="true" Action="invokeMethod" MethodName="InfoFunction"
+                  IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"
+                  ReturnName="data.UserMasAMDataControl.methodResults.InfoFunction_UserMasAMDataControl_dataProvider_InfoFunction_result"/>
+    <methodAction id="encryptedPassword" RequiresUpdateModel="true" Action="invokeMethod" MethodName="encryptedPassword"
+                  IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"
+                  ReturnName="data.UserMasAMDataControl.methodResults.encryptedPassword_UserMasAMDataControl_dataProvider_encryptedPassword_result">
+      <NamedData NDName="password" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="CustomerCode">
+      <AttrNames>
+        <Item Value="CustomerCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="PortalVendorUserVO2Iterator" id="CreateInsert"
+            InstanceName="UserMasAMDataControl.PortalVendorUserVO2" DataControl="UserMasAMDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="PortalVendorUserVO2Iterator" id="Delete"
+            InstanceName="UserMasAMDataControl.PortalVendorUserVO2" DataControl="UserMasAMDataControl"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="PortalVendorUserVO2Iterator" id="VendorId">
+      <AttrNames>
+        <Item Value="VendorId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorUserVO2Iterator" id="LineId">
+      <AttrNames>
+        <Item Value="LineId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorUserVO2Iterator" id="ContactPerson">
+      <AttrNames>
+        <Item Value="ContactPerson"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorUserVO2Iterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorUserVO2Iterator" id="Loginname">
+      <AttrNames>
+        <Item Value="Loginname"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PortalVendorUserVO2Iterator" StaticList="false" Uses="LOV_CustRole" id="CustRole"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="insertCustomerDtl" RequiresUpdateModel="true" Action="invokeMethod" MethodName="insertCustomerDtl"
+                  IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"
+                  ReturnName="data.UserMasAMDataControl.methodResults.insertCustomerDtl_UserMasAMDataControl_dataProvider_insertCustomerDtl_result"/>
+    <methodAction id="findMaxUserIdInUserMaster" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findMaxUserIdInUserMaster" IsViewObjectMethod="false" DataControl="UserMasAMDataControl"
+                  InstanceName="data.UserMasAMDataControl.dataProvider"
+                  ReturnName="data.UserMasAMDataControl.methodResults.findMaxUserIdInUserMaster_UserMasAMDataControl_dataProvider_findMaxUserIdInUserMaster_result"/>
+  </bindings>
+</pageDefinition>

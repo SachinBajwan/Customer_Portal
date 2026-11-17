@@ -1,0 +1,12 @@
+//Groovy Scripts for terms.erp.mainapp.model.view.FileMsterSubErpVVO
+
+package terms.erp.mainapp.model.view
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="bindUType")
+def bindUType_VariableScript_Variable()
+{
+adf.context.expressionEvaluator.evaluate('#{pageFlowScope.userType}')
+}
+

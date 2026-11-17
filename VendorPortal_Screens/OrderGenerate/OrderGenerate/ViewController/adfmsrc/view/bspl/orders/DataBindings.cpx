@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="view.bspl.orders" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/fragments/createOrders.jsff" usageId="view_bspl_orders_createOrdersPageDef"/>
+    <page path="/Order.jspx" usageId="view_bspl_orders_OrderPageDef"/>
+    <page path="/WEB-INF/bspl/orders/ui/flow/CreateOrderTF.xml#CreateOrderTF@CreateInsert"
+          usageId="view_bspl_orders_CreateOrderTF_CreateOrderTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/bspl/orders/ui/flow/CreateOrderTF.xml#CreateOrderTF@getOrderDetail"
+          usageId="view_bspl_orders_CreateOrderTF_CreateOrderTF_getOrderDetailPageDef"/>
+    <page path="/WEB-INF/bspl/orders/ui/flow/CreateOrderTF.xml#CreateOrderTF@Rollback"
+          usageId="view_bspl_orders_CreateOrderTF_CreateOrderTF_RollbackPageDef"/>
+    <page path="/WEB-INF/bspl/orders/ui/flow/CreateOrderTF.xml#CreateOrderTF@setOrderHdr"
+          usageId="view_bspl_orders_CreateOrderTF_CreateOrderTF_setOrderHdrPageDef"/>
+    <page path="/fragments/searchOrders.jsff" usageId="view_bspl_orders_searchOrdersPageDef"/>
+    <page path="/WEB-INF/bspl/orders/ui/flow/SearchOrderTF.xml#SearchOrderTF@getOrders"
+          usageId="view_bspl_orders_SearchOrderTF_SearchOrderTF_getOrdersPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="view_bspl_orders_createOrdersPageDef" path="fragments.createOrdersPageDef"/>
+    <page id="view_bspl_orders_OrderPageDef" path="view.bspl.orders.pageDefs.OrderPageDef"/>
+    <page id="view_bspl_orders_CreateOrderTF_CreateOrderTF_CreateInsertPageDef"
+          path="bspl.orders.ui.flow.CreateOrderTF_CreateOrderTF_CreateInsertPageDef"/>
+    <page id="view_bspl_orders_CreateOrderTF_CreateOrderTF_getOrderDetailPageDef"
+          path="bspl.orders.ui.flow.CreateOrderTF_CreateOrderTF_getOrderDetailPageDef"/>
+    <page id="view_bspl_orders_CreateOrderTF_CreateOrderTF_RollbackPageDef"
+          path="bspl.orders.ui.flow.CreateOrderTF_CreateOrderTF_RollbackPageDef"/>
+    <page id="view_bspl_orders_CreateOrderTF_CreateOrderTF_setOrderHdrPageDef"
+          path="bspl.orders.ui.flow.CreateOrderTF_CreateOrderTF_setOrderHdrPageDef"/>
+    <page id="view_bspl_orders_searchOrdersPageDef" path="fragments.searchOrdersPageDef"/>
+    <page id="view_bspl_orders_SearchOrderTF_SearchOrderTF_getOrdersPageDef"
+          path="bspl.orders.ui.flow.SearchOrderTF_SearchOrderTF_getOrdersPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="OrderAMDataControl" Package="model.bspl.orders.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="OrderAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

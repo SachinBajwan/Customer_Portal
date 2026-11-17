@@ -1,0 +1,16 @@
+//Groovy Scripts for UserMaster.model.entities.PortalVendorUserEO
+
+package UserMaster.model.entities
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+import groovy.transform.TypeChecked;
+import groovy.transform.TypeCheckingMode;
+ 
+@TypeChecked(TypeCheckingMode.SKIP)
+
+@TransientValueExpression(attributeName="LineId")
+def LineId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("GLOBAL_OCI_SEQ",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

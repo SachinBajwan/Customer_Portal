@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PassResetApp"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true"
+  ComponentClass="bspl.sec.passresetapp.model.services.PassResetAppImpl"
+  DefClass="bspl.sec.passresetapp.model.services.PassResetAppDefImpl"
+  ComponentInterface="bspl.sec.passresetapp.model.services.common.PassResetApp">
+  <DesignTime>
+    <Attr Name="_isDefCodegen" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="bspl.sec.passresetapp.model.services.PassResetApp_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewUsage
+    Name="UserLoginVVO1"
+    ViewObjectName="bspl.sec.passresetapp.model.views.UserLoginVVO"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="updatePassword"
+      MethodName="updatePassword">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="password"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="emp_ID"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="userPassordDecrypt"
+      MethodName="userPassordDecrypt">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="EMP_ID"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="bspl.sec.passresetapp.ModelBundle"/>
+  </ResourceBundle>
+</AppModule>

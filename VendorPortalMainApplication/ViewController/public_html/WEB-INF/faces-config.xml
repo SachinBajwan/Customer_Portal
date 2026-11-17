@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee">
+  <application>
+    <default-render-kit-id>oracle.adf.rich</default-render-kit-id>
+    <resource-bundle>
+      <base-name>terms.erp.mainapp.view.bundle.Resource</base-name>
+      <var>bundle</var>
+    </resource-bundle>
+  </application>
+  <lifecycle>
+    <phase-listener>terms.erp.mainapp.view.listener.CustomAdfPhaseListener</phase-listener>
+  </lifecycle>
+</faces-config>

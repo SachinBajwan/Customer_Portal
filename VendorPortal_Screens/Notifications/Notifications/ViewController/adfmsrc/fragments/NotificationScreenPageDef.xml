@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="NotificationScreenPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MsgNotificationSynVO1" RangeSize="25" DataControl="NotificationAMDataControl"
+              id="MsgNotificationSynVO1Iterator"/>
+    <iterator id="MsgNotificationSynVO1Iterator1" Binds="MsgNotificationSynVO1" DataControl="NotificationAMDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MsgNotificationSynVO1Iterator" id="MsgNotificationSynVO1">
+      <nodeDefinition DefName="model.bspl.notification.views.MsgNotificationSynVO" Name="MsgNotificationSynVO10">
+        <AttrNames>
+          <Item Value="Body"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CustCode"/>
+          <Item Value="DocNo"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="ObjectVersionNumber"/>
+          <Item Value="Status"/>
+          <Item Value="Subject"/>
+          <Item Value="UnitCd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="NotificationAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

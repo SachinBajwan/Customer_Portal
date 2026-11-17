@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="TicketsPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="TicketMasterVO1" RangeSize="25" DataControl="SelfServiceAMDataControl"
+              id="TicketMasterVO1Iterator"/>
+    <searchRegion Binds="TicketMasterVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="TicketMasterVO1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="TicketMasterVO1Iterator" id="Category">
+      <AttrNames>
+        <Item Value="Category"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TicketMasterVO1Iterator" id="InvoiceNo">
+      <AttrNames>
+        <Item Value="InvoiceNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TicketMasterVO1Iterator" id="Priority">
+      <AttrNames>
+        <Item Value="Priority"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="TicketMasterVO1Iterator" id="TicketMasterVO1">
+      <nodeDefinition DefName="model.bspl.self.views.TicketMasterVO" Name="TicketMasterVO10">
+        <AttrNames>
+          <Item Value="TicketId"/>
+          <Item Value="TicketNo"/>
+          <Item Value="Category"/>
+          <Item Value="RaisedOn"/>
+          <Item Value="Status"/>
+          <Item Value="InvoiceNo"/>
+          <Item Value="Priority"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="SelfServiceAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action IterBinding="TicketMasterVO1Iterator" id="CreateInsert"
+            InstanceName="SelfServiceAMDataControl.TicketMasterVO1" DataControl="SelfServiceAMDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Rollback" DataControl="SelfServiceAMDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <attributeValues IterBinding="TicketMasterVO1Iterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

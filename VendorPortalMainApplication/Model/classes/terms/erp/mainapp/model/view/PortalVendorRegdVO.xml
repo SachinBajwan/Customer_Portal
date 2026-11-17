@@ -1,0 +1,1116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PortalVendorRegdVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  SelectAllAttributes="false">
+  <Variable
+    Name="bindLogin"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="SecControlVO1"
+    ViewObjectName="terms.erp.mainapp.model.view.SecControlVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SecControlVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.SecControlVO.SecControlVOCriteria1"/>
+    <ParameterMap>
+      <PIMap Variable="p_controlType">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA['VEN_TYPE']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="SecControlVO2"
+    ViewObjectName="terms.erp.mainapp.model.view.SecControlVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SecControlVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.SecControlVO.SecControlVOCriteria1"/>
+    <ParameterMap>
+      <PIMap Variable="p_controlType">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA['VENDOR_FLAG']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="SecControlVO3"
+    ViewObjectName="terms.erp.mainapp.model.view.SecControlVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SecControlVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.SecControlVO.SecControlVOCriteria1"/>
+    <ParameterMap>
+      <PIMap Variable="p_controlType">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA['REG_FLAG']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CountryVO1"
+    ViewObjectName="terms.erp.mainapp.model.view.CountryVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="DistrictVO1"
+    ViewObjectName="terms.erp.mainapp.model.view.DistrictVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="DistrictVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.DistrictVO.DistrictVOCriteria1"/>
+    <ParameterMap>
+      <PIMap Variable="bindCity">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[City]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="StateVO1"
+    ViewObjectName="terms.erp.mainapp.model.view.StateVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="StateVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.StateVO.StateVOCriteria1"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CityVO1"
+    ViewObjectName="terms.erp.mainapp.model.view.CityVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="CityVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.CityVO.CityVOCriteria1"/>
+    <ParameterMap>
+      <PIMap Variable="bindState">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[State]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="VendorTypeLOV1"
+    ViewObjectName="terms.erp.mainapp.model.view.VendorTypeLOV"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="VendorTypeLOVCriteria"
+      FullName="terms.erp.mainapp.model.view.VendorTypeLOV.VendorTypeLOVCriteria"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CustomerTypeLOV"
+    ViewObjectName="terms.erp.mainapp.model.view.SecControlVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SecControlVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.SecControlVO.SecControlVOCriteria1"/>
+    <ParameterMap>
+      <PIMap Variable="p_controlType">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA['CUST_TYPE']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ConstitutionLOV"
+    ViewObjectName="terms.erp.mainapp.model.view.SecControlVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SecControlVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.SecControlVO.SecControlVOCriteria1"/>
+    <ParameterMap>
+      <PIMap Variable="p_controlType">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA['CONSTITUTION_TP']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="NoticeLanguageLOV"
+    ViewObjectName="terms.erp.mainapp.model.view.SecControlVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="SecControlVOCriteria1"
+      FullName="terms.erp.mainapp.model.view.SecControlVO.SecControlVOCriteria1"/>
+    <ParameterMap>
+      <PIMap Variable="p_controlType">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA['NOTICE_LANGUAGE']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_CountryName"
+    ListVOName="CountryVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Country"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Name"/>
+      <Item Value="Code"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CountryVOCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DistrictName"
+    ListVOName="DistrictVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DistrictName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="District"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DistrictName"/>
+      <Item Value="DistrictCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DistrictName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="DistrictVOCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_StateName"
+    ListVOName="StateVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="StateName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="State"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="StateName"/>
+      <Item Value="StateCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="StateName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="StateVOCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_VendorTypDesc"
+    ListVOName="VendorTypeLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="VendorTypDesc"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="VendorType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+      <Item Value="ControlCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="VendorTypeLOVCriteria1"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RegFlgDesc"
+    ListVOName="SecControlVO3"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RegFlgDesc"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="RegFlag"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+      <Item Value="ControlCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_VendorFlgDesc"
+    ListVOName="SecControlVO2"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="VendorFlgDesc"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="VendorFlag"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+      <Item Value="ControlCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="SecControlVOCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CityName"
+    ListVOName="CityVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="City"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CityName"/>
+      <Item Value="CityCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CityVOCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CustomerTypeDesc"
+    ListVOName="CustomerTypeLOV"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CustomerTypeDesc"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CustType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+      <Item Value="ControlCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="SecControlVOCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ConstitutionDesc"
+    ListVOName="ConstitutionLOV"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ConstitutionDesc"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Constitution"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+      <Item Value="ControlCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="SecControlVOCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_NoticeLanguage"
+    ListVOName="NoticeLanguageLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="NoticeLanguage"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ControlCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="PortalVendorRegdEO"
+    Entity="terms.erp.mainapp.model.entities.PortalVendorRegdEO"/>
+  <ViewAttribute
+    Name="Name"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Name"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.Name_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PanNo"
+    PrecisionRule="true"
+    EntityAttrName="PanNo"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="PAN_NO">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.PanNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorFlag"
+    PrecisionRule="true"
+    EntityAttrName="VendorFlag"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="VENDOR_FLAG">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.VendorFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorType"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="VendorType"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="VENDOR_TYPE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.VendorType_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RegFlag"
+    PrecisionRule="true"
+    EntityAttrName="RegFlag"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="REG_FLAG"
+    DefaultValue="R">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.RegFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="VendorId"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="VENDOR_ID"/>
+  <ViewAttribute
+    Name="GstRegNo"
+    PrecisionRule="true"
+    EntityAttrName="GstRegNo"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="GST_REG_NO">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.GstRegNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RegistrationId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RegistrationId"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="REGISTRATION_ID"/>
+  <ViewAttribute
+    Name="TempPassword"
+    PrecisionRule="true"
+    EntityAttrName="TempPassword"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="TEMP_PASSWORD"/>
+  <ViewAttribute
+    Name="ContactPerson"
+    PrecisionRule="true"
+    EntityAttrName="ContactPerson"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CONTACT_PERSON">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.ContactPerson_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Address1"
+    PrecisionRule="true"
+    EntityAttrName="Address1"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="ADDRESS1">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.Address1_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Phones"
+    PrecisionRule="true"
+    EntityAttrName="Phones"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="PHONES"/>
+  <ViewAttribute
+    Name="Fax"
+    PrecisionRule="true"
+    EntityAttrName="Fax"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="FAX"/>
+  <ViewAttribute
+    Name="Website"
+    PrecisionRule="true"
+    EntityAttrName="Website"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="WEBSITE"/>
+  <ViewAttribute
+    Name="PinCode"
+    PrecisionRule="true"
+    EntityAttrName="PinCode"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="PIN_CODE"/>
+  <ViewAttribute
+    Name="City"
+    PrecisionRule="true"
+    EntityAttrName="City"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CITY">
+    <Dependencies>
+      <Item
+        Value="StateName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="State"
+    PrecisionRule="true"
+    EntityAttrName="State"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="STATE"/>
+  <ViewAttribute
+    Name="Country"
+    PrecisionRule="true"
+    EntityAttrName="Country"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="COUNTRY"/>
+  <ViewAttribute
+    Name="District"
+    PrecisionRule="true"
+    EntityAttrName="District"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="DISTRICT">
+    <Dependencies>
+      <Item
+        Value="CityName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Mobile"
+    PrecisionRule="true"
+    EntityAttrName="Mobile"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="MOBILE"/>
+  <ViewAttribute
+    Name="Email"
+    PrecisionRule="true"
+    EntityAttrName="Email"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="EMAIL"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="LAST_UPDATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="ObjectVersionNumber"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ObjectVersionNumber"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="OBJECT_VERSION_NUMBER"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="LineId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="Loginname"
+    PrecisionRule="true"
+    EntityAttrName="Loginname"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="LOGINNAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.Loginname_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContactFirstName"
+    PrecisionRule="true"
+    EntityAttrName="ContactFirstName"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CONTACT_FIRST_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.ContactFirstName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContactLastName"
+    PrecisionRule="true"
+    EntityAttrName="ContactLastName"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CONTACT_LAST_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.ContactLastName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContactSrName"
+    PrecisionRule="true"
+    EntityAttrName="ContactSrName"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CONTACT_SR_NAME"/>
+  <ViewAttribute
+    Name="VendorTypDesc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_VendorTypDesc">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.VendorTypDesc_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VendorFlgDesc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_VendorFlgDesc">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.VendorFlgDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RegFlgDesc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_RegFlgDesc"
+    DefaultValue="Registered">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.RegFlgDesc_LABEL"/>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_CountryName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.CountryName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DistrictName"
+    PrecisionRule="true"
+    EntityAttrName="DistrictName"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="DISTRICT_NAME"
+    LOVName="LOV_DistrictName">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.DistrictName_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="CityName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StateName"
+    PrecisionRule="true"
+    EntityAttrName="StateName"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="STATE_NAME"
+    LOVName="LOV_StateName">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.StateName_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TempLoginUsed"
+    PrecisionRule="true"
+    EntityAttrName="TempLoginUsed"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="TEMP_LOGIN_USED"/>
+  <ViewAttribute
+    Name="AadharCard"
+    PrecisionRule="true"
+    EntityAttrName="AadharCard"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="AADHAR_CARD">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.AadharCard_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CityName"
+    PrecisionRule="true"
+    EntityAttrName="CityName"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CITY_NAME"
+    LOVName="LOV_CityName">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.CityName_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="StateName"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CityExist"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CityExist"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CITY_EXIST"
+    DefaultValue="Y">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.CityExist_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OtherCity"
+    PrecisionRule="true"
+    EntityAttrName="OtherCity"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="OTHER_CITY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.OtherCity_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BillAddressLine1"
+    PrecisionRule="true"
+    EntityAttrName="BillAddressLine1"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="BILL_ADDRESS_LINE_1"/>
+  <ViewAttribute
+    Name="BillAddressLine2"
+    PrecisionRule="true"
+    EntityAttrName="BillAddressLine2"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="BILL_ADDRESS_LINE_2"/>
+  <ViewAttribute
+    Name="AnalyticCookiesFlg"
+    PrecisionRule="true"
+    EntityAttrName="AnalyticCookiesFlg"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="ANALYTIC_COOKIES_FLG"/>
+  <ViewAttribute
+    Name="AgeConfFlg"
+    PrecisionRule="true"
+    EntityAttrName="AgeConfFlg"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="AGE_CONF_FLG"
+    DefaultValue="Y"/>
+  <ViewAttribute
+    Name="Constitution"
+    PrecisionRule="true"
+    EntityAttrName="Constitution"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CONSTITUTION"/>
+  <ViewAttribute
+    Name="CustRole"
+    PrecisionRule="true"
+    EntityAttrName="CustRole"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CUST_ROLE"
+    DefaultValue="Admin">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.CustRole_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustType"
+    PrecisionRule="true"
+    EntityAttrName="CustType"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CUST_TYPE"/>
+  <ViewAttribute
+    Name="LegName"
+    PrecisionRule="true"
+    EntityAttrName="LegName"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="LEG_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.LegName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LglNameOfBs"
+    PrecisionRule="true"
+    EntityAttrName="LglNameOfBs"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="LGL_NAME_OF_BS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.LglNameOfBs_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Designation"
+    PrecisionRule="true"
+    EntityAttrName="Designation"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="DESIGNATION"/>
+  <ViewAttribute
+    Name="PrcDataFlg"
+    PrecisionRule="true"
+    EntityAttrName="PrcDataFlg"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="PRC_DATA_FLG"
+    DefaultValue="Y"/>
+  <ViewAttribute
+    Name="RecTrnAltFlg"
+    PrecisionRule="true"
+    EntityAttrName="RecTrnAltFlg"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="REC_TRN_ALT_FLG"
+    DefaultValue="Y"/>
+  <ViewAttribute
+    Name="SendMailFlg"
+    PrecisionRule="true"
+    EntityAttrName="SendMailFlg"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="SEND_MAIL_FLG"/>
+  <ViewAttribute
+    Name="SendWpFlg"
+    PrecisionRule="true"
+    EntityAttrName="SendWpFlg"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="SEND_WP_FLG"/>
+  <ViewAttribute
+    Name="CustomerTypeDesc"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="35"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUSTOMER_TYPE_DESC"
+    SQLType="VARCHAR"
+    Expression="select description from sec_control_values where control_type='CUST_TYPE' and control_code=PortalVendorRegdEO.CUST_TYPE"
+    LOVName="LOV_CustomerTypeDesc">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.CustomerTypeDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConstitutionDesc"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="35"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONSTITUTION_DESC"
+    SQLType="VARCHAR"
+    Expression="select description from sec_control_values where control_type='CONSTITUTION_TP' and control_code=PortalVendorRegdEO.CONSTITUTION"
+    LOVName="LOV_ConstitutionDesc">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.ConstitutionDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustomerCode"
+    PrecisionRule="true"
+    EntityAttrName="CustomerCode"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="CUSTOMER_CODE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.CustomerCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReviewFlg"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ReviewFlg"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="REVIEW_FLG"
+    DefaultValue="N">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NoticeLanguage"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="NoticeLanguage"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="NOTICE_LANGUAGE"
+    DefaultValue="H"
+    LOVName="LOV_NoticeLanguage">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="terms.erp.mainapp.model.view.PortalVendorRegdVO.NoticeLanguage_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UserRole"
+    PrecisionRule="true"
+    EntityAttrName="UserRole"
+    EntityUsage="PortalVendorRegdEO"
+    AliasName="USER_ROLE"/>
+  <ViewCriteria
+    Name="PortalVendorRegdVOCriteria"
+    ViewObjectName="terms.erp.mainapp.model.view.PortalVendorRegdVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PortalVendorRegdVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Loginname"
+        ViewAttribute="Loginname"
+        Operator="="
+        Conjunction="AND"
+        Value=":bindLogin"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="PortalDocAttachRefDtlVO"
+    ViewLink="terms.erp.mainapp.model.view.link.PortalVendorDocR01Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="terms.erp.mainapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:h="http://java.sun.com/jsf/html">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="CreateLogin.jspx" id="d1">
+            <f:facet name="metaContainer">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <af:resource type="css" source="/resource/css/bootstrap.min.css"/>
+                <af:resource type="css" source="/resource/css/Signup.css"/>
+            </f:facet>
+            <af:messages id="m1"/>
+            <af:form id="f1" usesUpload="true">
+                <af:panelGroupLayout id="pgl1" styleClass="signup-container">
+                    <af:panelGroupLayout id="pgl5" styleClass="signup-header">
+                        <af:panelGroupLayout styleClass="brand-row">
+                            <af:outputText value="CP" styleClass="brand-logo"/>
+                            <af:outputText value="CUSTOMER PORTAL" styleClass="brand-name"/>                        
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl6" styleClass="forgot-mainwrapper">
+                        <af:panelGroupLayout id="pgl4" styleClass="forgot-wrapper">
+                            <af:panelGroupLayout id="pgl10" styleClass="forgot-header">
+                                <h:outputLabel value="Create Login Account" id="ol1"/>
+                            </af:panelGroupLayout>
+                            <af:panelGroupLayout styleClass="forgot-section">                                
+                                <af:panelGroupLayout id="pgl2" styleClass="forgot-formwrapper">
+                                <af:panelGroupLayout styleClass="forgot-content">
+                                    <af:outputText value="Change your Password" styleClass="forgot-changetext"/>
+                                    <af:outputText value="#{bindings.TempLoginUsed.inputValue}"
+                                                       shortDesc="#{bindings.TempLoginUsed.hints.tooltip}" id="ot2"
+                                                       visible="false"/>
+                                    <af:outputText value="#{bindings.UserName.inputValue}"
+                                                       shortDesc="#{bindings.UserName.hints.tooltip}" id="ot1"
+                                                       visible="false"/>
+                                </af:panelGroupLayout>
+                                <af:panelHeader text="" id="ph1" binding="#{LoginBean.createLoginHeader}" styleClass="forgot-formwrapper-main">
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="menuBar"/>
+                                    <af:panelGroupLayout id="pgl11" styleClass="forgot-section"
+                                                         binding="#{LoginBean.tempLoginPanel}">
+                                        <af:outputFormatted value="Enter UserLogin and Temporary Password to create New Password"
+                                                            id="of1" inlineStyle="color:Green; font-weight:bold;"/>
+                                        
+                                        <af:panelGroupLayout id="pgl12" styleClass="forgot-formwrapper">
+                                            <af:panelGroupLayout id="pgl7" styleClass="input-fields">
+                                                <af:inputText label="Login" id="it1" autoSubmit="true" styleClass="input-field">
+                                                    <af:clientAttribute name="autocomplete" value="new-username"/>
+                                                </af:inputText>
+                                                <af:inputText label="Password" id="it2" secret="true" autoSubmit="true" styleClass="input-field"/>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl8" styleClass="toolbar">
+                                                <af:button text="Validate" id="b1"
+                                                           actionListener="#{LoginBean.validateTempLogin}"
+                                                           styleClass="login-button submit"/>
+                                                <af:button text="Back To Login" id="b3"
+                                                           actionListener="#{LoginBean.backToLoginPage}"
+                                                            styleClass="login-button back"/>
+                                            </af:panelGroupLayout>
+                                            <!--<af:image source="/resource/image/login.jpeg" id="i1"
+                                                      inlineStyle="width:131px; height:129px;"/>-->
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl3" styleClass="forgot-section"
+                                                         binding="#{LoginBean.createLoginPanel}" visible="false">
+                                        <af:outputFormatted value="Create New Password" id="of2"
+                                                            inlineStyle="color:Green; font-weight:bold;"/>
+                                        <af:panelGroupLayout id="pgl9" styleClass="forgot-formwrapper">
+                                            <af:panelGroupLayout id="pgl13" styleClass="input-fields">
+                                                <af:inputText value="#{bindings.UserId.inputValue}"
+                                                              label="#{bindings.UserId.hints.label}"
+                                                              required="#{bindings.UserId.hints.mandatory}"
+                                                              columns="#{bindings.UserId.hints.displayWidth}"
+                                                              maximumLength="#{bindings.UserId.hints.precision}"
+                                                              shortDesc="#{bindings.UserId.hints.tooltip}" id="it5"
+                                                              visible="false" styleClass="input-field">
+                                                    <f:validator binding="#{bindings.UserId.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText label="Username" id="it3" styleClass="input-field"
+                                                              binding="#{LoginBean.bindUserLogin}" visible="false"/>
+                                                <af:inputText label="Password" id="it4" styleClass="input-field"
+                                                              binding="#{LoginBean.bindPassword}" autoSubmit="true"
+                                                              valueChangeListener="#{LoginBean.passwVce}" secret="true">
+                                                              <af:validateRegExp pattern="^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*\\\\d))|((?=.*[A-Z])(?=.*\\\\d))).{8,}$"
+                                                                       messageDetailNoMatch="Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."/>
+                                                </af:inputText>
+                                                <af:inputText label="Confirm Password" id="it6" styleClass="input-field"
+                                                              binding="#{LoginBean.bindCpassword}" autoSubmit="true"
+                                                              valueChangeListener="#{LoginBean.cPasswVce}"
+                                                              secret="true">
+                                                    <af:validateRegExp pattern="^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*\\\\d))|((?=.*[A-Z])(?=.*\\\\d))).{8,}$"
+                                                                       messageDetailNoMatch="Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."/>
+                                                </af:inputText>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl14" styleClass="toolbar">
+                                                <af:button text="Create" id="b2"
+                                                           actionListener="#{LoginBean.createNewLogin}"
+                                                           binding="#{LoginBean.bindCreateLoginBtn}"
+                                                           styleClass="login-button submit"/>
+                                                <af:button text="Back To Login" id="b4"
+                                                           actionListener="#{LoginBean.backToLogin}"
+                                                           immediate="true" styleClass="login-button back"/>
+                                            </af:panelGroupLayout>
+                                            <!--<af:image source="/resource/image/login.jpeg" id="i2"
+                                                      inlineStyle="width:131px; height:129px;"/>-->
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelHeader>
+                            </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

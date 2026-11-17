@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DocumentFindListVVO"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="terms.erp.mainapp.model.view.DocumentFindListVVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bind_TCode"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="P_USER_ID"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="VariableScript"><![CDATA[adf.context.expressionEvaluator.evaluate('#{pageFlowScope.UserId}')]]></TransientExpression>
+    <!--<TransientExpression
+      Name="VariableScript"
+      trustMode="untrusted"
+      CodeSourceName="DocumentFindListVVO"/>-->
+  </Variable>
+  <Variable
+    Name="L_UNIT"
+    Kind="where"
+    Type="java.lang.String">
+    <!--<TransientExpression
+      Name="VariableScript"
+      trustMode="untrusted"
+      CodeSourceName="DocumentFindListVVO"/>-->
+       <TransientExpression
+      Name="VariableScript"><![CDATA[adf.context.expressionEvaluator.evaluate('#{pageFlowScope.UnitCode}')]]></TransientExpression>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT FILE_ID,T_CODE,FLOW_PATH,FILE_SNAME,FOR_SEARCH FROM(   
+SELECT DISTINCT B.FILE_ID FILE_ID,B.T_CODE T_CODE,B.FLOW_PATH FLOW_PATH,INITCAP(B.FILE_SNAME) FILE_SNAME,
+B.T_CODE||' '||B.FILE_SNAME FOR_SEARCH
+    FROM USER_PRIV A,FILE_MASTER_ERP B
+    WHERE NVL(B.SHOW_FLAG,'N')='Y'
+    AND B.T_CODE IS NOT NULL
+    AND B.FLOW_PATH IS NOT NULL
+    and 
+    A.FILE_ID=B.FILE_ID
+    AND A.USER_ID=:P_USER_ID
+    AND A.UNIT=:L_UNIT)
+WHERE 
+UPPER(FOR_SEARCH) LIKE '%' || NVL(UPPER(:bind_TCode),UPPER(FOR_SEARCH)) ||  '%']]></SQLQuery>
+  <ViewAttribute
+    Name="FileId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FILE_ID"
+    Expression="FILE_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="T_CODE"
+    Expression="T_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FlowPath"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FLOW_PATH"
+    Expression="FLOW_PATH"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FileSname"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FILE_SNAME"
+    Expression="FILE_SNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ForSearch"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="39"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FOR_SEARCH"
+    Expression="FOR_SEARCH"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="FileId"/>
+    <Item Value="TCode"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="terms.erp.mainapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

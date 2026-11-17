@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="OrderAM"
+  Version="12.2.1.11.57"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true"
+  ComponentClass="model.bspl.orders.services.OrderAMImpl"
+  ComponentInterface="model.bspl.orders.services.common.OrderAM">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewUsage
+    Name="OrderDetailVO1"
+    ViewObjectName="model.bspl.orders.views.OrderDetailVO"/>
+  <ViewUsage
+    Name="OrderHeaderVO1"
+    ViewObjectName="model.bspl.orders.views.OrderHeaderVO"/>
+  <ViewUsage
+    Name="OrderDetailVO2"
+    ViewObjectName="model.bspl.orders.views.OrderDetailVO"/>
+  <ViewUsage
+    Name="SearchOrderHeaderVO1"
+    ViewObjectName="model.bspl.orders.views.SearchOrderHeaderVO"/>
+  <ViewLinkUsage
+    Name="FkOrderDetailHeaderLink1"
+    ViewLinkObjectName="model.bspl.orders.views.links.FkOrderDetailHeaderLink"
+    SrcViewUsageName="model.bspl.orders.services.OrderAM.OrderHeaderVO1"
+    DstViewUsageName="model.bspl.orders.services.OrderAM.OrderDetailVO2"
+    Reversed="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="getOrderDetail"
+      MethodName="getOrderDetail">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="setOrderHdr"
+      MethodName="setOrderHdr">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getOrders"
+      MethodName="getOrders">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</AppModule>

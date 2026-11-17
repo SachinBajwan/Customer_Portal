@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="view.bspl.dashboard" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/Dashboard.jspx" usageId="view_bspl_dashboard_DashboardPageDef"/>
+    <page path="/fragments/CustomerDashboard.jsff" usageId="view_bspl_dashboard_CustomerDashboardPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="view_bspl_dashboard_DashboardPageDef" path="view.bspl.dashboard.pageDefs.DashboardPageDef"/>
+    <page id="view_bspl_dashboard_CustomerDashboardPageDef" path="fragments.CustomerDashboardPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="DashboardAMDataControl" Package="model.bspl.dashboard.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="DashboardAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

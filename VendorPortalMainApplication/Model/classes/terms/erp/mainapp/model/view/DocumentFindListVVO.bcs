@@ -1,0 +1,19 @@
+//Groovy Scripts for terms.erp.mainapp.model.view.DocumentFindListVVO
+
+package terms.erp.mainapp.model.view
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="P_USER_ID")
+def P_USER_ID_VariableScript_Variable()
+{
+adf.context.expressionEvaluator.evaluate('#{pageFlowScope.UserId}')
+}
+
+
+@VariableExpression(path="L_UNIT")
+def L_UNIT_VariableScript_Variable()
+{
+adf.context.expressionEvaluator.evaluate('#{pageFlowScope.UnitCode}')
+}
+

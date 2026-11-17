@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="reviewSubmitPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+    <iterator Binds="PortalDocAttachRefDtlVO2" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalDocAttachRefDtlVO2Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="LglNameOfBs">
+      <AttrNames>
+        <Item Value="LglNameOfBs"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="CustomerTypeDesc">
+      <AttrNames>
+        <Item Value="CustomerTypeDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="GstRegNo">
+      <AttrNames>
+        <Item Value="GstRegNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="PanNo">
+      <AttrNames>
+        <Item Value="PanNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="BillAddressLine1">
+      <AttrNames>
+        <Item Value="BillAddressLine1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="StateName">
+      <AttrNames>
+        <Item Value="StateName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="CityName">
+      <AttrNames>
+        <Item Value="CityName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="PinCode">
+      <AttrNames>
+        <Item Value="PinCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Designation">
+      <AttrNames>
+        <Item Value="Designation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Mobile">
+      <AttrNames>
+        <Item Value="Mobile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="LegName">
+      <AttrNames>
+        <Item Value="LegName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="PortalDocAttachRefDtlVO2Iterator" id="PortalDocAttachRefDtlVO2">
+      <nodeDefinition DefName="terms.erp.mainapp.model.view.PortalDocAttachRefDtlVO" Name="PortalDocAttachRefDtlVO20">
+        <AttrNames>
+          <Item Value="RefDocType"/>
+          <Item Value="DocFileName"/>
+          <Item Value="Remarks"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="CustRole">
+      <AttrNames>
+        <Item Value="CustRole"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="PortalVendorRegdVO1Iterator" id="ReviewFlg" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ReviewFlg"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action id="Rollback" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <methodAction id="generateRegistrationId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="generateRegistrationId" IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.generateRegistrationId_TermsMainAppAMDataControl_dataProvider_generateRegistrationId_result"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="PrcDataFlg">
+      <AttrNames>
+        <Item Value="PrcDataFlg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="RecTrnAltFlg">
+      <AttrNames>
+        <Item Value="RecTrnAltFlg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="SendMailFlg">
+      <AttrNames>
+        <Item Value="SendMailFlg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="SendWpFlg">
+      <AttrNames>
+        <Item Value="SendWpFlg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="NoticeLanguage">
+      <AttrNames>
+        <Item Value="NoticeLanguage"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="AnalyticCookiesFlg">
+      <AttrNames>
+        <Item Value="AnalyticCookiesFlg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="AgeConfFlg">
+      <AttrNames>
+        <Item Value="AgeConfFlg"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="createProfileData" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createProfileData"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.createProfileData_TermsMainAppAMDataControl_dataProvider_createProfileData_result">
+      <NamedData NDName="LineId" NDType="java.lang.Long"/>
+      <NamedData NDName="UserId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

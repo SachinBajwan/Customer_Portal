@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="CustomerDashboardPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CustPendingSummaryVO1" RangeSize="25" DataControl="DashboardAMDataControl"
+              id="CustPendingSummaryVO1Iterator"/>
+    <iterator Binds="RecentOrdersVO1" RangeSize="25" DataControl="DashboardAMDataControl" id="RecentOrdersVO1Iterator"/>
+    <searchRegion Binds="RecentOrdersVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="RecentOrdersVO1Query"/>
+    <iterator Binds="UserSessionVO1" RangeSize="25" DataControl="DashboardAMDataControl" id="UserSessionVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CustPendingSummaryVO1Iterator" id="CustPendingSummaryVO1">
+      <nodeDefinition DefName="model.bspl.dashboard.views.CustPendingSummaryVO" Name="CustPendingSummaryVO10">
+        <AttrNames>
+          <Item Value="RecCnt"/>
+          <Item Value="CustCode"/>
+          <Item Value="Remarks"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="getCustomerCode" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getCustomerCode"
+                  IsViewObjectMethod="false" DataControl="DashboardAMDataControl"
+                  InstanceName="data.DashboardAMDataControl.dataProvider"
+                  ReturnName="data.DashboardAMDataControl.methodResults.getCustomerCode_DashboardAMDataControl_dataProvider_getCustomerCode_result">
+      <NamedData NDName="vendorId" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="RecentOrdersVO1Iterator" id="RecentOrdersVO1">
+      <nodeDefinition DefName="model.bspl.dashboard.views.RecentOrdersVO" Name="RecentOrdersVO10">
+        <AttrNames>
+          <Item Value="DocNo"/>
+          <Item Value="CreationDate"/>
+          <Item Value="Amount"/>
+          <Item Value="Remarks"/>
+          <Item Value="SessionId"/>
+          <Item Value="CustCode"/>
+          <Item Value="UnitCd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="callOrdersProcedure" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callOrdersProcedure" IsViewObjectMethod="false" DataControl="DashboardAMDataControl"
+                  InstanceName="data.DashboardAMDataControl.dataProvider"
+                  ReturnName="data.DashboardAMDataControl.methodResults.callOrdersProcedure_DashboardAMDataControl_dataProvider_callOrdersProcedure_result"/>
+    <methodAction id="getCustomerName" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getCustomerName"
+                  IsViewObjectMethod="false" DataControl="DashboardAMDataControl"
+                  InstanceName="data.DashboardAMDataControl.dataProvider"
+                  ReturnName="data.DashboardAMDataControl.methodResults.getCustomerName_DashboardAMDataControl_dataProvider_getCustomerName_result">
+      <NamedData NDName="vendorId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="UserSessionVO1Iterator" id="LoginTm">
+      <AttrNames>
+        <Item Value="LoginTm"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UserSessionVO1Iterator" id="LoginDate">
+      <AttrNames>
+        <Item Value="LoginDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UserSessionVO1Iterator" id="MachineIp">
+      <AttrNames>
+        <Item Value="MachineIp"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

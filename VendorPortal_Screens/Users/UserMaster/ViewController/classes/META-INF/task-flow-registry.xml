@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="WEB-INF/bspl/UserMaster/ui/flow/CreateUserTF.xml" id="CreateUserTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="mode"/>
+      <input-parameter name="vendorId"/>
+      <input-parameter name="lineId"/>
+      <input-parameter name="userRole"/>
+      <input-parameter name="userId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/bspl/UserMaster/ui/flow/SearchUserTF.xml" id="SearchUserTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="mode"/>
+      <input-parameter name="vendorId"/>
+      <input-parameter name="lineId"/>
+      <input-parameter name="userRole"/>
+      <input-parameter name="userId"/>
+   </task-flow-descriptor>
+</task-flow-registry>

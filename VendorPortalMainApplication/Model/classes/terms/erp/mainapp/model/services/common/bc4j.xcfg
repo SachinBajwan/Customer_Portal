@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="terms.erp.mainapp.model.services.TermsMainAppAM">
+      <AppModuleConfig DeployPlatform="LOCAL" name="TermsMainAppAMLocal" ApplicationName="terms.erp.mainapp.model.services.TermsMainAppAM" jbo.project="terms.erp.mainapp.model.Model">
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="terms.erp.mainapp.model.services.TermsMainAppAM"/>
+         <Custom ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" ns0:JDBCDataSource="java:comp/env/jdbc/APPLICATIONDBDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="terms.erp.mainapp.model.Model" ApplicationName="terms.erp.mainapp.model.services.TermsMainAppAM" DeployPlatform="LOCAL" name="TermsMainAppAMShared">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.resetnontransactionalstate="false" jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="terms.erp.mainapp.model.services.TermsMainAppAM"/>
+         <Custom ns0:JDBCDataSource="java:comp/env/jdbc/APPLICATIONDBDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

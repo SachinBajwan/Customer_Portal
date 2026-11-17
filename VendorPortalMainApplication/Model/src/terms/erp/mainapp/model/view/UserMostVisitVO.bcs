@@ -1,0 +1,19 @@
+//Groovy Scripts for terms.erp.mainapp.model.view.UserMostVisitVO
+
+package terms.erp.mainapp.model.view
+
+import oracle.jbo.script.annotation.VariableExpression;
+
+@VariableExpression(path="PUserId")
+def PUserId_VariableScript_Variable()
+{
+adf.context.expressionEvaluator.evaluate('#{pageFlowScope.UserId}')
+}
+
+
+@VariableExpression(path="PUnit")
+def PUnit_VariableScript_Variable()
+{
+adf.context.expressionEvaluator.evaluate('#{pageFlowScope.UnitCode}')
+}
+

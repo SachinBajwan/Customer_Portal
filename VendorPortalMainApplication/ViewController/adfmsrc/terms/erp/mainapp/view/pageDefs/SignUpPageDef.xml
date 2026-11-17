@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SignUpPageDef"
+                Package="terms.erp.mainapp.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PortalVendorServicesVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalVendorServicesVO1Iterator"/>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+    <taskFlow id="CustomerOnboardTF1" taskFlowId="/WEB-INF/CustomerOnboardTF.xml#CustomerOnboardTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <action id="Commit" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <methodAction id="InfoFunction" RequiresUpdateModel="true" Action="invokeMethod" MethodName="InfoFunction"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.InfoFunction_TermsMainAppAMDataControl_dataProvider_InfoFunction_result"/>
+    <tree IterBinding="PortalVendorServicesVO1Iterator" id="PortalVendorServicesVO1">
+      <nodeDefinition DefName="terms.erp.mainapp.model.view.PortalVendorServicesVO" Name="PortalVendorServicesVO10">
+        <AttrNames>
+          <Item Value="Description"/>
+          <Item Value="CheckBox" Binds="CheckBox"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="PortalVendorServicesVO1Iterator" id="CheckBox" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CheckBox"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="selectVendorServices" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="selectVendorServices" IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.selectVendorServices_TermsMainAppAMDataControl_dataProvider_selectVendorServices_result"/>
+    <methodAction id="generateRegistrationId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="generateRegistrationId" IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.generateRegistrationId_TermsMainAppAMDataControl_dataProvider_generateRegistrationId_result"/>
+    <methodAction id="setStateFromGst" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setStateFromGst"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.setStateFromGst_TermsMainAppAMDataControl_dataProvider_setStateFromGst_result">
+      <NamedData NDName="stateCode" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="TempPassword">
+      <AttrNames>
+        <Item Value="TempPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="VendorId">
+      <AttrNames>
+        <Item Value="VendorId"/>
+      </AttrNames>
+    </attributeValues>
+    <!--<listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_RegFlag" id="RegFlag1"/>-->
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Name1">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="GstRegNo1">
+      <AttrNames>
+        <Item Value="GstRegNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="VendorId1">
+      <AttrNames>
+        <Item Value="VendorId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="RegistrationId1">
+      <AttrNames>
+        <Item Value="RegistrationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="TempPassword1">
+      <AttrNames>
+        <Item Value="TempPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="ObjectVersionNumber">
+      <AttrNames>
+        <Item Value="ObjectVersionNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="PanNo1">
+      <AttrNames>
+        <Item Value="PanNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Address1">
+      <AttrNames>
+        <Item Value="Address1"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_CountryName" id="CountryName"/>
+    <listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_StateName" id="StateName"/>
+    <listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_DistrictName"
+                  id="DistrictName"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="PinCode">
+      <AttrNames>
+        <Item Value="PinCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Country">
+      <AttrNames>
+        <Item Value="Country"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="State">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="District">
+      <AttrNames>
+        <Item Value="District"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="LineId">
+      <AttrNames>
+        <Item Value="LineId"/>
+      </AttrNames>
+    </attributeValues>
+    <!--<listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_VendorFlag" id="VendorFlag"/>-->
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Mobile">
+      <AttrNames>
+        <Item Value="Mobile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Website">
+      <AttrNames>
+        <Item Value="Website"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="ContactPerson">
+      <AttrNames>
+        <Item Value="ContactPerson"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="ContactFirstName">
+      <AttrNames>
+        <Item Value="ContactFirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="ContactLastName">
+      <AttrNames>
+        <Item Value="ContactLastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Phones">
+      <AttrNames>
+        <Item Value="Phones"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Fax">
+      <AttrNames>
+        <Item Value="Fax"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="generateUserLogin" RequiresUpdateModel="true" Action="invokeMethod" MethodName="generateUserLogin"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.generateUserLogin_TermsMainAppAMDataControl_dataProvider_generateUserLogin_result">
+      <NamedData NDName="First" NDType="java.lang.String"/>
+      <NamedData NDName="Middle" NDType="java.lang.String"/>
+      <NamedData NDName="Last" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="Loginname">
+      <AttrNames>
+        <Item Value="Loginname"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="createProfileData" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createProfileData"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.createProfileData_TermsMainAppAMDataControl_dataProvider_createProfileData_result">
+      <NamedData NDName="LineId" NDType="java.lang.Long"/>
+      <NamedData NDName="UserId" NDType="java.lang.String"/>
+    </methodAction>
+    <listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_VendorTypDesc"
+                  id="VendorTypDesc"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="VendorType">
+      <AttrNames>
+        <Item Value="VendorType"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_RegFlgDesc" id="RegFlgDesc"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="RegFlag">
+      <AttrNames>
+        <Item Value="RegFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_VendorFlgDesc"
+                  id="VendorFlgDesc1"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="VendorFlag">
+      <AttrNames>
+        <Item Value="VendorFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="AadharCard">
+      <AttrNames>
+        <Item Value="AadharCard"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="checkPanDupliate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkPanDupliate"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.checkPanDupliate_TermsMainAppAMDataControl_dataProvider_checkPanDupliate_result">
+      <NamedData NDName="pan" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="checkAadharDupliate" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="checkAadharDupliate" IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.checkAadharDupliate_TermsMainAppAMDataControl_dataProvider_checkAadharDupliate_result">
+      <NamedData NDName="aadhar" NDType="java.lang.String"/>
+    </methodAction>
+    <listOfValues IterBinding="PortalVendorRegdVO1Iterator" StaticList="false" Uses="LOV_CityName" id="CityName"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="City">
+      <AttrNames>
+        <Item Value="City"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="PortalVendorRegdVO1Iterator" id="CityExist" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CityExist"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="OtherCity">
+      <AttrNames>
+        <Item Value="OtherCity"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

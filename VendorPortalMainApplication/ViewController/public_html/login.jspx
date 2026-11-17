@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="Login Page" id="d1">
+            <af:messages id="m1"/>
+            <af:resource type="javascript" source="/resource/js/LoginBackDisabled.js"/>
+            <f:facet name="metaContainer">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <af:resource type="css" source="/resource/css/bootstrap.min.css"/>
+                <af:resource type="css" source="/resource/css/font-awesome.min.css"/>
+                <af:resource type="css" source="/resource/css/Login.css"/>
+            </f:facet>
+            <af:resource type="javascript">
+              function reloadCaptcha(event) {
+                  var img = document.getElementById('capImg');
+                  if (img) {
+                      // Strip any existing query parameters and append a fresh timestamp
+                      var baseUrl = img.src.split('?')[0];
+                      img.src = baseUrl + '?t=' + new Date().getTime();
+                  }
+                  // Stop default action if needed
+                  event.cancel();
+              }
+            </af:resource>
+            <af:form id="f1" defaultCommand="cl1">
+                <af:panelGroupLayout id="pgl1" layout="vertical" valign="top" styleClass="AFStretchWidth"
+                                     inlineStyle='background-image:url("resource/image/portal.jpg"); background-repeat:no-repeat; background-size:100% auto; background-clip:border-box; background-attachment:scroll; background-origin:padding-box; background-position:0% 50%;'
+                                     rendered="false">
+                    <div class="main-box">&#160;</div>
+                    <div class="middle">
+                        <div class="login" style="height:326px;">
+                            <div>
+                                <span id="imglogo">
+                                    <a href="#">
+                                        <img src="resource/image/portal_logo.png" width="110" height="83"
+                                             alt="BSPL Logo"/></a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                              popupCanceledListener="#{ResetPasswordBean.popUpCancelListener}">
+                        <af:dialog id="d4" dialogListener="#{ResetPasswordBean.passwordDialogDL}"
+                                   binding="#{ResetPasswordBean.pwdDialogBind}"
+                                   type="#{ResetPasswordBean.pswdMode=='O'? 'okCancel' : 'none' }"
+                                   title="	Reset Password">
+                            <f:facet name="buttonBar"/>
+                            <af:panelGroupLayout id="pgl4" layout="horizontal" valign="top" halign="left"
+                                                 inlineStyle="Margin-left:10px;">
+                                <af:panelGroupLayout id="pgl5" layout="vertical" valign="middle" halign="left"
+                                                     binding="#{ResetPasswordBean.userNamePanelBind}"
+                                                     visible="#{ResetPasswordBean.pswdMode=='U' }">
+                                    <af:panelGroupLayout id="pgl6" layout="horizontal" valign="middle" halign="center">
+                                        <af:inputText id="it12" contentStyle="width:200px;font-size:14px;"
+                                                      placeholder="User Name" autoSubmit="true"
+                                                      binding="#{ResetPasswordBean.userNameBind}"/>
+                                        <af:button text="	Next" id="b11"
+                                                   actionListener="#{ResetPasswordBean.validateUserAL}"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl7" layout="vertical" valign="top" halign="left"
+                                                     binding="#{ResetPasswordBean.otpPanelFormBind}"
+                                                     visible="#{ResetPasswordBean.pswdMode=='A' }">
+                                    <af:message id="m5" messageType="info"
+                                                message="Please enter the OTP that has been sent to your verified email id."/>
+                                    <af:panelGroupLayout id="pgl8" layout="vertical" halign="right"
+                                                         inlineStyle="width:300px;">
+                                        <af:inputText id="it11" placeholder="OTP"
+                                                      contentStyle="width:200px;font-size:14px;" autoSubmit="true"
+                                                      binding="#{ResetPasswordBean.otpFieldBind}"/>
+                                        <af:panelGroupLayout id="pgl9" layout="horizontal" valign="middle"
+                                                             halign="right" styleClass="AFStretchWidth">
+                                            <af:button text="	Resend OTP" id="b13"
+                                                       actionListener="#{ResetPasswordBean.sendOTPActionAL}"/>
+                                            <af:button text="Next" id="b12"
+                                                       actionListener="#{ResetPasswordBean.goToChangePasswordAL}"/>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl10" layout="vertical" valign="top" halign="left"
+                                                     binding="#{ResetPasswordBean.pwdChangePanelFormBind}"
+                                                     visible="#{ResetPasswordBean.pswdMode=='O' }">
+                                    <af:inputText id="it13" placeholder="	Password"
+                                                  contentStyle="width:200px;font-size:14px;"
+                                                  binding="#{ResetPasswordBean.passwordBind}"
+                                                  validator="#{ResetPasswordBean.validatePassword}" secret="true"
+                                                  autoSubmit="true" partialTriggers="it14"/>
+                                    <af:inputText id="it14" placeholder="Re-enter Password"
+                                                  contentStyle="width:200px;font-size:14px;"
+                                                  binding="#{ResetPasswordBean.confirmPasswordBind}" secret="true"
+                                                  autoSubmit="true" inlineStyle="margin-top:5px;"
+                                                  validator="#{ResetPasswordBean.validateConfirmPassword}"/>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:dialog>
+                    </af:popup>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl12" styleClass="AFStretchWidth login-maincontainer">
+                    <af:panelGroupLayout id="pgl2" styleClass="login-main-wrapper">
+                        <af:panelGroupLayout styleClass="login-section">
+                            
+                            <af:panelGroupLayout id="pgl14" styleClass="left-panel">
+                                <af:panelGroupLayout styleClass="brand-row">
+                                    <af:outputText value="CP" styleClass="brand-logo"/>
+                                    <af:outputText value="CUSTOMER PORTAL" styleClass="brand-name"/>                        
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="welcome-wrapper">
+                                    <af:outputText value="Welcome Back" styleClass="welcome-title">
+                                        Welcome <af:outputText value="Back" styleClass="welcome-highlight"/>
+                                    </af:outputText>
+                                    <af:outputText value="Place orders, track dispatches and download invoices "
+                                               styleClass="welcome-text"/>
+                                    <af:outputText value="- all in one secure place."
+                                               styleClass="welcome-text"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout layout="vertical" styleClass="feature-list">                                    
+                                    <af:outputText value="✓   Real-time order tracking" styleClass="feature"/>                                        
+                                    <af:outputText value="✓   One-click reordering" styleClass="feature"/>                                        
+                                    <af:outputText value="✓   Sale Order, Dispatch &amp; Invoice reports" styleClass="feature"/>                                    
+                                </af:panelGroupLayout>
+                                
+                                <af:panelGroupLayout styleClass="left-footer">                                    
+                                    <af:outputText value="© 2026 Company Ltd. | Privacy Notice | Terms of Use"/>                                    
+                                </af:panelGroupLayout>
+                                
+                            </af:panelGroupLayout>
+                            
+                            <af:panelGroupLayout id="LoginForm" styleClass="login-container">
+                                <af:panelGroupLayout styleClass="login-container-main">
+                                <af:panelGroupLayout styleClass="brand-row brand-row-mobile">
+                                    <af:outputText value="CP" styleClass="brand-logo"/>
+                                    <af:outputText value="CUSTOMER PORTAL" styleClass="brand-name"/>                        
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl13" styleClass="login-wrapper" rendered="true">
+                                    <af:outputText value="Sign in to your account" styleClass="login-title"/>
+                                    <af:selectOneRadio id="sorConsent" label="Login via :" value="P" layout="horizontal"
+                                                       autoSubmit="true" valueChangeListener="#{LoginBean.loginMode}"
+                                                       binding="#{LoginBean.bindLoginMode}"
+                                                       styleClass="login-mode-radio">
+                                        <af:selectItem label="Customer Code" value="P" id="siYes"/>
+                                        <af:selectItem label="Email" value="E" id="siNo"/>
+                                    </af:selectOneRadio>
+                                    <af:panelFormLayout id="pfl1" binding="#{LoginBean.bindUserNameForm}" styleClass="login-inputs">
+                                        <af:inputText value="#{bindings.UserName.inputValue}"
+                                                      required="#{bindings.UserName.hints.mandatory}"
+                                                      columns="#{bindings.UserName.hints.displayWidth}"
+                                                      maximumLength="#{bindings.UserName.hints.precision}"
+                                                      shortDesc="#{bindings.UserName.hints.tooltip}" id="it1"
+                                                      binding="#{LoginBean.bindUserName}" placeholder="Customer Code *"
+                                                       autoSubmit="true">
+                                            <f:validator binding="#{bindings.UserName.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Password.inputValue}"
+                                                      required="#{bindings.Password.hints.mandatory}"
+                                                      columns="#{bindings.Password.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Password.hints.precision}"
+                                                      shortDesc="#{bindings.Password.hints.tooltip}" id="it3"
+                                                      binding="#{LoginBean.bindUserPassword}"
+                                                      placeholder="Password" secret="true" autoComplete="off">
+                                            <f:validator binding="#{bindings.Password.validator}"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                    <af:panelFormLayout id="pfl2" binding="#{LoginBean.bindEmailOtpForm}" styleClass="login-inputs" visible="false">
+                                        <f:facet name="footer"/>
+                                        <af:inputText value="#{bindings.Email.inputValue}"
+                                                      required="#{bindings.Email.hints.mandatory}"
+                                                      columns="#{bindings.Email.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Email.hints.precision}"
+                                                      shortDesc="#{bindings.Email.hints.tooltip}" id="it2"
+                                                       placeholder="Registered Email *"
+                                                      binding="#{LoginBean.bindRegEmailId}" autoSubmit="true"
+                                                      valueChangeListener="#{LoginBean.loginEmailVce}">
+                                            <f:validator binding="#{bindings.Email.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Email_otp.inputValue}"
+                                                      required="#{bindings.Email_otp.hints.mandatory}"
+                                                      columns="#{bindings.Email_otp.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Email_otp.hints.precision}"
+                                                      shortDesc="#{bindings.Email_otp.hints.tooltip}" id="it4" secret="true"
+                                                       placeholder="OTP" autoComplete="off"
+                                                      binding="#{LoginBean.bindEmailOtp}">
+                                            <f:validator binding="#{bindings.Email_otp.validator}"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                    <af:panelGroupLayout id="pgl_captcha_section" styleClass="captcha-wrapper">
+                                        <!--<af:outputLabel value="Enter CAPTCHA *" id="ol_cap_title" styleClass="panel-title"/>-->
+                                        <!-- CAPTCHA Image & Refresh Action Row -->
+                                        <!-- Wrapper panel with partial trigger tied to the refresh button ID -->
+                                        <af:panelGroupLayout id="pgl_captcha_wrapper" styleClass="captcha-main"
+                                                             partialTriggers="b_refresh">
+                                            <!-- Native ADF image component bound to the timestamp -->
+                                            <af:image source="/captcha.png?t=#{LoginBean.captchaTimestamp}" id="captchaImg"
+                                                      inlineStyle="border: 1px solid #d0d7de; border-radius: 4px; height: 42px; width: 180px;"/>
+                                            <!-- Refresh Button with immediate="true" -->
+                                            <af:button id="b_refresh" styleClass="refresh-btn refresh-icon-btn"
+                                                       actionListener="#{LoginBean.refreshCaptcha}" partialSubmit="true"
+                                                       immediate="true"/>
+                                        </af:panelGroupLayout>
+                                        <!-- Verification Code Input & Verify Action Row -->
+                                        <af:panelGroupLayout id="pgl_verify_row">
+                                            <af:inputText id="it_vcode" maximumLength="6"
+                                                          styleClass="verification-input"
+                                                          value="#{LoginBean.verificationCode}"/>
+                                            <!--<af:button text="Verify CAPTCHA" id="b_verify" styleClass="btn btn-primary"
+                                                       inlineStyle="margin-left: 15px; margin-bottom: 2px;"/>-->
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout styleClass="remember-row">
+                                    <af:selectBooleanCheckbox id="remember" text="Keep me signed in on this device"
+                                                              visible="false"/>
+                                    <af:commandLink text="Forgot Password?" styleClass="forgot-link"
+                                                    actionListener="#{LoginBean.gotoForgotPassword}"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl3" styleClass="AFStretchWidth" valign="middle">
+                                    <af:commandLink text="Login" id="cl1" useWindow="true" styleClass="login-button"
+                                                    actionListener="#{LoginBean.doLoginAL}"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout id="pgl11" styleClass="AFStretchWidth signup-wrapper">
+                                    <af:commandLink text="New User ? Register" id="cl3" useWindow="true"
+                                                    actionListener="#{LoginBean.signUp}"/>
+                                    <!--<af:commandLink text="Forgot Password ?" id="cl13"
+                                                    inlineStyle="color:#07447d;font-weight:bold;padding:3px;text-decoration:none;float: right; margin-right: 120px; margin-bottom: 4px;"
+                                                    actionListener="#{LoginBean.gotoForgotPassword}">
+                                        <af:showPopupBehavior popupId="p1"/>
+                                    </af:commandLink>-->
+                                    <af:commandLink text="Change your Temporary Password Here !" id="cl12"
+                                                    actionListener="#{LoginBean.gotoCreateLogin}" useWindow="false"
+                                                    styleClass="temporary-link"/>
+                                </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

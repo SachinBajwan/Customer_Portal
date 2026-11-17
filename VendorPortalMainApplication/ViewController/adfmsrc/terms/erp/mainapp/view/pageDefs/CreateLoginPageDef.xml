@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="CreateLoginPageDef"
+                Package="terms.erp.mainapp.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="UserMasterVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl" id="UserMasterVO1Iterator"/>
+    <iterator Binds="PortalVendorRegdVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="PortalVendorRegdVO1Iterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="validateTempId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateTempId"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.validateTempId_TermsMainAppAMDataControl_dataProvider_validateTempId_result">
+      <NamedData NDName="user" NDType="java.lang.String"/>
+      <NamedData NDName="pass" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="UserMasterVO1Iterator" id="UserName">
+      <AttrNames>
+        <Item Value="UserName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UserMasterVO1Iterator" id="UserId">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <methodAction id="createLogin" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createLogin"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.createLogin_TermsMainAppAMDataControl_dataProvider_createLogin_result">
+      <NamedData NDName="user" NDType="java.lang.String"/>
+      <NamedData NDName="pass" NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="UserMasterVO1Iterator" id="CreateInsert" InstanceName="TermsMainAppAMDataControl.UserMasterVO1"
+            DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="PortalVendorRegdVO1Iterator" id="TempLoginUsed">
+      <AttrNames>
+        <Item Value="TempLoginUsed"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

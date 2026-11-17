@@ -1,0 +1,608 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:h="http://java.sun.com/jsf/html">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="SignUp.jspx" id="d1">
+            <f:facet name="metaContainer">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <af:resource type="css" source="/resource/css/bootstrap.min.css"/>
+                <af:resource type="css" source="/resource/css/customerOnboarding.css"/>
+            </f:facet>
+            <af:messages id="m1"/>
+            <af:form id="f1" usesUpload="true" visible= "#{pageFlowScope.sign ne null}">
+                <af:panelGroupLayout id="main" styleClass="onboarding-page">
+                <!-- HEADER -->
+                    <af:panelGroupLayout id="pgl5" styleClass="signup-header">
+                        <af:panelGroupLayout styleClass="brand-row">
+                            <af:outputText value="CP" styleClass="brand-logo"/>
+                            <af:outputText value="CUSTOMER PORTAL" styleClass="brand-name"/>                        
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>                    
+                    <!-- PAGE TITLE -->    
+                    <!--<af:panelGroupLayout id="heading"
+                                         layout="vertical"
+                                         styleClass="page-heading" rendered="false">    
+                        <af:outputText value="Customer Onboarding"
+                                       id="headingText"
+                                       styleClass="page-title"/>    
+                        <af:outputText
+                            value="Complete 5 steps. Your progress is auto-saved as draft."
+                            id="subHeading"
+                            styleClass="page-subtitle"/>    
+                    </af:panelGroupLayout>-->                    
+                     <!-- TRAIN -->                    
+                     <!-- CURRENT PAGE -->
+                    <af:panelGroupLayout styleClass="step-content-main">
+                        <af:panelGroupLayout id="content" styleClass="step-content">
+                            <af:region value="#{bindings.CustomerOnboardTF1.regionModel}" id="r1">                            
+                            </af:region>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
+               <!-- <af:decorativeBox id="db1" styleClass="AFStretchWidth"
+                                  inlineStyle="border:6px solid #3973ac; background-color:#3973ac;" rendered="false">
+                    <f:facet name="top">
+                        <af:panelGroupLayout id="pgl2" halign="center" layout="horizontal">
+                            <h:outputLabel value="Sign Up" id="ol1"
+                                           style="color:#ffffff; font-size:x-large; font-weight:bold; font-family:sans-serif;"/>
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                      binding="#{LoginBean.bindPopOtp}"
+                                      popupCanceledListener="#{LoginBean.cancelPopup}">
+                                <af:dialog id="d2" type="ok" title="Check your Email for OTP"
+                                           dialogListener="#{LoginBean.otpDialog}">
+                                    <f:facet name="buttonBar"/>
+                                    <af:inputText id="it10" autoSubmit="true" binding="#{LoginBean.bindInputOtp}"
+                                                  maximumLength="4" contentStyle="width:80px;" required="true"/>
+                                    <af:spacer width="10" height="20" id="s6"/>
+                                    <af:outputFormatted value="OTP is not correct" id="of1"
+                                                        inlineStyle="font-weight:bold; color:Red;"
+                                                        binding="#{LoginBean.bindMsgOutPut}" visible="false"/>
+                                </af:dialog>
+                            </af:popup>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="center"/>
+                </af:decorativeBox>
+                <af:spacer width="0" height="30" id="s2"/>
+                <af:spacer width="0" height="30" id="s1"/>
+                <af:panelBorderLayout id="pbl1" inlineStyle="color:Fuchsia;" rendered="false">
+                    <f:facet name="top"/>
+                    <f:facet name="bottom">
+                        <af:panelGroupLayout id="pgl3" halign="center" layout="horizontal">
+                            <af:panelGroupLayout id="pgl4" layout="vertical" halign="center">
+                                <af:spacer width="0" height="10" id="s4"/>
+                                <af:toolbar id="t1">
+                                    <af:button id="b3" icon="/resource/image/previous(1).png"
+                                               binding="#{LoginBean.bindPreviousBtn}" visible="false"
+                                               actionListener="#{LoginBean.prevTabCall}"/>
+                                    <af:button id="b4" icon="/resource/image/next(1).png"
+                                               binding="#{LoginBean.bindNextBtn}"
+                                               actionListener="#{LoginBean.nextTabCall}"/>
+                                    <af:button id="b2" actionListener="#{LoginBean.saveNewRegistration}"
+                                               icon="/resource/image/save_ena.png" rendered="false"/>
+                                    <af:button id="b5"
+                                               actionListener="#{LoginBean.saveNewRegistration}"
+                                               binding="#{LoginBean.saveBtnSignup}" styleClass="myButtonStyle"
+                                               text="Submit"/>
+                                    <af:button id="b1" immediate="true"
+                                               icon="/resource/image/back.png" rendered="false"/>
+                                    <af:button id="b6" action="#{LoginBean.onLogout}"
+                                               actionListener="#{LoginBean.backToLogin}" styleClass="myButtonStyle" immediate="true"
+                                               text="Back to Login"/>
+                                    <af:spacer width="10" height="0" id="s7"/>
+                                </af:toolbar>
+                                <af:toolbar id="t3"/>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="100" height="0" id="s5"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <af:panelHeader text="Welcome Vendor!" id="ph1" binding="#{LoginBean.mainPanelHeader}">
+                        <f:facet name="context">
+                            <af:outputFormatted value="#{pageFlowScope.userName}" id="of2"
+                                                inlineStyle="padding-top:18px; font-weight:bolder; font-size:14px; float:left; text-align:left; margin-bottom:7px; margin-top: -19px;"
+                                                visible="false"/>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="menuBar"/>
+                        <f:facet name="legend">
+                            <af:panelGroupLayout id="pgl5" halign="center">
+                                <af:spacer width="250" height="0" id="s8"/>
+                                <af:panelGroupLayout id="pgl6" valign="middle" halign="center" layout="vertical">
+                                    <af:outputFormatted value="Congratulations!! Your request has been submitted successfully."
+                                                        id="of4"
+                                                        inlineStyle="font-weight:bold; color:Navy; font-size:large;"
+                                                        binding="#{LoginBean.bindSignUpSuccessMsg}" visible="false"/>
+                                    <af:spacer width="0" height="10" id="s9"/>
+                                    <af:outputFormatted value="Registraion Id : #{bindings.RegistrationId1.inputValue}"
+                                                        id="of3"
+                                                        inlineStyle="font-weight:bold; color:#31944b; font-size:large;"
+                                                        binding="#{LoginBean.bindMsgRegId}" visible="false"/>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="info"/>
+                        <af:spacer width="0" height="30" id="s3"/>
+                        <af:panelGroupLayout id="pgl1" layout="horizontal" inlineStyle="width:1200px;">
+                            <af:panelTabbed id="pt1" styleClass="AFStretchWidth" binding="#{LoginBean.bindpanelTab}">
+                                <af:showDetailItem id="tab1" text="General" disclosed="true"
+                                                   binding="#{LoginBean.bindGeneralTab}">
+                                    <af:panelFormLayout id="pfl5" maxColumns="5" fieldWidth="200" labelWidth="180"
+                                                        rows="3"
+                                                        inlineStyle="line-height:200%; font-weight:normal; font-size:large;">
+                                        <af:inputText value="#{bindings.Name1.inputValue}"
+                                                      label="#{bindings.Name1.hints.label}"
+                                                      columns="#{bindings.Name1.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Name1.hints.precision}"
+                                                      shortDesc="#{bindings.Name1.hints.tooltip}" id="it20"
+                                                      autoSubmit="true" required="true"
+                                                      binding="#{LoginBean.bindFirmName}"
+                                                      valueChangeListener="#{LoginBean.firmNameVal}"
+                                                      contentStyle="width:180px;"
+                                                      >
+                                            <f:validator binding="#{bindings.Name1.validator}"/>
+                                        </af:inputText>
+                                        <af:inputComboboxListOfValues id="vendorTypDescId"
+                                                                      popupTitle="Search and Select: #{bindings.VendorTypDesc.hints.label}"
+                                                                      value="#{bindings.VendorTypDesc.inputValue}"
+                                                                      label="#{bindings.VendorTypDesc.hints.label}"
+                                                                      model="#{bindings.VendorTypDesc.listOfValuesModel}"
+                                                                      columns="#{bindings.VendorTypDesc.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.VendorTypDesc.hints.tooltip}"
+                                                                      binding="#{LoginBean.bindVendTyp}" required="true"
+                                                                      contentStyle="width:162px;">
+                                            <f:validator binding="#{bindings.VendorTypDesc.validator}"/>
+                                        </af:inputComboboxListOfValues>
+                                        <af:inputComboboxListOfValues id="regFlgDescId"
+                                                                      popupTitle="Search and Select: #{bindings.RegFlgDesc.hints.label}"
+                                                                      value="#{bindings.RegFlgDesc.inputValue}"
+                                                                      label="#{bindings.RegFlgDesc.hints.label}"
+                                                                      model="#{bindings.RegFlgDesc.listOfValuesModel}"
+                                                                      columns="#{bindings.RegFlgDesc.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.RegFlgDesc.hints.tooltip}"
+                                                                      required="true" autoSubmit="true"
+                                                                      valueChangeListener="#{LoginBean.regFlag}"
+                                                                      binding="#{LoginBean.bindRegFlg}"
+                                                                      contentStyle="width:162px;"
+                                                                      disabled="#{bindings.RegFlgDesc.inputValue !=null}">
+                                            <f:validator binding="#{bindings.RegFlgDesc.validator}"/>
+                                        </af:inputComboboxListOfValues>
+                                        <af:inputText value="#{bindings.GstRegNo1.inputValue}"
+                                                      label="#{bindings.GstRegNo1.hints.label}"
+                                                      required="#{bindings.RegFlag.inputValue == 'R'}"
+                                                      columns="#{bindings.GstRegNo1.hints.displayWidth}"
+                                                      maximumLength="15" shortDesc="#{bindings.GstRegNo1.hints.tooltip}"
+                                                      id="it21" binding="#{LoginBean.bindGstNo}"
+                                                      valueChangeListener="#{LoginBean.validateGstNo}" autoSubmit="true"
+                                                      disabled="#{bindings.RegFlag.inputValue == 'U'}"
+                                                      contentStyle="width:180px;text-transform:uppercase;">
+                                            <f:validator binding="#{bindings.GstRegNo1.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.AadharCard.inputValue}"
+                                                      label="#{bindings.AadharCard.hints.label}"
+                                                      required="#{bindings.AadharCard.hints.mandatory}"
+                                                      columns="#{bindings.AadharCard.hints.displayWidth}"
+                                                      maximumLength="16"
+                                                      shortDesc="#{bindings.AadharCard.hints.tooltip}" id="it23"
+                                                      contentStyle="width:180px;text-transform:uppercase;"
+                                                      valueChangeListener="#{LoginBean.validateAadhar}"
+                                                      binding="#{LoginBean.bindAadhar}" autoSubmit="true">
+                                            <f:validator binding="#{bindings.AadharCard.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.PanNo1.inputValue}"
+                                                      label="#{bindings.PanNo1.hints.label}"
+                                                      required="#{bindings.RegFlag.inputValue == 'U'}"
+                                                      columns="#{bindings.PanNo1.hints.displayWidth}" maximumLength="10"
+                                                      shortDesc="#{bindings.PanNo1.hints.tooltip}" id="it31"
+                                                      binding="#{LoginBean.bindPanNo}"
+                                                      valueChangeListener="#{LoginBean.validatePAN}" autoSubmit="true"
+                                                      disabled="#{bindings.RegFlag.inputValue == 'R'}"
+                                                      contentStyle="width:180px;text-transform:uppercase;"
+                                                      validator="#{LoginBean.validatePAN}">
+                                            <f:validator binding="#{bindings.PanNo1.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.VendorType.inputValue}"
+                                                      label="#{bindings.VendorType.hints.label}"
+                                                      required="#{bindings.VendorType.hints.mandatory}"
+                                                      columns="#{bindings.VendorType.hints.displayWidth}"
+                                                      maximumLength="#{bindings.VendorType.hints.precision}"
+                                                      shortDesc="#{bindings.VendorType.hints.tooltip}" id="it19"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.VendorType.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.RegFlag.inputValue}"
+                                                      label="#{bindings.RegFlag.hints.label}"
+                                                      required="#{bindings.RegFlag.hints.mandatory}"
+                                                      columns="#{bindings.RegFlag.hints.displayWidth}"
+                                                      maximumLength="#{bindings.RegFlag.hints.precision}"
+                                                      shortDesc="#{bindings.RegFlag.hints.tooltip}" id="it22"
+                                                      partialTriggers="regFlgDescId" binding="#{LoginBean.bindRegFlag}"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.RegFlag.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.VendorId1.inputValue}"
+                                                      label="#{bindings.VendorId1.hints.label}"
+                                                      required="#{bindings.VendorId1.hints.mandatory}"
+                                                      columns="#{bindings.VendorId1.hints.displayWidth}"
+                                                      maximumLength="#{bindings.VendorId1.hints.precision}"
+                                                      shortDesc="#{bindings.VendorId1.hints.tooltip}" id="it24"
+                                                      contentStyle="width:180px;" binding="#{LoginBean.bindVendorId}"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.VendorId1.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.VendorId1.format}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Loginname.inputValue}"
+                                                      label="#{bindings.Loginname.hints.label}"
+                                                      required="#{bindings.Loginname.hints.mandatory}"
+                                                      columns="#{bindings.Loginname.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Loginname.hints.precision}"
+                                                      shortDesc="#{bindings.Loginname.hints.tooltip}" id="it12"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.Loginname.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.RegistrationId1.inputValue}"
+                                                      label="#{bindings.RegistrationId1.hints.label}"
+                                                      columns="#{bindings.RegistrationId1.hints.displayWidth}"
+                                                      maximumLength="#{bindings.RegistrationId1.hints.precision}"
+                                                      shortDesc="#{bindings.RegistrationId1.hints.tooltip}" id="it25"
+                                                      contentStyle="width:180px;"
+                                                      binding="#{LoginBean.bindRegistrationId}" visible="false">
+                                            <f:validator binding="#{bindings.RegistrationId1.validator}"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                    <af:panelFormLayout id="pfl3">
+                                        <af:inputText value="#{bindings.LineId.inputValue}"
+                                                      label="#{bindings.LineId.hints.label}"
+                                                      required="#{bindings.LineId.hints.mandatory}"
+                                                      columns="#{bindings.LineId.hints.displayWidth}"
+                                                      maximumLength="#{bindings.LineId.hints.precision}"
+                                                      shortDesc="#{bindings.LineId.hints.tooltip}" id="it18"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.LineId.validator}"/>
+                                            <af:convertNumber groupingUsed="false" pattern="#{bindings.LineId.format}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.TempPassword1.inputValue}"
+                                                      label="#{bindings.TempPassword1.hints.label}"
+                                                      required="#{bindings.TempPassword1.hints.mandatory}"
+                                                      columns="#{bindings.TempPassword1.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TempPassword1.hints.precision}"
+                                                      shortDesc="#{bindings.TempPassword1.hints.tooltip}" id="it26"
+                                                      contentStyle="width:180px;" visible="false">
+                                            <f:validator binding="#{bindings.TempPassword1.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.LastUpdatedBy.inputValue}"
+                                                      label="#{bindings.LastUpdatedBy.hints.label}"
+                                                      required="#{bindings.LastUpdatedBy.hints.mandatory}"
+                                                      columns="#{bindings.LastUpdatedBy.hints.displayWidth}"
+                                                      maximumLength="#{bindings.LastUpdatedBy.hints.precision}"
+                                                      shortDesc="#{bindings.LastUpdatedBy.hints.tooltip}" id="it29"
+                                                      contentStyle="width:180px;" visible="false">
+                                            <f:validator binding="#{bindings.LastUpdatedBy.validator}"/>
+                                        </af:inputText>
+                                        <af:inputDate value="#{bindings.LastUpdateDate.inputValue}"
+                                                      label="#{bindings.LastUpdateDate.hints.label}"
+                                                      required="#{bindings.LastUpdateDate.hints.mandatory}"
+                                                      columns="#{bindings.LastUpdateDate.hints.displayWidth}"
+                                                      shortDesc="#{bindings.LastUpdateDate.hints.tooltip}" id="id1"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.LastUpdateDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.LastUpdateDate.format}"/>
+                                        </af:inputDate>
+                                        <af:inputText value="#{bindings.LineId.inputValue}"
+                                                      label="#{bindings.LineId.hints.label}"
+                                                      required="#{bindings.LineId.hints.mandatory}"
+                                                      columns="#{bindings.LineId.hints.displayWidth}"
+                                                      maximumLength="#{bindings.LineId.hints.precision}"
+                                                      shortDesc="#{bindings.LineId.hints.tooltip}" id="it7"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.LineId.validator}"/>
+                                            <af:convertNumber groupingUsed="false" pattern="#{bindings.LineId.format}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.ObjectVersionNumber.inputValue}"
+                                                      label="#{bindings.ObjectVersionNumber.hints.label}"
+                                                      required="#{bindings.ObjectVersionNumber.hints.mandatory}"
+                                                      columns="#{bindings.ObjectVersionNumber.hints.displayWidth}"
+                                                      maximumLength="#{bindings.ObjectVersionNumber.hints.precision}"
+                                                      shortDesc="#{bindings.ObjectVersionNumber.hints.tooltip}"
+                                                      id="it30" contentStyle="width:180px;" visible="false">
+                                            <f:validator binding="#{bindings.ObjectVersionNumber.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.ObjectVersionNumber.format}"/>
+                                        </af:inputText>
+                                        <af:inputDate value="#{bindings.CreationDate.inputValue}"
+                                                      label="#{bindings.CreationDate.hints.label}"
+                                                      required="#{bindings.CreationDate.hints.mandatory}"
+                                                      columns="#{bindings.CreationDate.hints.displayWidth}"
+                                                      shortDesc="#{bindings.CreationDate.hints.tooltip}" id="id2"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.CreationDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+                                        </af:inputDate>
+                                    </af:panelFormLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Address" id="sdi1" binding="#{LoginBean.bindAddressTab}">
+                                    <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" fieldWidth="200"
+                                                        labelWidth="140"
+                                                        inlineStyle="line-height:200%; font-weight:normal; font-size:large;">
+                                        <af:inputComboboxListOfValues id="vendorFlgDesc1Id"
+                                                                      popupTitle="Search and Select: #{bindings.VendorFlgDesc1.hints.label}"
+                                                                      value="#{bindings.VendorFlgDesc1.inputValue}"
+                                                                      label="#{bindings.VendorFlgDesc1.hints.label}"
+                                                                      model="#{bindings.VendorFlgDesc1.listOfValuesModel}"
+                                                                      columns="#{bindings.VendorFlgDesc1.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.VendorFlgDesc1.hints.tooltip}"
+                                                                      contentStyle="width:160px;" required="true"
+                                                                      valueChangeListener="#{LoginBean.vendorFromVal}"
+                                                                      binding="#{LoginBean.bindVendFlg}">
+                                            <f:validator binding="#{bindings.VendorFlgDesc1.validator}"/>
+                                        </af:inputComboboxListOfValues>
+                                        <af:inputText value="#{bindings.VendorFlag.inputValue}"
+                                                      label="#{bindings.VendorFlag.hints.label}"
+                                                      required="#{bindings.VendorFlag.hints.mandatory}"
+                                                      columns="#{bindings.VendorFlag.hints.displayWidth}"
+                                                      maximumLength="#{bindings.VendorFlag.hints.precision}"
+                                                      shortDesc="#{bindings.VendorFlag.hints.tooltip}" id="it3"
+                                                      binding="#{LoginBean.bindVendorFlag}" autoSubmit="true"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.VendorFlag.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Address1.inputValue}"
+                                                      label="#{bindings.Address1.hints.label}"
+                                                      columns="#{bindings.Address1.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Address1.hints.precision}"
+                                                      shortDesc="#{bindings.Address1.hints.tooltip}" id="it2"
+                                                      binding="#{LoginBean.bindAddress}" contentStyle="width:200px;"
+                                                      rows="3"
+                                                      required="true"
+                                                      rendered="#{bindings.VendorFlag.inputValue !=null}">
+                                            <f:validator binding="#{bindings.Address1.validator}"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                    <af:panelFormLayout id="pfl2" maxColumns="3" rows="7" fieldWidth="200"
+                                                        labelWidth="140"
+                                                        inlineStyle="line-height:200%; font-weight:normal; font-size:large;"
+                                                        rendered="#{bindings.VendorFlag.inputValue=='I'}">
+                                        <af:inputComboboxListOfValues id="countryNameId"
+                                                                      popupTitle="Search and Select: #{bindings.CountryName.hints.label}"
+                                                                      value="#{bindings.CountryName.inputValue}"
+                                                                      label="#{bindings.CountryName.hints.label}"
+                                                                      model="#{bindings.CountryName.listOfValuesModel}"
+                                                                      required="#{bindings.CountryName.hints.mandatory}"
+                                                                      columns="#{bindings.CountryName.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.CountryName.hints.tooltip}"
+                                                                      disabled="true" autoSubmit="true"
+                                                                      binding="#{LoginBean.bindCountryDesc}"
+                                                                      contentStyle="width:160px;">
+                                            <f:validator binding="#{bindings.CountryName.validator}"/>
+                                        </af:inputComboboxListOfValues>
+                                        <af:inputComboboxListOfValues id="iclov1"
+                                                                      popupTitle="Search and Select: #{bindings.StateName.hints.label}"
+                                                                      value="#{bindings.StateName.inputValue}"
+                                                                      label="#{bindings.StateName.hints.label}"
+                                                                      model="#{bindings.StateName.listOfValuesModel}"
+                                                                      columns="#{bindings.StateName.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.StateName.hints.tooltip}"
+                                                                      binding="#{LoginBean.bindState}" autoSubmit="true"
+                                                                      required="true" contentStyle="width:160px;">
+                                            <f:validator binding="#{bindings.StateName.validator}"/>
+                                            <af:autoSuggestBehavior suggestedItems="#{bindings.StateName.suggestedItems}"/>
+                                        </af:inputComboboxListOfValues>
+                                        <af:inputComboboxListOfValues id="cityNameId"
+                                                                      popupTitle="Search and Select: #{bindings.CityName.hints.label}"
+                                                                      value="#{bindings.CityName.inputValue}"
+                                                                      label="#{bindings.CityName.hints.label}"
+                                                                      model="#{bindings.CityName.listOfValuesModel}"
+                                                                      columns="#{bindings.CityName.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.CityName.hints.tooltip}"
+                                                                      autoSubmit="true" required="true"
+                                                                      contentStyle="width:160px;"
+                                                                      binding="#{LoginBean.bindCity}">
+                                            <f:validator binding="#{bindings.CityName.validator}"/>
+                                            <af:autoSuggestBehavior suggestedItems="#{bindings.CityName.suggestedItems}"/>
+                                        </af:inputComboboxListOfValues>
+                                        <af:selectBooleanCheckbox value="#{bindings.CityExist.inputValue}"
+                                                                  label="#{bindings.CityExist.label}"
+                                                                  shortDesc="#{bindings.CityExist.hints.tooltip}"
+                                                                  id="sbc2" autoSubmit="true"
+                                                                  valueChangeListener="#{LoginBean.cityExistVce}"/>
+                                        <af:inputText value="#{bindings.OtherCity.inputValue}"
+                                                      label="#{bindings.OtherCity.hints.label}"
+                                                      required="#{bindings.OtherCity.hints.mandatory}"
+                                                      columns="#{bindings.OtherCity.hints.displayWidth}"
+                                                      maximumLength="#{bindings.OtherCity.hints.precision}"
+                                                      shortDesc="#{bindings.OtherCity.hints.tooltip}" id="it28"
+                                                      contentStyle="width:160px;" binding="#{LoginBean.bindOtherCity}"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.OtherCity.validator}"/>
+                                        </af:inputText>
+                                        <af:inputComboboxListOfValues id="iclov2"
+                                                                      popupTitle="Search and Select: #{bindings.DistrictName.hints.label}"
+                                                                      value="#{bindings.DistrictName.inputValue}"
+                                                                      label="#{bindings.DistrictName.hints.label}"
+                                                                      model="#{bindings.DistrictName.listOfValuesModel}"
+                                                                      columns="#{bindings.DistrictName.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.DistrictName.hints.tooltip}"
+                                                                      binding="#{LoginBean.bindDistrict}"
+                                                                      autoSubmit="true" contentStyle="width:160px;"
+                                                                      required="true">
+                                            <f:validator binding="#{bindings.DistrictName.validator}"/>
+                                            <af:autoSuggestBehavior suggestedItems="#{bindings.DistrictName.suggestedItems}"/>
+                                        </af:inputComboboxListOfValues>
+                                        <af:inputText value="#{bindings.PinCode.inputValue}"
+                                                      label="#{bindings.PinCode.hints.label}"
+                                                      columns="#{bindings.PinCode.hints.displayWidth}" maximumLength="6"
+                                                      shortDesc="#{bindings.PinCode.hints.tooltip}" id="it1"
+                                                      binding="#{LoginBean.bindPinNo}"
+                                                      valueChangeListener="#{LoginBean.validatePin}" autoSubmit="true"
+                                                      required="true" contentStyle="width:160px;"
+                                                      rendered="#{bindings.VendorFlag.inputValue=='I'}">
+                                            <f:validator binding="#{bindings.PinCode.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Country.inputValue}"
+                                                      label="#{bindings.Country.hints.label}"
+                                                      required="#{bindings.Country.hints.mandatory}"
+                                                      columns="#{bindings.Country.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Country.hints.precision}"
+                                                      shortDesc="#{bindings.Country.hints.tooltip}"
+                                                      partialTriggers="countryNameId" id="it4"
+                                                      contentStyle="width:185px;" binding="#{LoginBean.bindCountry}"
+                                                      disabled="true" visible="false">
+                                            <f:validator binding="#{bindings.Country.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.State.inputValue}"
+                                                      label="#{bindings.State.hints.label}"
+                                                      required="#{bindings.State.hints.mandatory}"
+                                                      columns="#{bindings.State.hints.displayWidth}"
+                                                      maximumLength="#{bindings.State.hints.precision}"
+                                                      shortDesc="#{bindings.State.hints.tooltip}" id="it5"
+                                                      contentStyle="width:185px;" disabled="true"
+                                                      binding="#{LoginBean.bindStateDesc}" partialTriggers="iclov1"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.State.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.City.inputValue}"
+                                                      label="#{bindings.City.hints.label}"
+                                                      required="#{bindings.City.hints.mandatory}"
+                                                      columns="#{bindings.City.hints.displayWidth}"
+                                                      maximumLength="#{bindings.City.hints.precision}"
+                                                      shortDesc="#{bindings.City.hints.tooltip}" id="it27"
+                                                      contentStyle="width:185px;" partialTriggers="cityNameId"
+                                                      visible="false" autoSubmit="true"
+                                                      binding="#{LoginBean.bindCityDesc}">
+                                            <f:validator binding="#{bindings.City.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.District.inputValue}"
+                                                      label="#{bindings.District.hints.label}"
+                                                      required="#{bindings.District.hints.mandatory}"
+                                                      columns="#{bindings.District.hints.displayWidth}"
+                                                      maximumLength="#{bindings.District.hints.precision}"
+                                                      shortDesc="#{bindings.District.hints.tooltip}" id="it6"
+                                                      contentStyle="width:185px;" disabled="true"
+                                                      binding="#{LoginBean.bindDistrictDesc}" partialTriggers="iclov2"
+                                                      visible="false">
+                                            <f:validator binding="#{bindings.District.validator}"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Contact" id="sdi2" binding="#{LoginBean.bindContactTab}">
+                                    <af:panelFormLayout id="pfl4" maxColumns="3" rows="3" fieldWidth="200"
+                                                        labelWidth="140"
+                                                        inlineStyle="line-height:200%; font-weight:normal; font-size:large;">
+                                        <af:inputText value="#{bindings.ContactPerson.inputValue}"
+                                                      label="#{bindings.ContactPerson.hints.label}"
+                                                      columns="#{bindings.ContactPerson.hints.displayWidth}"
+                                                      maximumLength="#{bindings.ContactPerson.hints.precision}"
+                                                      shortDesc="#{bindings.ContactPerson.hints.tooltip}" id="it8"
+                                                      contentStyle="width:185px;" required="true"
+                                                      binding="#{LoginBean.bindContactPerson}"
+                                                      valueChangeListener="#{LoginBean.contactPersonVce}"
+                                                      autoSubmit="true">
+                                            <f:validator binding="#{bindings.ContactPerson.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Email.inputValue}"
+                                                      label="#{bindings.Email.hints.label}"
+                                                      columns="#{bindings.Email.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Email.hints.precision}"
+                                                      shortDesc="#{bindings.Email.hints.tooltip}" id="it16"
+                                                      contentStyle="width:185px;" binding="#{LoginBean.bindEmail}"
+                                                      valueChangeListener="#{LoginBean.verifyEmail}" autoSubmit="true"
+                                                      required="true"
+                                                      validator="#{LoginBean.chkEmailFormat}">
+                                            <f:validator binding="#{bindings.Email.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Phones.inputValue}"
+                                                      label="#{bindings.Phones.hints.label}"
+                                                      required="#{bindings.Phones.hints.mandatory}"
+                                                      columns="#{bindings.Phones.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Phones.hints.precision}"
+                                                      shortDesc="#{bindings.Phones.hints.tooltip}" id="it15"
+                                                      contentStyle="width:185px;" binding="#{LoginBean.bindPhone}">
+                                            <f:validator binding="#{bindings.Phones.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.ContactFirstName.inputValue}"
+                                                      label="#{bindings.ContactFirstName.hints.label}"
+                                                      required="#{bindings.ContactFirstName.hints.mandatory}"
+                                                      columns="#{bindings.ContactFirstName.hints.displayWidth}"
+                                                      maximumLength="#{bindings.ContactFirstName.hints.precision}"
+                                                      shortDesc="#{bindings.ContactFirstName.hints.tooltip}" id="it9"
+                                                      contentStyle="width:185px;"
+                                                      binding="#{LoginBean.bindContactMiddle}" autoSubmit="true"
+                                                      valueChangeListener="#{LoginBean.midNameVce}">
+                                            <f:validator binding="#{bindings.ContactFirstName.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Website.inputValue}"
+                                                      label="#{bindings.Website.hints.label}"
+                                                      required="#{bindings.Website.hints.mandatory}"
+                                                      columns="#{bindings.Website.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Website.hints.precision}"
+                                                      shortDesc="#{bindings.Website.hints.tooltip}" id="it13"
+                                                      contentStyle="width:185px;" binding="#{LoginBean.bindWebsite}">
+                                            <f:validator binding="#{bindings.Website.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Mobile.inputValue}"
+                                                      label="#{bindings.Mobile.hints.label}"
+                                                      columns="#{bindings.Mobile.hints.displayWidth}" maximumLength="12"
+                                                      shortDesc="#{bindings.Mobile.hints.tooltip}" id="it11"
+                                                      contentStyle="width:185px;"
+                                                      valueChangeListener="#{LoginBean.chkValidMobile}" required="true"
+                                                      autoSubmit="true" binding="#{LoginBean.bindMobileNo}">
+                                            <f:validator binding="#{bindings.Mobile.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.ContactLastName.inputValue}"
+                                                      label="#{bindings.ContactLastName.hints.label}"
+                                                      columns="#{bindings.ContactLastName.hints.displayWidth}"
+                                                      maximumLength="#{bindings.ContactLastName.hints.precision}"
+                                                      shortDesc="#{bindings.ContactLastName.hints.tooltip}" id="it14"
+                                                      contentStyle="width:185px;" binding="#{LoginBean.bindContactLast}"
+                                                      required="true" autoSubmit="true"
+                                                      valueChangeListener="#{LoginBean.lastNameVce}">
+                                            <f:validator binding="#{bindings.ContactLastName.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Fax.inputValue}"
+                                                      label="#{bindings.Fax.hints.label}"
+                                                      required="#{bindings.Fax.hints.mandatory}"
+                                                      columns="#{bindings.Fax.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Fax.hints.precision}"
+                                                      shortDesc="#{bindings.Fax.hints.tooltip}" id="it17"
+                                                      contentStyle="width:185px;" binding="#{LoginBean.bindFax}">
+                                            <f:validator binding="#{bindings.Fax.validator}"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Services" id="sdi3" binding="#{LoginBean.bindServiceTab}">
+                                    <af:table value="#{bindings.PortalVendorServicesVO1.collectionModel}" var="row"
+                                              rows="#{bindings.PortalVendorServicesVO1.rangeSize}"
+                                              emptyText="#{bindings.PortalVendorServicesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.PortalVendorServicesVO1.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.PortalVendorServicesVO1.collectionModel.makeCurrent}"
+                                              rowSelection="single"
+                                              fetchSize="#{bindings.PortalVendorServicesVO1.rangeSize}" id="t2">
+                                        <af:column id="c2" align="center" width="40">
+                                            <af:selectBooleanCheckbox value="#{row.bindings.CheckBox.inputValue}"
+                                                                      label="#{row.bindings.CheckBox.label}"
+                                                                      shortDesc="#{bindings.PortalVendorServicesVO1.hints.CheckBox.tooltip}"
+                                                                      id="sbc1" autoSubmit="true"
+                                                                      binding="#{LoginBean.bindChkBox}"
+                                                                      required="true"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.PortalVendorServicesVO1.hints.Description.label}"
+                                                   id="c1" width="500" align="left">
+                                            <af:outputText value="#{row.Description}"
+                                                           shortDesc="#{bindings.PortalVendorServicesVO1.hints.Description.tooltip}"
+                                                           id="ot1"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:showDetailItem>
+                            </af:panelTabbed>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </af:panelBorderLayout> -->                
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

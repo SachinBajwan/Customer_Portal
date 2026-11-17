@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="orderTrackPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="TrackOrdersVO1" RangeSize="25" DataControl="OrderTrackAMDataControl" id="TrackOrdersVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="TrackOrdersVO1Iterator" id="TrackOrdersVO1">
+      <nodeDefinition DefName="model.bspl.track.views.TrackOrdersVO" Name="TrackOrdersVO10">
+        <AttrNames>
+          <Item Value="SessionId"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CustCode"/>
+          <Item Value="UnitCd"/>
+          <Item Value="DocNo"/>
+          <Item Value="Remarks"/>
+          <Item Value="Amount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

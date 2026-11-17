@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+ 
+ 
+   <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="content-area">
+  <!-- 1. Header & Draft Status -->
+    <af:panelGroupLayout id="co_pgl2" layout="vertical" styleClass="page-header" inlineStyle="margin-bottom: 20px;">
+      <af:outputText value="Orders" id="co_ot1" styleClass="welcome-title"/>
+      <af:outputText value="#{pageFlowScope.vendorId}" id="ot8" visible="false"/>
+      <!--<af:outputText value="#{CreateOrderBean.draftStatusMessage}" id="co_ot2" styleClass="welcome-subtitle"/>-->
+    </af:panelGroupLayout>
+  
+  <af:panelGroupLayout id="co_pgl_actions" layout="horizontal" styleClass="search-action-bar" inlineStyle="margin: 20px 0;">
+      <!--<af:inputText placeholder="Search product by code / name / scan..." id="co_it_search" styleClass="product-search-input"/>-->
+      <af:panelGroupLayout id="co_pgl_btns" layout="horizontal">
+        <af:button text="+ Create Order" id="co_b1" styleClass="btn btn-primary" action="go">
+          <af:setActionListener from="C" to="#{pageFlowScope.mode}"/>
+        </af:button>
+        <af:button text="Upload Excel" id="co_b2" styleClass="btn btn-outline" rendered="false"/>
+      </af:panelGroupLayout>
+      <f:facet name="separator">
+        <af:spacer width="15" id="co_sp1"/>
+      </f:facet>
+    </af:panelGroupLayout>
+    
+    
+    <af:panelGroupLayout layout="vertical" id="pgl2" inlineStyle="margin-bottom: 20px;" styleClass="panel">
+      <af:panelHeader text=" " id="ph1">
+        <af:query id="qryId1" headerText=" "
+                  value="#{bindings.SearchOrderHeaderVOCriteriaQuery.queryDescriptor}"
+                  model="#{bindings.SearchOrderHeaderVOCriteriaQuery.queryModel}"
+                  queryListener="#{bindings.SearchOrderHeaderVOCriteriaQuery.processQuery}"
+                  queryOperationListener="#{bindings.SearchOrderHeaderVOCriteriaQuery.processQueryOperation}"
+                  resultComponentId="::pc1:resId1" saveQueryMode="hidden" modeChangeVisible="false" rows="1"
+                  maxColumns="2" disclosed="true"/>
+      </af:panelHeader>
+      <af:panelGroupLayout id="pgl3" inlineStyle="margin-bottom: 20px;" styleClass="panel">
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.SearchOrderHeaderVO1.collectionModel}" var="row"
+                    rows="#{bindings.SearchOrderHeaderVO1.rangeSize}"
+                    emptyText="#{bindings.SearchOrderHeaderVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.SearchOrderHeaderVO1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.SearchOrderHeaderVO1.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.SearchOrderHeaderVO1.rangeSize}"
+                    filterModel="#{bindings.SearchOrderHeaderVOCriteriaQuery.queryDescriptor}"
+                    queryListener="#{bindings.SearchOrderHeaderVOCriteriaQuery.processQuery}" varStatus="vs" id="resId1"
+                    styleClass="recent-orders-table">
+            <af:column sortProperty="#{bindings.SearchOrderHeaderVO1.hints.OrderId.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SearchOrderHeaderVO1.hints.OrderId.label}" id="resId1c1"
+                       align="center" headerClass="recent-orders-header">
+              <af:link id="l1" action="go">
+                <af:outputText value="#{row.OrderId}" shortDesc="#{bindings.SearchOrderHeaderVO1.hints.OrderId.tooltip}"
+                               id="ot1" styleClass="order-no">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SearchOrderHeaderVO1.hints.OrderId.format}"/>
+                </af:outputText>
+                <af:setActionListener from="#{row.OrderId}" to="#{pageFlowScope.orderId}"/>
+                <af:setActionListener from="E" to="#{pageFlowScope.mode}"/>
+              </af:link>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchOrderHeaderVO1.hints.OrderDate.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SearchOrderHeaderVO1.hints.OrderDate.label}"
+                       id="resId1c2" align="center" headerClass="recent-orders-header">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.SearchOrderHeaderVOCriteriaQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.OrderDate.value}"
+                              id="id1">
+                  <af:convertDateTime pattern="#{bindings.SearchOrderHeaderVO1.hints.OrderDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:outputText value="#{row.OrderDate}"
+                             shortDesc="#{bindings.SearchOrderHeaderVO1.hints.OrderDate.tooltip}" id="ot2"
+                             styleClass="order-no">
+                <af:convertDateTime pattern="#{bindings.SearchOrderHeaderVO1.hints.OrderDate.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchOrderHeaderVO1.hints.ReqDeliveryDate.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SearchOrderHeaderVO1.hints.ReqDeliveryDate.label}"
+                       id="resId1c3" align="center" width="140" headerClass="recent-orders-header">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.SearchOrderHeaderVOCriteriaQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.ReqDeliveryDate.value}"
+                              id="id2">
+                  <af:convertDateTime pattern="#{bindings.SearchOrderHeaderVO1.hints.ReqDeliveryDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:outputText value="#{row.ReqDeliveryDate}"
+                             shortDesc="#{bindings.SearchOrderHeaderVO1.hints.ReqDeliveryDate.tooltip}" id="ot3"
+                             styleClass="order-no">
+                <af:convertDateTime pattern="#{bindings.SearchOrderHeaderVO1.hints.ReqDeliveryDate.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchOrderHeaderVO1.hints.Address.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SearchOrderHeaderVO1.hints.Address.label}" id="resId1c4"
+                       align="center" width="200" headerClass="recent-orders-header">
+              <af:outputText value="#{row.Address}" shortDesc="#{bindings.SearchOrderHeaderVO1.hints.Address.tooltip}"
+                             id="ot4" styleClass="order-no"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchOrderHeaderVO1.hints.PoNo.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.SearchOrderHeaderVO1.hints.PoNo.label}" id="resId1c5" align="center"
+                       width="120" headerClass="recent-orders-header">
+              <af:outputText value="#{row.PoNo}" shortDesc="#{bindings.SearchOrderHeaderVO1.hints.PoNo.tooltip}"
+                             id="ot5" styleClass="order-no"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchOrderHeaderVO1.hints.Status.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SearchOrderHeaderVO1.hints.Status.label}" id="resId1c6"
+                       align="center" headerClass="recent-orders-header">
+              <af:outputText value="#{row.Status}" shortDesc="#{bindings.SearchOrderHeaderVO1.hints.Status.tooltip}"
+                             id="ot6" styleClass="order-no"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SearchOrderHeaderVO1.hints.Remarks.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SearchOrderHeaderVO1.hints.Remarks.label}" id="resId1c7"
+                       align="center" width="250" headerClass="recent-orders-header">
+              <af:outputText value="#{row.Remarks}" shortDesc="#{bindings.SearchOrderHeaderVO1.hints.Remarks.tooltip}"
+                             id="ot7" styleClass="order-no"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+    
+    </af:panelGroupLayout>
+  </jsp:root>

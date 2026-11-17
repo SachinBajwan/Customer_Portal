@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="MainWorkareaPageDef"
+                Package="terms.erp.mainapp.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="FileMasterErpVVO1" RangeSize="25" DataControl="TermsMainAppAMDataControl"
+              id="FileMasterErpVVO1Iterator"/>
+    <iterator Binds="DocSearchCodeVVO1" RangeSize="10" DataControl="TermsMainAppAMDataControl"
+              id="DocSearchCodeVVO1Iterator"/>
+    <!--<iterator id="UserMostVisitVO1Iterator" Binds="UserMostVisitVO1" DataControl="TermsMainAppAMDataControl"
+              RangeSize="25"/>-->
+    <iterator id="SearchUserMostVisitVO1Iterator" Binds="SearchUserMostVisitVO1" DataControl="TermsMainAppAMDataControl"
+              RangeSize="25"/>
+    <taskFlow id="dynamicRegion1" taskFlowId="${pageFlowScope.MainWorkareaBean.dynamicTaskFlowId1}"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"
+              parametersMap="#{pageFlowScope.MainWorkareaBean.parameterMap}"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="FileMasterErpVVO1Iterator" id="FileMasterErpVVO1">
+      <nodeDefinition DefName="terms.erp.mainapp.model.view.FileMasterErpVVO" Name="FileMasterErpVVO10">
+        <AttrNames>
+          <Item Value="FileId"/>
+          <Item Value="FileSname"/>
+          <Item Value="FileType"/>
+          <Item Value="FlowPath"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="FileMsterSubErpVVO"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="terms.erp.mainapp.model.view.FileMsterSubErpVVO" Name="FileMasterErpVVO11">
+        <AttrNames>
+          <Item Value="FileId"/>
+          <Item Value="FileSname"/>
+          <Item Value="FileType"/>
+          <Item Value="FlowPath"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="FileIdFileMsterSubErpVVO"/>
+        </Accessors>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="onPageLoadExecute" RequiresUpdateModel="true" Action="invokeMethod" MethodName="onPageLoadExecute"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"/>
+    <methodAction id="findByDocumentCode" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findByDocumentCode" IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider"
+                  ReturnName="data.TermsMainAppAMDataControl.methodResults.findByDocumentCode_TermsMainAppAMDataControl_dataProvider_findByDocumentCode_result">
+      <NamedData NDName="tCode" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="filterDocumentDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterDocumentDetails" IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider">
+      <NamedData NDName="tCode" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="Insert_Visit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="Insert_Visit"
+                  IsViewObjectMethod="false" DataControl="TermsMainAppAMDataControl"
+                  InstanceName="data.TermsMainAppAMDataControl.dataProvider">
+      <NamedData NDName="UserId" NDType="java.lang.String"/>
+      <NamedData NDName="TCode" NDType="java.lang.String"/>
+      <NamedData NDName="FileId" NDType="java.lang.String"/>
+      <NamedData NDName="FileName" NDType="java.lang.String"/>
+      <NamedData NDName="FilePath" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" DataControl="TermsMainAppAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

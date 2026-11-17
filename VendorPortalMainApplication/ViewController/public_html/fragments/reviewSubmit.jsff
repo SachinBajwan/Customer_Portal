@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core">
+<af:panelGroupLayout styleClass="onboarding-wrapper"> 
+    <af:panelGroupLayout styleClass="onboarding-title">
+        <af:outputText value="Customer Onboarding" styleClass="onboarding-heading"/>
+        <!--<af:outputText value="Fields marked * are mandatory." id="ot4" styleClass="mandatory-note"/>-->
+    </af:panelGroupLayout>     
+    <af:panelHeader text="" id="ph2" binding="#{LoginBean.bindReviewMainPanelHdr}" styleClass="hide-panel-header-title">
+        <f:facet name="toolbar"/>
+        <af:panelGroupLayout id="trainContainer" layout="vertical" styleClass="customer-train-container">
+            <af:train id="t4" value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+                      styleClass="customer-train"/>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="root" styleClass="contact-step">
+            <!-- STEP TITLE -->
+            <!--<af:outputText
+            value="Step 3: Review Submit"
+            id="stepTitle"
+            styleClass="step-title"/>-->
+            <!--- FORM -->
+            <af:panelHeader text="Step 5: Review and Submit" id="ph1" styleClass="AFStretchWidth custom-form-header">
+                <af:panelGroupLayout id="pglMain" styleClass="review-main">
+                    <!-- PAGE HEADER -->
+                    <af:panelHeader id="phMain" text="" styleClass="review-header">
+                        <af:outputText id="otInstruction"
+                                       value="Please review your details before confirming and saving."
+                                       styleClass="review-instruction"/>
+                    </af:panelHeader>
+                    <!-- BUSINESS DETAILS -->
+                    <af:panelGroupLayout id="pgl1" styleClass="review-status-section" visible="false">
+                        <af:inputText value="#{bindings.NoticeLanguage.inputValue}"
+                                      label="#{bindings.NoticeLanguage.hints.label}"
+                                      required="#{bindings.NoticeLanguage.hints.mandatory}"
+                                      columns="#{bindings.NoticeLanguage.hints.displayWidth}"
+                                      maximumLength="#{bindings.NoticeLanguage.hints.precision}"
+                                      shortDesc="#{bindings.NoticeLanguage.hints.tooltip}" id="it5"
+                                      binding="#{LoginBean.bindNoticeLanR}" autoSubmit="true">
+                            <f:validator binding="#{bindings.NoticeLanguage.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.PrcDataFlg.inputValue}"
+                                      label="#{bindings.PrcDataFlg.hints.label}"
+                                      required="#{bindings.PrcDataFlg.hints.mandatory}"
+                                      columns="#{bindings.PrcDataFlg.hints.displayWidth}"
+                                      maximumLength="#{bindings.PrcDataFlg.hints.precision}"
+                                      shortDesc="#{bindings.PrcDataFlg.hints.tooltip}" id="it1" autoSubmit="true"
+                                      binding="#{LoginBean.bindProDataR}">
+                            <f:validator binding="#{bindings.PrcDataFlg.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.RecTrnAltFlg.inputValue}"
+                                      label="#{bindings.RecTrnAltFlg.hints.label}"
+                                      required="#{bindings.RecTrnAltFlg.hints.mandatory}"
+                                      columns="#{bindings.RecTrnAltFlg.hints.displayWidth}"
+                                      maximumLength="#{bindings.RecTrnAltFlg.hints.precision}"
+                                      shortDesc="#{bindings.RecTrnAltFlg.hints.tooltip}" id="it2" autoSubmit="true"
+                                      binding="#{LoginBean.bindRecTranR}">
+                            <f:validator binding="#{bindings.RecTrnAltFlg.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.SendMailFlg.inputValue}"
+                                      label="#{bindings.SendMailFlg.hints.label}"
+                                      required="#{bindings.SendMailFlg.hints.mandatory}"
+                                      columns="#{bindings.SendMailFlg.hints.displayWidth}"
+                                      maximumLength="#{bindings.SendMailFlg.hints.precision}"
+                                      shortDesc="#{bindings.SendMailFlg.hints.tooltip}" id="it3" autoSubmit="true"
+                                      binding="#{LoginBean.bindEmailR}">
+                            <f:validator binding="#{bindings.SendMailFlg.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.SendWpFlg.inputValue}" label="#{bindings.SendWpFlg.hints.label}"
+                                      required="#{bindings.SendWpFlg.hints.mandatory}"
+                                      columns="#{bindings.SendWpFlg.hints.displayWidth}"
+                                      maximumLength="#{bindings.SendWpFlg.hints.precision}"
+                                      shortDesc="#{bindings.SendWpFlg.hints.tooltip}" id="it4" autoSubmit="true"
+                                      binding="#{LoginBean.bindWpR}">
+                            <f:validator binding="#{bindings.SendWpFlg.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.AnalyticCookiesFlg.inputValue}"
+                                      label="#{bindings.AnalyticCookiesFlg.hints.label}"
+                                      required="#{bindings.AnalyticCookiesFlg.hints.mandatory}"
+                                      columns="#{bindings.AnalyticCookiesFlg.hints.displayWidth}"
+                                      maximumLength="#{bindings.AnalyticCookiesFlg.hints.precision}"
+                                      shortDesc="#{bindings.AnalyticCookiesFlg.hints.tooltip}" id="it6"
+                                      autoSubmit="true" binding="#{LoginBean.bindCookFlgR}">
+                            <f:validator binding="#{bindings.AnalyticCookiesFlg.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.AgeConfFlg.inputValue}"
+                                      label="#{bindings.AgeConfFlg.hints.label}"
+                                      required="#{bindings.AgeConfFlg.hints.mandatory}"
+                                      columns="#{bindings.AgeConfFlg.hints.displayWidth}"
+                                      maximumLength="#{bindings.AgeConfFlg.hints.precision}"
+                                      shortDesc="#{bindings.AgeConfFlg.hints.tooltip}" id="it7" autoSubmit="true"
+                                      binding="#{LoginBean.bindAgeFlgR}">
+                            <f:validator binding="#{bindings.AgeConfFlg.validator}"/>
+                        </af:inputText>
+                    </af:panelGroupLayout>
+                    <af:panelHeader id="phBusiness" text="Business Details" styleClass="review-section">
+                        <af:panelGroupLayout id="pgl2" styleClass="AFStretchWidth custom-form-layout">
+                            <af:panelGroupLayout id="pgl3" styleClass="AFStretchWidth container-fluid">
+                                <af:panelGroupLayout styleClass="row">
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Business Name :" id="plam1" styleClass="input-label">
+                                            <af:outputText value="#{bindings.LglNameOfBs.inputValue}"
+                                                           shortDesc="#{bindings.LglNameOfBs.hints.tooltip}" id="ot1"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Business Type :" id="plam2" styleClass="input-label">
+                                            <af:outputText value="#{bindings.CustomerTypeDesc.inputValue}"
+                                                           shortDesc="#{bindings.CustomerTypeDesc.hints.tooltip}" id="ot2"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="GST Registration No. :" id="plam3" styleClass="input-label">
+                                            <af:outputText value="#{bindings.GstRegNo.inputValue}"
+                                                           shortDesc="#{bindings.GstRegNo.hints.tooltip}" id="ot3"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="PAN Number :" id="plam4" styleClass="input-label">
+                                            <af:outputText value="#{bindings.PanNo.inputValue}"
+                                                           shortDesc="#{bindings.PanNo.hints.tooltip}" id="ot4"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="State :" id="plam6" styleClass="input-label">
+                                            <af:outputText value="#{bindings.StateName.inputValue}"
+                                                           shortDesc="#{bindings.StateName.hints.tooltip}" id="ot6"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="City :" id="plam7" styleClass="input-label">
+                                            <af:outputText value="#{bindings.CityName.inputValue}"
+                                                           shortDesc="#{bindings.CityName.hints.tooltip}" id="ot7"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-8 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Business Address :" id="plam5" styleClass="input-label">
+                                            <af:outputText value="#{bindings.BillAddressLine1.inputValue}"
+                                                           shortDesc="#{bindings.BillAddressLine1.hints.tooltip}" id="ot5"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="PIN Code :" id="plam8" styleClass="input-label">
+                                            <af:outputText value="#{bindings.PinCode.inputValue}"
+                                                           shortDesc="#{bindings.PinCode.hints.tooltip}" id="ot8"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                    <!-- PERSON DETAILS -->
+                    <af:panelHeader id="phPerson" text="Person Details" styleClass="review-section">
+                        <af:panelGroupLayout id="pgl4" styleClass="AFStretchWidth custom-form-layout">
+                            <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth container-fluid">
+                                <af:panelGroupLayout styleClass="row">
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Trade Name :" id="plam9" styleClass="input-label">
+                                            <af:outputText value="#{bindings.Name.inputValue}"
+                                                           shortDesc="#{bindings.Name.hints.tooltip}" id="ot9"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Legal Name :" id="plam10" styleClass="input-label">
+                                            <af:outputText value="#{bindings.LegName.inputValue}"
+                                                           shortDesc="#{bindings.LegName.hints.tooltip}" id="ot14"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Designation :" id="plam11" styleClass="input-label">
+                                            <af:outputText value="#{bindings.Designation.inputValue}"
+                                                           shortDesc="#{bindings.Designation.hints.tooltip}" id="ot10"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Mobile Number :" id="plam12" styleClass="input-label">
+                                            <af:outputText value="#{bindings.Mobile.inputValue}"
+                                                           shortDesc="#{bindings.Mobile.hints.tooltip}" id="ot11"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Email ID :" id="plam13" styleClass="input-label">
+                                            <af:outputText value="#{bindings.Email.inputValue}"
+                                                           shortDesc="#{bindings.Email.hints.tooltip}" id="ot12"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout styleClass="col-lg-4 col-md-6 col-sm-12">
+                                        <af:panelLabelAndMessage label="Role :" id="plam14" styleClass="input-label">
+                                            <af:outputText value="#{bindings.CustRole.inputValue}"
+                                                           shortDesc="#{bindings.CustRole.hints.tooltip}" id="ot13"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                    <!-- DOCUMENT DETAILS -->
+                    <af:panelHeader id="phDocuments" text="Document Details" styleClass="review-section">
+                        <af:table value="#{bindings.PortalDocAttachRefDtlVO2.collectionModel}" var="row"
+                                  rows="#{bindings.PortalDocAttachRefDtlVO2.rangeSize}"
+                                  emptyText="#{bindings.PortalDocAttachRefDtlVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.PortalDocAttachRefDtlVO2.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.PortalDocAttachRefDtlVO2.collectionModel.makeCurrent}"
+                                  rowSelection="single" fetchSize="#{bindings.PortalDocAttachRefDtlVO2.rangeSize}"
+                                  id="t1">
+                            <af:column headerText="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocType.label}" id="c1"
+                                       width="250">
+                                <af:outputText value="#{row.RefDocType}"
+                                               shortDesc="#{bindings.PortalDocAttachRefDtlVO2.hints.RefDocType.tooltip}"
+                                               id="ot15"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.PortalDocAttachRefDtlVO2.hints.DocFileName.label}" id="c2"
+                                       width="250">
+                                <af:outputText value="#{row.DocFileName}"
+                                               shortDesc="#{bindings.PortalDocAttachRefDtlVO2.hints.DocFileName.tooltip}"
+                                               id="ot16"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.PortalDocAttachRefDtlVO2.hints.Remarks.label}" id="c3"
+                                       width="500">
+                                <af:outputText value="#{row.Remarks}"
+                                               shortDesc="#{bindings.PortalDocAttachRefDtlVO2.hints.Remarks.tooltip}"
+                                               id="ot17"/>
+                            </af:column>
+                        </af:table>
+                    </af:panelHeader>
+                    <!-- CONFIRMATION MESSAGE -->
+                    <af:panelGroupLayout id="pglConfirmation" styleClass="review-confirmation">
+                        <af:selectBooleanCheckbox value="#{bindings.ReviewFlg.inputValue}"
+                                                  shortDesc="#{bindings.ReviewFlg.hints.tooltip}" id="sbc1"
+                                                  autoSubmit="true" valueChangeListener="#{LoginBean.reviewDataVce}"
+                                                  binding="#{LoginBean.bindReviewFlg}"/>
+                        <af:outputText id="otConfirmMessage" value="I confirm that the given information is correct." styleClass="review-confirmation-text"/>
+                    </af:panelGroupLayout>
+                    <!-- ACTION BUTTONS -->
+                </af:panelGroupLayout>
+            </af:panelHeader>
+            <!-- BUTTONS -->
+            <af:panelGroupLayout id="buttons" styleClass="button-row">
+                <af:panelGroupLayout styleClass="button-section">
+                    <af:commandButton text="← Back" id="backButton" styleClass="common-button back-button"
+                                  action="#{LoginBean.ReviewBack}"/>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="rightButtons" styleClass="button-section">
+                    <af:commandButton text="Save" id="draftButton" styleClass="common-button next-button"
+                                      actionListener="#{LoginBean.saveNewRegistration}"/>
+                    <af:commandButton text="Next →" id="nextButton" action="next" styleClass="common-button next-button"
+                                      rendered="false"/>
+                    <af:commandButton text="Cancel" id="cancelButton" styleClass="common-button " immediate="true"
+                                      actionListener="#{LoginBean.backToLoginMain}"/>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+    </af:panelHeader>
+    <af:commandButton text="Close" id="b1" styleClass="cancel-button" actionListener="#{LoginBean.backToLoginMain}"
+                      binding="#{LoginBean.bindReviewCancelBtn}"/>
+</af:panelGroupLayout>
+</jsp:root>

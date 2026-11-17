@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.11.57" id="DataBindings"
+             SeparateXMLFiles="false" Package="view.bspl.docs" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/fragments/DocumentsUpload.jsff" usageId="view_bspl_docs_DocumentsUploadPageDef"/>
+    <page path="/WEB-INF/bspl/documents/ui/flow/DocumentsTF.xml#DocumentsTF@getDocDetail"
+          usageId="view_bspl_docs_DocumentsTF_DocumentsTF_getDocDetailPageDef"/>
+    <page path="/Doc.jspx" usageId="view_bspl_docs_DocPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="view_bspl_docs_DocumentsUploadPageDef" path="fragments.DocumentsUploadPageDef"/>
+    <page id="view_bspl_docs_DocumentsTF_DocumentsTF_getDocDetailPageDef"
+          path="bspl.documents.ui.flow.DocumentsTF_DocumentsTF_getDocDetailPageDef"/>
+    <page id="view_bspl_docs_DocPageDef" path="view.bspl.docs.pageDefs.DocPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="DocumentAMDataControl" Package="model.bspl.docs.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="DocumentAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

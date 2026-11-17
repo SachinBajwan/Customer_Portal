@@ -1,0 +1,269 @@
+@charset "UTF-8";
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+@namespace af "http://xmlns.oracle.com/adf/faces/rich";
+@namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+/* Greeting & Typography */
+.welcome-title { font-size: 22px; font-weight: 600; color: #12223c; }
+.welcome-subtitle { font-size: 12px; color: #666666; margin-top: 4px; display: block; }
+
+/* Metrics Container Grid */
+.metrics-container { width: 100%; margin-bottom: 20px; border-spacing: 15px 0; }
+.metric-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.metric-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+}
+.metric-card.blue::before { background-color: #2b6cb0; }
+.metric-card.orange::before { background-color: #dd6b20; }
+.metric-card.green::before { background-color: #38a169; }
+.metric-card.red::before { background-color: #e53e3e; }
+
+.metric-title { font-size: 12px; color: #666666; display: block; margin-bottom: 8px; }
+.metric-card.blue .metric-value { color: #2b6cb0; font-size: 22px; font-weight: bold; }
+.metric-card.orange .metric-value { color: #dd6b20; font-size: 22px; font-weight: bold; }
+.metric-card.green .metric-value { color: #38a169; font-size: 22px; font-weight: bold; }
+.metric-card.red .metric-value { color: #e53e3e; font-size: 22px; font-weight: bold; }
+
+/* Action Buttons Row */
+.action-buttons { margin-bottom: 25px; }
+
+/* Dashboard Two-Column Grid */
+.dashboard-grid { width: 100%; border-spacing: 20px 0; }
+.panel {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    vertical-align: top;
+}
+.panel-title { font-size: 14px; font-weight: 600; color: #12223c; display: block; margin-bottom: 12px; }
+
+/* Table and Pills */
+.data-table { width: 100%; }
+.status-pill {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+}
+.status-intransit { background-color: #e2e8f0; color: #4a5568; }
+.status-delivered { background-color: #c6f6d5; color: #22543d; }
+.status-approved { background-color: #c6f6d5; color: #22543d; }
+.status-pending { background-color: #feebc8; color: #744210; }
+
+/* Alerts */
+.alert-list { border: none; background: transparent; }
+.alert-item { border-bottom: 1px solid #f0f0f0; padding: 8px 0; }
+.alert-desc { color: #333333; font-size: 12px; display: block; margin-bottom: 2px; }
+.alert-time { color: #666666; font-size: 11px; display: block; }
+.alert-footer { margin-top: 15px; }
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.button-row {
+    width: 100%;
+    margin-top: 45px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rightButtons {
+    align-items: center;
+}
+
+.back-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: #347bbb;
+    color: white;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    margin-left: 20px;
+}
+
+.draft-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: white;
+    color: #2874b9;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.next-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: #347bbb;
+    color: white;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    margin-left: 20px;
+}
+
+.cancel-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: white;
+    color: #2874b9;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.draft-button {
+    min-width: 190px;
+    height: 44px;
+
+    background: white;
+    color: #2874b9;
+
+    border: 2px solid #347bbb;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/*---- Recent Orders Table -------*/
+
+/* Main card */
+.recent-orders-card {
+    border: 1px solid #b9c3cf;
+    border-radius: 5px;
+    padding: 10px;
+    background: #ffffff;
+    width: 500px;
+    box-sizing: border-box;
+}
+
+/* Title */
+.recent-orders-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1d3557;
+    margin-bottom: 8px;
+}
+
+/* Table */
+.recent-orders-table {
+    width: 100%;
+    border: 1px solid #c7cdd5;
+}
+
+/* Table header */
+.recent-orders-table af|column::header,
+.recent-orders-header {
+    background-color: #203d6b;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 8px 7px;
+}
+
+/* Table cells */
+.recent-orders-table af|column::data-cell {
+    font-size: 11px;
+    color: #28323c;
+    padding: 8px 7px;
+    vertical-align: middle;
+}
+
+/* Alternating rows */
+.recent-orders-table af|table::data-row {
+    background-color: #ffffff;
+}
+
+.recent-orders-table af|table::data-row:odd {
+    background-color: #f1f3f5;
+}
+
+/* Order number */
+.order-no {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Date */
+.order-date {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Amount */
+.order-amount {
+    font-size: 11px;
+    color: #263746;
+}
+
+/* Status common */
+.status-badge {
+    display: inline-block;
+    min-width: 70px;
+    text-align: center;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* In Transit */
+.status-transit {
+    background-color: #d9e9f5;
+    color: #3682b8;
+}
+
+/* Delivered */
+.status-delivered {
+    background-color: #dcefdc;
+    color: #3b8c42;
+}
+
+/* Approved */
+.status-approved {
+    background-color: #dcefdc;
+    color: #3b8c42;
+}
+
+/* Pending */
+.status-pending {
+    background-color: #ffe3cc;
+    color: #ef812c;
+}

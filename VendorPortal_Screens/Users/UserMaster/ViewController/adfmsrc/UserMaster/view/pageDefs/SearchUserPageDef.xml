@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.11.57" id="SearchUserPageDef"
+                Package="UserMaster.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SearchUserVO1" RangeSize="25" DataControl="UserMasAMDataControl" id="SearchUserVO1Iterator"/>
+    <searchRegion Criteria="SearchUserVOCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchUserVO1Iterator" id="SearchUserVOCriteriaQuery"/>
+    <iterator Binds="SearchUsersVO1" RangeSize="25" DataControl="UserMasAMDataControl" id="SearchUsersVO1Iterator"/>
+    <searchRegion Criteria="SearchUsersVOCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SearchUsersVO1Iterator" id="SearchUsersVOCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SearchUserVO1Iterator" id="SearchUserVO1">
+      <nodeDefinition DefName="UserMaster.model.views.SearchUserVO" Name="SearchUserVO10">
+        <AttrNames>
+          <Item Value="UserMasterId"/>
+          <Item Value="UserId"/>
+          <Item Value="UserName"/>
+          <Item Value="UserType"/>
+          <Item Value="PhoneNo"/>
+          <Item Value="Department"/>
+          <Item Value="Email"/>
+          <Item Value="Deptname"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SearchUsersVO1Iterator" id="SearchUsersVO1">
+      <nodeDefinition DefName="UserMaster.model.views.SearchUsersVO" Name="SearchUsersVO10">
+        <AttrNames>
+          <Item Value="VendorId"/>
+          <Item Value="LineId"/>
+          <Item Value="ContactPerson"/>
+          <Item Value="Email"/>
+          <Item Value="Loginname"/>
+          <Item Value="CustRole"/>
+          <Item Value="CustRoleDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>
